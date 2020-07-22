@@ -13,7 +13,7 @@
 
 - There is many different developers' applications that can help you with managing your project, but it can get overwhelming when one has to navigate through all these applications to make use of all the features. SynHub provides the user with all these features gathered in one place, so you won't struggle between all those apps. SynHub will help the user in seeking guidance, managing tasks, asking questions and looking for answers. SynHub is proud to introduce the 'Code Together' feature. This feature will provide the users with the ability of trying a realtime text-editor accompanied with a live chat section.
 
-- Semantic versioning, beginning with version 1.0.0 and incremented as changes are made v1.0.1 readme updates
+- Semantic versioning, beginning with version 1.0.1 and incremented as changes are made v1.0.1 readme updates
 
 - Given that a user opens the application in their browser When they will be displayed with the applications homepage Then the website will allow them to know more and navigate through the pages with easy accessability
 
