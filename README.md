@@ -24,3 +24,15 @@
 - As a user, I want to have the opportunity to enter rooms.
 - As an admin, I want to have the opportunity to create rooms.
 - As an admin, I want to have the opportunity to delete an unwanted room/question/answer.
+
+- DB Relationship Diagram
+
+![UML](uml.png)
+![relationships](Communitydb.jpg)
+![Questions Schema](db-schema-questions.png)
+![Users Schema](db-schema-user.PNG)
+
+- Wireframe 
+![Home Page](uml.png)
+![Community](uml.png)
+![Code together](uml.png)
