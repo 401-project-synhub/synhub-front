@@ -29,7 +29,7 @@
 
 ![relationships](Communitydb.jpg)
 ![Questions Schema](db-schema-questions.png)
-![Users Schema](db-schema-user.PNG)
+![Users Schema](db-schema-user.png)
 
 - Wireframe 
 ![Home Page](uml.png)
