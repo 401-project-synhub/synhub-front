@@ -27,7 +27,6 @@
 
 - DB Relationship Diagram
 
-![UML](uml.png)
 ![relationships](Communitydb.jpg)
 ![Questions Schema](db-schema-questions.png)
 ![Users Schema](db-schema-user.PNG)
