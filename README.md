@@ -32,6 +32,6 @@
 ![Users Schema](db-schema-user.png)
 
 - Wireframe 
-![Home Page](uml.png)
-![Community](uml.png)
-![Code together](uml.png)
+![Home Page](home-page.png)
+![Community](community.png)
+![Code together](codeTogether.png)
