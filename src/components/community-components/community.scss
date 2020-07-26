@@ -1,0 +1,42 @@
+// @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@300&display=swap');
+
+.show-more{
+    float: right;
+    color: whitesmoke;
+    width: 35%;
+    padding: 3%;
+    border-radius: 5px;
+    box-shadow: 3px 3px 4px #577D38;
+    border: none;
+    background-color: #88E766;
+    font-family: sans-serif;
+    cursor: pointer;
+    
+    &:hover {
+        background-color: #B8F1A3;
+        box-shadow: 1px 1px 3px #577D38;
+    }
+}
+
+#root{
+    .container {
+        display: flex;
+        justify-content: space-around;
+        align-content: center;
+        flex-wrap: wrap;
+        .MuiPaper-root {
+            box-shadow: 5px 6px 10px #88af88;
+            margin-top: 35px;
+            .MuiCardContent-root{
+                .MuiTypography-body2 {
+                    font-size: 1rem;
+                    font-family: 'Zilla slab',serif;
+                    font-weight: 600;
+                    letter-spacing: .6px;
+                }
+    
+            }
+        }
+    }
+}
