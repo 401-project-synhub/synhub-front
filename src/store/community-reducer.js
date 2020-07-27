@@ -1,24 +1,22 @@
-import React, {useContext} from 'react';
 import cookie from 'react-cookies';
 import superagent from 'superagent';
-import { SignInContext } from '../context/auth';
-import useAjax from '../hooks/community-hook';
 
 
-// const [questions, userInfo, _getAllQuestions, _postQuestion, _getTheUser] = useAjax();
+
 
 const initialState = {questions:[]};
 const API = 'https://synhub.herokuapp.com';
-let token ;
+
   const cookieToken = cookie.load('auth');
-  token = cookieToken || null;
+  let token = cookieToken || null;
+  //
+  const userPro = cookie.load('user');
+  let theUser = userPro || null;
 
 export default (state = initialState, action) =>{
     const {type, payload} = action;
-    console.log('action',action)
     switch (type){
         case 'showQuestions':
-            console.log(state,'state.questions')
             return {questions: payload.questions};
         case 'addQuestion':
             return {questions: state.questions }
@@ -36,13 +34,10 @@ export const _getAllQuestions = () => {
         }).catch(console.error);
     }
 }
-export const _addQuestion = (body) =>{
-    const context = useContext(SignInContext);
-
-    console.log(body);
+export const _addQuestion = (body) =>{    
     return (dispatch)=>{
         superagent.post(`${API}/api/v1/questions`)
-            .send(body)
+            .send({...body, author:theUser.username})
             .accept('application/json')
             .set('Authorization', `Bearer ${token}`)
             .then(data => {

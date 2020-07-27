@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+
+
+
 import { _getAllQuestions} from '../../store/community-reducer';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -16,7 +19,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 
 //import hooks
-import useAjax from '../../hooks/community-hook';
+// import useAjax from '../../hooks/community-hook';
 
 //import sass 
 import './community.scss';
@@ -37,7 +40,7 @@ function Community(props) {
     }, [])
     // console.log('userId',userId);
     // console.log('questions', questions);
-    console.log('props.questions', props.questions);
+    // console.log('props.questions', props.questions);
     const useStyles = makeStyles((theme) => ({
         root: {
             maxWidth: 345,
@@ -90,7 +93,7 @@ function Community(props) {
     );
 }
 const mapStateToProps = (state) =>{
-    console.log('communityReducer',state.communityReducer)
+    // console.log('communityReducer',state.communityReducer)
     return {
 
         questions: state.communityReducer
