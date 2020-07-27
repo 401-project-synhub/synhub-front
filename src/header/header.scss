@@ -1,0 +1,104 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900');
+
+.header{
+    color: white;
+    background-image: url('/assets/headerbg3.png');
+    height: 110vh;
+    background-repeat: no-repeat;
+    background-size: 114.5%;
+    background-position: top;
+
+    z-index: 999;
+    opacity: 1;
+    .hdr-dimond{
+        height: 430px;
+        width: 121px;
+    }
+    #hdr-dimond1{
+        position: absolute;
+        top: 40%;
+        left: 1%;
+    }
+    #hdr-dimond2{
+        position: absolute;
+        top: 50%;
+        left: 4%;
+    } 
+    #hdr-dimond3{
+        position: absolute;
+        top: 60%;
+        left: 7%;
+    }
+    h1{
+        margin: 0;
+    }
+    div{
+        font-family: 'Heebo', sans-serif;
+        position: absolute;
+        top: 37%;
+        left: 19.8%;
+
+        h1{
+            font-size: 70px;
+            text-transform: none;
+            font-weight: 500;
+            color: #fff;
+            margin: 0;
+            line-height: 1.1;
+        }
+        h2{
+            font-size: 70px;
+            font-weight: 500;
+            margin: 0 0 14px;
+            display: block;
+            color: #fff;
+            text-transform: none;
+            padding: 0;
+            line-height: 1.1;
+        }
+        p{
+            width: 62%;
+            text-align: left;
+            color: #fff;
+            margin: 24px 0 0;
+            font-size: 22px;
+            margin-bottom: 30px;
+            line-height: 36px;
+        }
+    }
+    nav{
+        display: grid;
+        width: 72.5%;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 100%;
+        grid-template-areas: "a b";
+    }
+    ul{
+        // width: 60%;
+        grid-area: b;
+        margin: 0;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 15vh;
+        font-size: 18px;
+        font-family: 'Heebo', sans-serif;
+        font-weight: 500;
+        color: #fff;
+        text-transform: capitalize;
+    }
+    li{
+        margin: 0;
+        list-style: none;
+        
+    }
+    img{
+        position: absolute;
+        top: 25%;
+        left: 59.5%;
+        width: 38%;
+        opacity: 0.95;
+        // opacity: 1;
+    }
+}
