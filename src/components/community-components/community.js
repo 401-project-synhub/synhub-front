@@ -55,6 +55,7 @@ function Community(props) {
             borderBottom: '#C7FDB4 2px solid',
         },
     }));
+    console.log('props.questions.questions',props.questions.questions)
     const classes = useStyles();
     return (
         <>
@@ -66,7 +67,7 @@ function Community(props) {
                     <Card className={classes.root} key={oneQuestion._id}>
                         <CardHeader
                             avatar={
-                                <Avatar alt={oneQuestion.author} src='/static/images/avatar/3.jpg' title={oneQuestion.author} />
+                                <Avatar alt={oneQuestion.author} src={oneQuestion.imgUrl?oneQuestion.imgUrl:'/static/images/avatar/3.jpg'} title={oneQuestion.author} />
                             }
                             title={oneQuestion.title}
                             subheader="September 14, 2016"

@@ -6,8 +6,12 @@ import superagent from 'superagent'
 // import superagent from 'superagent';
 dotenv.config();
 
-const API = process.env.API_SERVER  || 'https://synhub.herokuapp.com' 
+// const API = process.env.API_SERVER  || 'https://synhub.herokuapp.com' 
+const API = process.env.API_SERVER  || 'https://synhub-project.herokuapp.com';
+ 
+
 const SECRET = process.env.JWT_SECRET || 'batool123'
+
 
 export const SignInContext = React.createContext();
 
@@ -24,12 +28,12 @@ class SignInProvider extends React.Component {
     };
   }
 
-  signup = async (username, password,ranking, imgUrl, role) => {//email
+  signup = async (username, password,ranking, imgUrl, gender, role) => {//email
       
     try {
     
       superagent.post(`${API}/signup`)
-      .send({ username, password, ranking, imgUrl, role })
+      .send({ username, password, ranking, imgUrl, gender, role })
       .accept('application/json')
       // .set('Authorization', `Bearer ${token}`)
       .then(data => {
@@ -53,7 +57,7 @@ class SignInProvider extends React.Component {
       .accept('application/json')
       .set('Authorization', `Basic ${btoa(`${username}:${password}`)}`)
       .then(data => {
-          // console.log('token',data.body)
+          console.log('token',this.validateToken(data.body.token))
           this.validateToken(data.body.token);
         }).catch(console.error);
       

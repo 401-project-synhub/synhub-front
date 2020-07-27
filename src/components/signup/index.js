@@ -15,6 +15,7 @@ class SignUP extends React.Component {
       password: '',
       ranking:'',
       imgUrl:'',
+      gender:'',
       role: '',
     };
   }
@@ -25,7 +26,7 @@ class SignUP extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.context.signup(this.state.username, this.state.password, this.state.ranking, this.state.imgUrl, this.state.role);
+    this.context.signup(this.state.username, this.state.password, this.state.ranking, this.state.imgUrl, this.state.gender, this.state.role);
   }
   render() {
       return (
@@ -67,6 +68,14 @@ class SignUP extends React.Component {
               <Form.Control
                 placeholder="Image URL"
                 name="imgUrl"
+                onChange={this.handleChange}
+              />
+            </Form.Label>
+            <Form.Label>
+              <span>gender</span>
+              <Form.Control
+                placeholder="gender"
+                name="gender"
                 onChange={this.handleChange}
               />
             </Form.Label>
