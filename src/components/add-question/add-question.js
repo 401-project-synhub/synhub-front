@@ -1,31 +1,42 @@
 import React, { useState, useEffect, useContext } from 'react';
+import {connect} from 'react-redux';
+import {_addQuestion} from '../../store/community-reducer';
 import useAjax from '../../hooks/community-hook';
 
 //context 
 import { SignInContext } from '../../context/auth';
 
 
-export default function AddQuestion(props) {
+function AddQuestion(props) {
     const context = useContext(SignInContext);
     const [input, setInput] = useState({})
     const [questions, userInfo, _getAllQuestions, _postQuestion, _getTheUser] = useAjax();
     useEffect(() => {
         _getTheUser(context.user.id)
-        console.log('userInfo', userInfo.userInfo);
+        // console.log('userInfo', userInfo.userInfo);
     }, [])
     const AddQuestionEvent = (e) => {
         e.preventDefault();
-        setInput({ ...input, author: e.target.author })
+        // console.log('username', userInfo.userInfo.username)
+
+        setInput({ ...input, author: userInfo.userInfo.username,  imgUrl:userInfo.userInfo.imgUrl })
         // setInput({...input,  imgUrl:userInfo.userInfo.imgUrl})
 
-        console.log('input1', input)
+        // console.log('newQuestion', props.question.newQuestion)
         // setInput({ ...input, author: e.target.author.value })
-        // console.log('input2', input)
+        console.log('input2', input)
 
-        _postQuestion(input);
+        props.add(input);
     }
     const handleInputChange = (e) => {
-        setInput({ ...input, [e.target.name]: e.target.value });
+        if(e.target.name === 'tags'){
+           let theTags = e.target.value.split(' ');
+            setInput({ ...input, [e.target.name]: theTags });
+
+        }else{
+
+            setInput({ ...input, [e.target.name]: e.target.value });
+        }
         // console.log(input)
     };
 
@@ -44,13 +55,17 @@ export default function AddQuestion(props) {
                 Question Description
             <textarea placeholder='Add description' name='description' onChange={handleInputChange}></textarea>
             </label><br />
-
-            {/* <input type='hidden' name='userimage' onChange={handleInputChange} /> */}
+            <label>
+                Image
+            {userInfo.userInfo ?
+                    <input type='hidden' name='userimage' onChange={handleInputChange} defaultValue={userInfo.userInfo.imgUrl} /> 
+                    : null}
+            </label>
             <label>
                 Name
                 {userInfo.userInfo ?
-                    < input type='text' name='author' defaultValue={userInfo.userInfo.username} onChange={handleInputChange} />
-                 :null}
+                    < input type='hidden' name='author' defaultValue={userInfo.userInfo.username} onChange={handleInputChange} />
+                    : null}
 
             </label>
 
@@ -60,3 +75,13 @@ export default function AddQuestion(props) {
         </form>
     )
 }
+const mapStateToProps = (state) =>{
+    console.log('communityReducer',state.communityReducer)
+    return {
+        question: state.communityReducer,
+    }
+}
+const mapDispatchToProps = (dispatch) =>({
+    add: (body)=> dispatch(_addQuestion(body)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(AddQuestion);

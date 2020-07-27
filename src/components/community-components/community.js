@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-
-
+import {connect} from 'react-redux';
+import { _getAllQuestions} from '../../store/community-reducer';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -24,10 +24,12 @@ import './community.scss';
 
 
 function Community(props) {
-    const[questions, userInfo, _getAllQuestions, _postQuestion, _getTheUser] = useAjax();
-
+    // const[questions, userInfo, _getAllQuestions, _postQuestion, _getTheUser] = useAjax();
+    const fetchData = () => {
+        props.get();
+      };
     useEffect(() => {
-        _getAllQuestions();
+        fetchData();
         // _getTheUserId().then(res=>{
         //     console.log(res)
         //     _getTheUserImg(res.id);
@@ -35,7 +37,7 @@ function Community(props) {
     }, [])
     // console.log('userId',userId);
     // console.log('questions', questions);
-
+    console.log('props.questions', props.questions);
     const useStyles = makeStyles((theme) => ({
         root: {
             maxWidth: 345,
@@ -57,7 +59,7 @@ function Community(props) {
                 <button className="show-more">Add Question</button>
             </Link>
             <div className="container">
-                {questions.map(oneQuestion => (
+                {props.questions.questions.map(oneQuestion => (
                     <Card className={classes.root} key={oneQuestion._id}>
                         <CardHeader
                             avatar={
@@ -87,4 +89,14 @@ function Community(props) {
         </>
     );
 }
-export default Community;
+const mapStateToProps = (state) =>{
+    console.log('communityReducer',state.communityReducer)
+    return {
+
+        questions: state.communityReducer
+    }
+}
+const mapDispatchToProps = (dispatch) =>({
+    get: ()=> dispatch(_getAllQuestions()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Community);

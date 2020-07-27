@@ -70,6 +70,7 @@ export default function CommunityHook() {
             
 
     }
+    // console.log('token in hook',token)
     return [questions, userInfo, _getAllQuestions, _postQuestion, _getTheUser];
 
 }
