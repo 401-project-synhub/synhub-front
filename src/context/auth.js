@@ -37,7 +37,7 @@ class SignInProvider extends React.Component {
       .accept('application/json')
       // .set('Authorization', `Bearer ${token}`)
       .then(data => {
-          console.log('token',data.body)
+          // console.log('token',data.body)
           this.validateToken(data.body.token.token);
         }).catch(console.error);
       

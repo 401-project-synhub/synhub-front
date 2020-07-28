@@ -23,12 +23,12 @@ function App() {
       <Router>
         <Switch>
 
-          <Community exact path='/' />
-          <Route exact path='/details/:id' component={ShowMore} />
+            <Route exact path='/details/:id' component={ShowMore} />
 
           <SignInProvider >
             <SignUp />
             <SignIn />
+            <Community exact path='/' />
             <Auth capabilities='read'>
               <Route exact path='/addquestion' component={AddQuestion} />
             </Auth>

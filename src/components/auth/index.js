@@ -8,11 +8,11 @@ class Auth extends React.Component {
 
   render() {
     let okToRender = false;
-    // console.log(this,context.)
+    // console.log('this.props.capability',this.context.user)
     try {
       okToRender = this.context.signedIn && (
         this.props.capability ?
-          this.context.user.capabilities.includes(this.props.capability)
+          this.context.user.capabilities.capabilities.includes(this.props.capability)
           : true
       );
     } catch (e) {
