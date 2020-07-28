@@ -1,30 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import {connect} from 'react-redux';
 import {_addQuestion} from '../../store/community-reducer';
-// import useAjax from '../../hooks/community-hook';
-
-//context 
-// import { SignInContext } from '../../context/auth';
 
 
 function AddQuestion(props) {
-    // const context = useContext(SignInContext);
     const [input, setInput] = useState({})
-    // const [questions, userInfo, _getAllQuestions, _postQuestion, _getTheUser] = useAjax();
-    // useEffect(() => {
-    //     _getTheUser(context.user.id)
-    //     // console.log('userInfo', userInfo.userInfo);
-    // }, [])
+
     const AddQuestionEvent = (e) => {
         e.preventDefault();
-        // console.log('username', userInfo.userInfo.username)
-
-        // setInput({ ...input, author: userInfo.userInfo.username,  imgUrl:userInfo.userInfo.imgUrl })
-        // setInput({...input,  imgUrl:userInfo.userInfo.imgUrl})
-
-        // console.log('newQuestion', props.question.newQuestion)
-        // setInput({ ...input, author: e.target.author.value })
-        // console.log('input2', input)
 
         props.add(input);
     }
@@ -37,7 +20,6 @@ function AddQuestion(props) {
 
             setInput({ ...input, [e.target.name]: e.target.value });
         }
-        // console.log(input)
     };
 
     return (

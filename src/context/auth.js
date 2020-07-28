@@ -53,11 +53,11 @@ class SignInProvider extends React.Component {
      try {
     
       superagent.get(`${API}/signin`)
-      // .send({ username, password })
+      .send({ username, password })
       .accept('application/json')
       .set('Authorization', `Basic ${btoa(`${username}:${password}`)}`)
       .then(data => {
-          console.log('token',this.validateToken(data.body.token))
+          // console.log('token',this.validateToken(data.body.token))
           this.validateToken(data.body.token);
         }).catch(console.error);
       
@@ -75,6 +75,7 @@ class SignInProvider extends React.Component {
 
     try {
       let user = jwt.verify(token, SECRET);
+      // console.log('token, user',token, user)
       this.setSignInState(true, token, user);
 
     } catch (ex) {

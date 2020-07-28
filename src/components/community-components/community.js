@@ -18,8 +18,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 // import Grid from '@material-ui/core/Grid';
 
 
-//import hooks
-// import useAjax from '../../hooks/community-hook';
+
 
 //import sass 
 import './community.scss';
@@ -27,7 +26,6 @@ import './community.scss';
 
 
 function Community(props) {
-    // const[questions, userInfo, _getAllQuestions, _postQuestion, _getTheUser] = useAjax();
     const fetchData = () => {
         props.get();
       };
@@ -55,7 +53,7 @@ function Community(props) {
             borderBottom: '#C7FDB4 2px solid',
         },
     }));
-    console.log('props.questions.questions',props.questions.questions)
+    // console.log('props.questions.questions',props.questions.questions)
     const classes = useStyles();
     return (
         <>
