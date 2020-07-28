@@ -1,4 +1,6 @@
 import React from 'react';
+import SignIn from '../signin/';
+import SignUp from '../signup/';
 import './header.scss';
 
 function Header(props) {
@@ -12,6 +14,8 @@ function Header(props) {
                         <li>Community</li>
                         <li>Code Along</li>
                     </ul>
+                    <SignIn/>
+                    <SignUp/>
                 </nav>
             {/* </div> */}
             <div>

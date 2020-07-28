@@ -34,7 +34,7 @@ class SignIn extends React.Component {
         </Show>
         <Show condition={!this.context.signedIn}>
           <h2>Sign In</h2>
-          <Form role="form" onSubmit={this.handleSubmit} >
+          <Form className="display-none" role="form" onSubmit={this.handleSubmit} >
             <Form.Label>
               <span>User Name</span>
               <Form.Control

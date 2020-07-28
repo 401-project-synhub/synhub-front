@@ -15,15 +15,15 @@ import SignInProvider from './context/auth';
 function App() {
   return (
     <>
-      <Header />
       <Router>
         <Switch>
 
           <Route exact path='/details/:id' component={ShowMore} />
 
           <SignInProvider >
-            <SignUp />
-            <SignIn />
+            <Header />
+            {/* <SignUp />
+            <SignIn /> */}
             <Community exact path='/' />
             <Auth capabilities='read'>
               <Route exact path='/addquestion' component={AddQuestion} />

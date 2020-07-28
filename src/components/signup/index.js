@@ -33,7 +33,7 @@ class SignUP extends React.Component {
       <>
         <Show condition={!this.context.signedIn}>
           <h2>Sign Up</h2>
-          <Form role="form" onSubmit={this.handleSubmit} >
+          <Form className="display-none" role="form" onSubmit={this.handleSubmit} >
 
             <Form.Label>
               <span>User name</span>
