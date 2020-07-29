@@ -26,6 +26,7 @@ class SignUP extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     this.context.signup(this.state.username, this.state.password, this.state.ranking, this.state.imgUrl, this.state.gender, this.state.role);
+    e.target.reset();
   }
   render() {
       return (

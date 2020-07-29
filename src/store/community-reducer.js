@@ -3,8 +3,7 @@ import superagent from 'superagent';
 
 
 
-
-const initialState = { questions: [] };
+const initialState = { questions: [], answers:[], qDetails: {} };
 // const API = 'https://synhub.herokuapp.com';
 const API = 'https://synhub-project.herokuapp.com';
 
@@ -21,32 +20,65 @@ export default (state = initialState, action) => {
         case 'deleteQuestion':
             return { questions: state.questions.filter(val => val._id !== payload) }
         case 'updateQuestion':
-            return { questions: [...state.questions.map(val=>val.id===payload._id?payload.record:val) ] }
+            return { questions: [...state.questions.map(val => val.id === payload._id ? payload.record : val)] }
+        case 'searchQuestions':
+            let searchResult=[];
+            let inputArr= payload.split(' ');
+            state.questions.forEach(val=>{
+                let descriptionArr= val.description.split(' ');
+                for(let i=0; i<inputArr.length; i++){
+                    if(descriptionArr.includes(inputArr[i])){
+                        searchResult.push(val);
+                        break;
+                    }
+                }
+            })
+            return {questions: searchResult}
+        case 'addAnswer':
+            return {answers: [...state.answers, payload]}
+        case 'detailQuestion':
+            return {qDetails: payload}
         default:
             return state;
     }
 }
-export const _getAllQuestions = () => {
+export const _getAllQuestions = (choice) => {
 
     return (dispatch) => {
         return superagent.get(`${API}/api/v1/questions`)
             .accept('application/json')
-            // .set('Authorization', `Bearer ${token}`)
             .then(data => {
-                dispatch(getQuestionsAction({ questions: data.body.records }))
+                let sortedQuestions = data.body.records.sort((a, b) => {
+                    if (choice === 'title') {
+                            if(a.title < b.title) { return -1; }
+                            if(a.title > b.title) { return 1; }
+                            return 0;
+                        
+                    } else {
+                        return new Date(b.date) - new Date(a.date);
+                    }
+                });
+                dispatch(getQuestionsAction({ questions: sortedQuestions }))
+            }).catch(console.error);
+    }
+}
+export const _getQuestionDetails = (id) => {
+    return (dispatch)=>{
+        superagent.get(`${API}/api/v1/questions/${id}`)
+            .accept('application/json')
+            .then(data => {
+                dispatch(getQuesDetailsAction(data.body.records[0]))
             }).catch(console.error);
     }
 }
 export const _addQuestion = (body) => {
     const cookieToken = cookie.load('auth');
     let token = cookieToken || null;
-    //
     const userPro = cookie.load('user');
     let theUser = userPro || null;
-    // console.log('theUser',theUser)  
     return (dispatch) => {
         superagent.post(`${API}/api/v1/questions`)
-            .send({ ...body, author: theUser.username, imgUrl: theUser.imgUrl ? theUser.imgUrl : theUser.gender === 'male' ? 'https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236__340.png' : 'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407__340.png' })
+            .send({ ...body, author: theUser.username, imgUrl: theUser.imgUrl ? theUser.imgUrl : theUser.gender === 'male' ? 'https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236__340.png' : 'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407__340.png', date: new Date().toLocaleString() })
             .accept('application/json')
             .set('Authorization', `Bearer ${token}`)
             .then(data => {
@@ -56,7 +88,6 @@ export const _addQuestion = (body) => {
 }
 
 export const _deleteQuestion = (_id) => {
-    // console.log('_id',_id)
     const cookieToken = cookie.load('auth');
     let token = cookieToken || null;
     return (dispatch) => {
@@ -68,27 +99,53 @@ export const _deleteQuestion = (_id) => {
             }).catch(console.error);
     }
 }
-export const _updateQuestion = (body,_id) => {
+export const _updateQuestion = (body, _id) => {
     const cookieToken = cookie.load('auth');
     let token = cookieToken || null;
     //
     const userPro = cookie.load('user');
     let theUser = userPro || null;
-    // console.log('theUser',theUser)  
     return (dispatch) => {
         superagent.put(`${API}/api/v1/questions/${_id}`)
             .send({ ...body, author: theUser.username, imgUrl: theUser.imgUrl ? theUser.imgUrl : theUser.gender === 'male' ? 'https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236__340.png' : 'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407__340.png' })
             .accept('application/json')
             .set('Authorization', `Bearer ${token}`)
             .then(data => {
-                dispatch(updateQuestionsAction({record:data.body,_id}))
+                dispatch(updateQuestionsAction({ record: data.body, _id }))
             }).catch(console.error);
     }
 }
-
+export const _searchQuestions = (input) =>{
+    return (dispatch)=>{
+        dispatch(searchQuestionsAction(input))
+    }
+}
+// ===================ANSWERS=======================
+export const _addAnswer = (body, qTitle) => {
+    const cookieToken = cookie.load('auth');
+    let token = cookieToken || null;
+    const userPro = cookie.load('user');
+    let theUser = userPro || null;
+    return (dispatch) => {
+        superagent.post(`${API}/api/v1/answers`)
+            .send({ ...body, author: theUser.username, imgUrl: theUser.imgUrl ? theUser.imgUrl : theUser.gender === 'male' ? 'https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236__340.png' : 'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407__340.png', date: new Date().toLocaleString(), questionTitle: qTitle})
+            .accept('application/json')
+            .set('Authorization', `Bearer ${token}`)
+            .then(data => {
+                console.log('data.body', data.body);
+                dispatch(addAnswerAction(data.body.record))
+            }).catch(console.error);
+    }
+}
 export const getQuestionsAction = (payload) => {
     return {
         type: 'showQuestions',
+        payload: payload,
+    }
+}
+export const getQuesDetailsAction = (payload) => {
+    return {
+        type: 'detailQuestion',
         payload: payload,
     }
 }
@@ -105,9 +162,22 @@ export const deleteQuestionAction = (payload) => {
         payload: payload,
     }
 }
-export const updateQuestionsAction = (payload) =>{
+export const updateQuestionsAction = (payload) => {
     return {
         type: 'updateQuestion',
+        payload: payload,
+    }
+}
+export const searchQuestionsAction = (payload) => {
+    return {
+        type: 'searchQuestions',
+        payload: payload,
+    }
+}
+// ===================ANSWERS=======================
+export const addAnswerAction = (payload) => {
+    return{
+        type: 'addAnswer',
         payload: payload,
     }
 }

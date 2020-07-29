@@ -8,8 +8,8 @@ function AddQuestion(props) {
 
     const AddQuestionEvent = (e) => {
         e.preventDefault();
-
         props.add(input);
+        e.target.reset();
     }
     const handleInputChange = (e) => {
         if(e.target.name === 'tags'){

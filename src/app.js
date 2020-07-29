@@ -17,14 +17,10 @@ function App() {
     <>
       <Router>
         <Switch>
-
-          <Route exact path='/details/:id' component={ShowMore} />
-
           <SignInProvider >
             <Header />
-            {/* <SignUp />
-            <SignIn /> */}
-            <Community exact path='/' />
+            <Route exact path='/details/:id' component={ShowMore} />
+            <Route exact path='/' component={Community} />
             <Auth capabilities='read'>
               <Route exact path='/addquestion' component={AddQuestion} />
             </Auth>
