@@ -75,8 +75,8 @@ class SignInProvider extends React.Component {
 
     try {
       let user = jwt.verify(token, SECRET);
-      // console.log('token, user',token, user)
       this.setSignInState(true, token, user);
+      // console.log('token, user', 'signedIn',token, user,this.state.signedIn)
 
     } catch (ex) {
       this.signout();
@@ -86,9 +86,14 @@ class SignInProvider extends React.Component {
 
   setSignInState = (signedIn, token, user) => {
     // console.log('token11111111111',token, 'user111111111', JSON.stringify(user));
-    cookie.save('auth', token);
-    cookie.save('user',JSON.stringify(user));
-    this.setState({ signedIn, user, token });
+    // let cookieToken = cookie.load('auth');
+    // let cookieUser = cookie.load('user');
+    // if(!cookieToken){
+
+      cookie.save('auth', token);
+      cookie.save('user',JSON.stringify(user));
+      this.setState({ signedIn, user, token });
+    // }
   }
 
   componentDidMount() {

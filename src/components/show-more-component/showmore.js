@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import superagent from 'superagent';
 // import cookie from 'react-cookies';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Show from '../show/index';
-import {SignInContext} from '../../context/auth';
-import {_addAnswer, _getQuestionDetails} from '../../store/community-reducer';
+import { SignInContext } from '../../context/auth';
+import { _addAnswer, _getQuestionDetails } from '../../store/community-reducer';
 
 
 
@@ -18,23 +18,29 @@ const API = 'https://synhub-project.herokuapp.com';
 
 function ShowMore(props) {
     const context = useContext(SignInContext);
+    // const [data, setData] = useState({});
     useEffect(() => {
-        fetchData(props.match.params.id);
+        // fetchData(props.match.params.id)
+        // setData(props.details)
+        getQuestionDetails();
         // const cookieToken = cookie.load('auth');
         // token = cookieToken || null;
     }, [])
-    const fetchData=(id)=>{
-        props.get(id)
-    }
-    // const [details, setDetails] = useState({});
-    // const getQuestionDetails = () => {
-    //     superagent.get(`${API}/api/v1/questions/${props.match.params.id}`)
-    //         .accept('application/json')
-    //         .then(data => {
-    //             setDetails(data.body.records[0])
-    //         }).catch(console.error);
+    // const fetchData = (id) => {
+    //     props.get(id)
     // }
-    console.log('props.details', props.details);
+    const [details, setDetails] = useState({});
+    const getQuestionDetails = () => {
+        superagent.get(`${API}/api/v1/questions/${props.match.params.id}`)
+            .accept('application/json')
+            .then(data => {
+                setDetails(data.body.records[0])
+            }).catch(console.error);
+    }
+    console.log('data',props.match);
+    // console.log('datadata',data);
+
+    // console.log('props.details', props.details);
     const [input, setInput] = useState({})
 
     const handleSubmitAnswer = (e) => {
@@ -43,15 +49,20 @@ function ShowMore(props) {
         e.target.reset();
     }
     const handleInputChange = (e) => {
-            setInput({ ...input, [e.target.name]: e.target.value });
+        setInput({ ...input, [e.target.name]: e.target.value });
     };
     return (
         <>
-            <h2>Question Title :{props.details.title}</h2>
-            <h3>Question Author :{props.details.author}</h3>
-            <p>Description: {props.details.description}</p>
+        {details ?
+            <>
+                <h2>Question Title :{details.title}</h2>
+                <h3>Question Author :{details.author}</h3>
+                <p>Description: {details.description}</p>
+            </>
+            : null
+            }
             <div className='answers'>
-                {props.details.answers ? props.details.answers.map(oneAns => (
+                {details.answers ? details.answers.map(oneAns => (
                     <div className='one' key={oneAns._id}>
                         <h3> Answer Title: {oneAns.title}</h3>
                         <h4> Answer Author: {oneAns.author}</h4>
@@ -67,7 +78,7 @@ function ShowMore(props) {
                 <ul><li>
                     Tags
                 </li>
-                    {props.details.tags ? props.details.tags.map(oneTag => (
+                    {details.tags ? details.tags.map(oneTag => (
                         <li key={oneTag}>
                             {oneTag}
                         </li>
@@ -76,24 +87,25 @@ function ShowMore(props) {
 
             </div>
             <Show condition={context.signedIn}>
-            <form  onSubmit={handleSubmitAnswer}>
-                <legend>add your answer</legend>
-                <label>
-                    Title
-                    <input onChange={handleInputChange} type="text" name="title"/>
-                </label>
+                <form onSubmit={handleSubmitAnswer}>
+                    <legend>add your answer</legend>
+                    <label>
+                        Title
+                    <input onChange={handleInputChange} type="text" name="title" />
+                    </label>
                     <textarea onChange={handleInputChange} name="description" placeholder="answer description.."></textarea>
                     <button id="post-ans">Post Answer</button>
-            </form>
+                </form>
             </Show>
-        </>
+            </>
+
     )
 }
-const mapStateToProps = (state)=>{
-    return{ details: state.communityReducer.qDetails}
+const mapStateToProps = (state) => {
+    return { details: state.communityReducer.qDetails }
 }
-const mapDispatchToProps =(dispatch)=>({
-    add: (answer, qTitle) =>dispatch(_addAnswer(answer, qTitle)),
-    get: (id)=>dispatch(_getQuestionDetails(id)),
+const mapDispatchToProps = (dispatch) => ({
+    add: (answer, qTitle) => dispatch(_addAnswer(answer, qTitle)),
+    get: (id) => dispatch(_getQuestionDetails(id)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(ShowMore);

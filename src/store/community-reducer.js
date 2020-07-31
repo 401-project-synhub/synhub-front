@@ -37,6 +37,7 @@ export default (state = initialState, action) => {
         case 'addAnswer':
             return {answers: [...state.answers, payload]}
         case 'detailQuestion':
+            console.log(payload)
             return {qDetails: payload}
         default:
             return state;
@@ -50,8 +51,8 @@ export const _getAllQuestions = (choice) => {
             .then(data => {
                 let sortedQuestions = data.body.records.sort((a, b) => {
                     if (choice === 'title') {
-                            if(a.title < b.title) { return -1; }
-                            if(a.title > b.title) { return 1; }
+                            if(a.title.toUpperCase() < b.title.toUpperCase()) { return -1; }
+                            if(a.title.toUpperCase() > b.title.toUpperCase()) { return 1; }
                             return 0;
                         
                     } else {
@@ -63,10 +64,13 @@ export const _getAllQuestions = (choice) => {
     }
 }
 export const _getQuestionDetails = (id) => {
+    console.log('id',id)
     return (dispatch)=>{
-        superagent.get(`${API}/api/v1/questions/${id}`)
+        console.log('before Api call')
+        return superagent.get(`${API}/api/v1/questions/${id}`)
             .accept('application/json')
             .then(data => {
+                console.log('data.body.records[0]',data.body.records[0])
                 dispatch(getQuesDetailsAction(data.body.records[0]))
             }).catch(console.error);
     }

@@ -9,14 +9,14 @@ function Header(props) {
     const [signIN, setSignIN] = useState(false);
     const [signUP, setSignUP]= useState(false);
     const context = useContext(SignInContext);
-    console.log('signed in??', context.signedIn);
+    // console.log('signed in??', context.signedIn);
     const signInToggle = (e) => {
         setSignIN(!signIN);
-        console.log('toggled',signIN)
+        // console.log('toggled',signIN)
     }
     const signUpToggle = (e) => {
         setSignUP(!signUP);
-        console.log('toggled',signUP)
+        // console.log('toggled',signUP)
     }
     const saveTheDay = (e) =>{
         context.signout();
@@ -62,10 +62,10 @@ function Header(props) {
                 <h1>At SynHub </h1>
                 <p>Adipisicing elit, sed do eiusmod tempor incididunt with labore et dolore magna aliqua enim ad minimum.</p>
             </div>
-            <img id='hdr-illus' src='./assets/header-illus2.png' alt='asset'></img>
-            <img id='hdr-dimond1' className='hdr-dimond' src='./assets/dimond-shape.png' alt='asset'></img>
-            <img id='hdr-dimond2' className='hdr-dimond' src='./assets/dimond-shape.png' alt='asset'></img>
-            <img id='hdr-dimond3' className='hdr-dimond' src='./assets/dimond-shape.png' alt='asset'></img>
+            <img id='hdr-illus' src='/assets/header-illus2.png' alt='asset'></img>
+            <img id='hdr-dimond1' className='hdr-dimond' src='/assets/dimond-shape.png' alt='asset'></img>
+            <img id='hdr-dimond2' className='hdr-dimond' src='/assets/dimond-shape.png' alt='asset'></img>
+            <img id='hdr-dimond3' className='hdr-dimond' src='/assets/dimond-shape.png' alt='asset'></img>
 
         </section>
     )

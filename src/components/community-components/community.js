@@ -149,7 +149,7 @@ function Community(props) {
                     
                     <Card className={classes.root} key={oneQuestion._id}>
 
-                        <Link to={`/details/${oneQuestion._id}`}>
+                        <Link to={`/${oneQuestion._id}`}>
                             <CardHeader
                                 avatar={
                                     <Avatar alt={oneQuestion.author} src={oneQuestion.imgUrl ? oneQuestion.imgUrl : '/static/images/avatar/3.jpg'} title={oneQuestion.author} />
