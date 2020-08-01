@@ -23,9 +23,12 @@ export default (state = initialState, action) => {
             return { questions: [...state.questions.map(val => val.id === payload._id ? payload.record : val)] }
         case 'searchQuestions':
             let searchResult=[];
-            let inputArr= payload.split(' ');
-            state.questions.forEach(val=>{
-                let descriptionArr= val.description.split(' ');
+
+            let inputArr= payload.input.replace(/\W\s|\W/g,' ').split(' ');
+            
+            payload.questions.forEach(val=>{
+                let descriptionArr= val.description.replace(/\W\s|\W/g,' ').split(' ');
+                // console.log('descriptionArr',descriptionArr)
                 for(let i=0; i<inputArr.length; i++){
                     if(descriptionArr.includes(inputArr[i])){
                         searchResult.push(val);
@@ -33,12 +36,20 @@ export default (state = initialState, action) => {
                     }
                 }
             })
+            console.log('inpu', state.questions)
+            console.log('searchResults', searchResult)
+
             return {questions: searchResult}
         case 'addAnswer':
             return {answers: [...state.answers, payload]}
         case 'detailQuestion':
             console.log(payload)
             return {qDetails: payload}
+        case 'tagsSearch':
+            console.log('state',state)
+            let filteredQuestions = payload.questions.filter(val=>val.tags.includes(payload.tag.toLowerCase()))
+            console.log('filtered quedtions', filteredQuestions)
+            return {...state,questions:filteredQuestions}    
         default:
             return state;
     }
@@ -119,9 +130,29 @@ export const _updateQuestion = (body, _id) => {
             }).catch(console.error);
     }
 }
+export const _getAllQuestionsByTag = (tag) => {
+
+    return (dispatch) => {
+        return superagent.get(`${API}/api/v1/questions`)
+            .accept('application/json')
+            .then(data => {
+                let sortedQuestions = data.body.records.sort((a, b) => {
+                        return new Date(b.date) - new Date(a.date);
+                });
+                dispatch(searchByTagsAction({ questions: sortedQuestions, tag:tag }))
+            }).catch(console.error);
+    }
+}
 export const _searchQuestions = (input) =>{
     return (dispatch)=>{
-        dispatch(searchQuestionsAction(input))
+        return superagent.get(`${API}/api/v1/questions`)
+            .accept('application/json')
+            .then(data => {
+                let sortedQuestions = data.body.records.sort((a, b) => {
+                        return new Date(b.date) - new Date(a.date);
+                });
+                dispatch(searchQuestionsAction({input, questions:sortedQuestions}))
+            }).catch(console.error);
     }
 }
 // ===================ANSWERS=======================
@@ -178,6 +209,12 @@ export const searchQuestionsAction = (payload) => {
         payload: payload,
     }
 }
+export const searchByTagsAction = (payload) => {
+    return {
+        type: 'tagsSearch',
+        payload: payload,
+    }
+}
 // ===================ANSWERS=======================
 export const addAnswerAction = (payload) => {
     return{
@@ -185,3 +222,5 @@ export const addAnswerAction = (payload) => {
         payload: payload,
     }
 }
+
+

@@ -90,8 +90,8 @@ class SignInProvider extends React.Component {
     // let cookieUser = cookie.load('user');
     // if(!cookieToken){
 
-      cookie.save('auth', token);
-      cookie.save('user',JSON.stringify(user));
+      cookie.save('auth', token, { path: '/' });
+      cookie.save('user',JSON.stringify(user),{ path: '/' });
       this.setState({ signedIn, user, token });
     // }
   }

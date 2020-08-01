@@ -13,7 +13,8 @@ function AddQuestion(props) {
     }
     const handleInputChange = (e) => {
         if(e.target.name === 'tags'){
-           let theTags = e.target.value.split(' ');
+           let theTags = e.target.value.toLowerCase().split(' ');
+           
             setInput({ ...input, [e.target.name]: theTags });
 
         }else{

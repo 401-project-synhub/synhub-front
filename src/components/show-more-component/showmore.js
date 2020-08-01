@@ -45,7 +45,7 @@ function ShowMore(props) {
 
     const handleSubmitAnswer = (e) => {
         e.preventDefault();
-        props.add(input, props.details.title);
+        props.add(input, details.title);
         e.target.reset();
     }
     const handleInputChange = (e) => {
@@ -58,23 +58,6 @@ function ShowMore(props) {
                 <h2>Question Title :{details.title}</h2>
                 <h3>Question Author :{details.author}</h3>
                 <p>Description: {details.description}</p>
-            </>
-            : null
-            }
-            <div className='answers'>
-                {details.answers ? details.answers.map(oneAns => (
-                    <div className='one' key={oneAns._id}>
-                        <h3> Answer Title: {oneAns.title}</h3>
-                        <h4> Answer Author: {oneAns.author}</h4>
-                        <p>
-                            Answer Description
-                            {oneAns.description}
-                        </p>
-                    </div>
-
-
-                )) : ''}
-
                 <ul><li>
                     Tags
                 </li>
@@ -84,6 +67,23 @@ function ShowMore(props) {
                         </li>
                     )) : ''}
                 </ul>
+            </>
+            : null
+            }
+            <div className='answers'>
+                {details.answers ? details.answers.map(oneAns => (
+                    <div className='one' key={oneAns._id}>
+                        <h3> Answer Title: {oneAns.title}</h3>
+                        <h4> Answer Author: {oneAns.author}</h4>
+                        <p>
+                            Answer Description :
+                            {oneAns.description}
+                        </p>
+                    </div>
+
+
+                )) : ''}
+
 
             </div>
             <Show condition={context.signedIn}>

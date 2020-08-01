@@ -19,9 +19,10 @@ import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import './community.scss';
+// import '../community-component/community.scss';
 
-function Community(props) {
+function TagsSearch(props) {
+    // console.log('hey from tag')
     const [input, setInput] = useState({})
     let [underUpdating, setUnderUpdating] = useState(false);
     let [questionID, setQuestionID] = useState('');
@@ -50,20 +51,21 @@ function Community(props) {
     const handleSearchSubmit = (e) => {
         e.preventDefault();
         props.search(searchInp);
-        // setSearchInp('');
+        setSearchInp('');
         e.target.reset();
         console.log('searchInp', searchInp);
     }
     const context = useContext(SignInContext);
-    const fetchData = (choice) => {
-        props.get(choice);
+    // console.log('(props.match',props.match)
+    const fetchData = () => {
+        props.tagsSearch(props.match.params.tag);
     };
     useEffect(() => {
         props.get(choice);
     }, [choice])
 
     useEffect(() => {
-        fetchData('date');
+        fetchData();
     }, [])
     const toggle = (e) => {
         setUnderUpdating(!underUpdating);
@@ -134,7 +136,7 @@ function Community(props) {
                         <option value={'title'}>Title</option>
                     </NativeSelect>
                 </FormControl>
-                <Paper onSubmit={handleSearchSubmit} component="form" className={classes.root2}>
+                <Paper onSubmit={handleSearchSubmit} id='searchId' component="form" className={classes.root2}>
                     <InputBase
                         onChange={handleSearchChange}
                         className={classes.input}
@@ -148,8 +150,10 @@ function Community(props) {
                         </IconButton>
                     </Link>
                 </Paper>
-                {props.questions.questions.map(oneQuestion => (
-
+                
+                {
+                    console.log(props.questions),
+                props.questions.questions.map(oneQuestion => (
                     <Card className={classes.root} key={oneQuestion._id}>
 
                         <Link to={`/details/${oneQuestion._id}`}>
@@ -215,4 +219,4 @@ const mapDispatchToProps = (dispatch) => ({
     search: (input) => dispatch(_searchQuestions(input)),
     tagsSearch: (tag) => { dispatch(_getAllQuestionsByTag(tag)) }
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Community);
+export default connect(mapStateToProps, mapDispatchToProps)(TagsSearch);
