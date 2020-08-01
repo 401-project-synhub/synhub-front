@@ -1,15 +1,26 @@
 import React from 'react';
-import Header from './header/header.js'
-import Home from './home/home.js'
+import Header from './components/header/header.js'
+import Home from './components/home/home.js'
+import CodeTogether from './components/code-together/code-together.js';
+import RoomsForm from './components/code-together/rooms-from/rooms-from.js';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 import './app.scss';
 function App() {
   return (
     <>
-    <Header />
-    <main>
-      <Home />
-    </main>
+      <BrowserRouter>
+        <main>
+          <Route exact path='/'>
+            <Header />
+            <Home />
+          </Route>
+          <Route exact path='/coding' component={(props) => <RoomsForm {...props} key={window.location.pathname}/>} />
+          <Route exact path='/coding/:room'>
+            <CodeTogether />
+          </Route>
+        </main>
+      </BrowserRouter>
     </>
   )
 }

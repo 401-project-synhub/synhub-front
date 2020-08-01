@@ -1,5 +1,6 @@
 import React from 'react';
 import './header.scss';
+import {Link} from 'react-router-dom';
 
 function Header(props) {
 
@@ -11,6 +12,7 @@ function Header(props) {
                         <li>Home</li>
                         <li>Community</li>
                         <li>Code Along</li>
+                        <Link className='link' to='./coding'>Code Together</Link>
                     </ul>
                 </nav>
             {/* </div> */}
