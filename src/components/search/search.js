@@ -66,9 +66,11 @@ function Search(props) {
     };
     useEffect(() => {
         // props.get(choice);
-        // props.search(searchInp);
+        // setSearchInp('');
+        props.search(props.match.params.key);
 
-    }, [searchInp])
+        // console.log('say hi')
+    }, [props.match.params.key])
 
     useEffect(() => {
         fetchData();

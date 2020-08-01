@@ -22,24 +22,32 @@ export default (state = initialState, action) => {
         case 'updateQuestion':
             return { questions: [...state.questions.map(val => val.id === payload._id ? payload.record : val)] }
         case 'searchQuestions':
-            let searchResult=[];
+            if(payload.input){
+                console.log('payload in if', payload.input)
 
-            let inputArr= payload.input.replace(/\W\s|\W/g,' ').split(' ');
-            
-            payload.questions.forEach(val=>{
-                let descriptionArr= val.description.replace(/\W\s|\W/g,' ').split(' ');
-                // console.log('descriptionArr',descriptionArr)
-                for(let i=0; i<inputArr.length; i++){
-                    if(descriptionArr.includes(inputArr[i])){
-                        searchResult.push(val);
-                        break;
+                let searchResult=[];
+    
+                let inputArr= payload.input.replace(/\W\s|\W/g,' ').split(' ');
+                
+                payload.questions.forEach(val=>{
+                    let descriptionArr= val.description.replace(/\W\s|\W/g,' ').split(' ');
+                    // console.log('descriptionArr',descriptionArr)
+                    for(let i=0; i<inputArr.length; i++){
+                        if(descriptionArr.includes(inputArr[i])){
+                            searchResult.push(val);
+                            break;
+                        }
                     }
-                }
-            })
-            console.log('inpu', state.questions)
-            console.log('searchResults', searchResult)
+                })
+                console.log('inpu', state.questions)
+                console.log('searchResults', searchResult)
+    
+                return {questions: searchResult}
 
-            return {questions: searchResult}
+            }else{
+                console.log('payload in else', payload.input)
+                return {questions:payload.questions}
+            }
         case 'addAnswer':
             return {answers: [...state.answers, payload]}
         case 'detailQuestion':

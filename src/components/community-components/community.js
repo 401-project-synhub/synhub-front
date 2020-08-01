@@ -18,6 +18,7 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import SearchIcon from '@material-ui/icons/Search';
 import './community.scss';
 
@@ -151,7 +152,9 @@ function Community(props) {
                 {props.questions.questions.map(oneQuestion => (
 
                     <Card className={classes.root} key={oneQuestion._id}>
-
+                        <IconButton >
+                            <BookmarkBorderIcon />
+                        </IconButton>
                         <Link to={`/details/${oneQuestion._id}`}>
                             <CardHeader
                                 avatar={
