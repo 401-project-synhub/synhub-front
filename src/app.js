@@ -10,6 +10,7 @@ import AddQuestion from './components/add-question/add-question';
 import ShowMore from './components/show-more-component/showmore';
 import Search from './components/search/search';
 import TagsSearch from './components/tags-search/tags-search'
+import Paint from './components/paint/paint'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './app.scss';
@@ -32,6 +33,9 @@ function App() {
               </Route>
               <Route exact path='/community'>
                 <Community />
+              </Route>
+              <Route exact path='/paint'>
+                <Paint />
               </Route>
               <Route exact path='/community/search/:key' component={Search} />
               <Route exact path='/community/tags/:tag' component={TagsSearch} />
