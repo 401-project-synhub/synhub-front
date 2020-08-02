@@ -1,3 +1,28 @@
 body{
     margin: 0;
 }
+.sign-popup{
+    // display: none;
+    z-index: 100000000000000000000000000000000;
+}
+.signing{
+    // position: absolute;
+    width: 200px;
+    height: 50px;
+    z-index: 100000000000000000000000000;
+}
+.show-more{
+    // position: absolute;
+    z-index: 100000000000000000000000000000000000000000000;
+}
+.bgBlack{
+    z-index: 10000000000000000000;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+}

@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900');
+@import "~bootstrap/scss/bootstrap";
 
 .header{
     color: white;
@@ -73,6 +74,69 @@
         grid-template-columns: 50% 50%;
         grid-template-rows: 100%;
         grid-template-areas: "a b";
+        .bgBlack{
+            z-index: 1000000;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background-color: #0000008c;
+            width: 100%;
+            height: 100%;
+            .sign-popup{
+                height: 75%;
+                width: 35%;
+                display: flex;
+                top: 15%;
+                left: 30%;
+                bottom: 0;
+                right: 0;
+                position: absolute;
+                background-color: #d1ffdd;
+                border-radius: 8px;
+                box-shadow: 0px 2px 8px #172f19;      
+                flex-direction: column;
+                // justify-content: space-evenly;
+                align-items: center; 
+                form{
+                    height: 60%;
+                    width: 70%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    margin-top: 5%;
+                    input{
+                        height: 22%;
+                        margin-top: 10%;
+                        border-radius: 0.55rem;
+                    }
+                    button{
+                        cursor: pointer;
+                        border-radius: 0.55rem;
+                        height: 18%;
+                        margin-top: 5%;
+                        background-color: chocolate;
+                        border: 0;
+                        border-bottom: 4px solid #364838;
+                        text-transform: uppercase;
+                        font-size: large;
+                        font-weight: 500;
+                        color: #dcffe5;
+                    }
+                }     
+                h2{
+                    font-size: 3rem;
+                    color: #364838;
+                    text-transform: uppercase;
+                    margin-top: 10%;
+                    border-bottom: chocolate 3px solid;
+                    width: 90%;
+                    text-align: center;
+                    margin-bottom: 0;
+                }
+            }
+        }
     }
     ul{
         // width: 60%;
