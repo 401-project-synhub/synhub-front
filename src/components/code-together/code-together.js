@@ -14,7 +14,7 @@ import 'codemirror/mode/css/css';
 import 'codemirror/mode/javascript/javascript';
 import { withRouter } from "react-router"
 import { useParams } from "react-router-dom";
-const ENDPOINT = "http://127.0.0.1:4000";
+const ENDPOINT = "https://synhub.herokuapp.com";
 const socket = socketIOClient(ENDPOINT);
 const usersArray = ['yousef', 'batool', 'mhmd'];
 let roomName;

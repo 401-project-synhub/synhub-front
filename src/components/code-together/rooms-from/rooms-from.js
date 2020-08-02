@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import socketIOClient from "socket.io-client";
 import { Link } from 'react-router-dom';
 import { withRouter } from "react-router"
-const ENDPOINT = "http://127.0.0.1:4000";
+const ENDPOINT = "https://synhub.herokuapp.com";
 let socket;
 // const socket = socketIOClient(ENDPOINT);
 
