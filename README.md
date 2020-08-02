@@ -1,5 +1,4 @@
-# SynHub
-
+# CRA without the extra fluff
 - Project Name: SynHub
 
 - Team Members:
@@ -35,3 +34,4 @@
 ![Home Page](home-page.png)
 ![Community](community.png)
 ![Code together](codeTogether.png)
+
