@@ -22,8 +22,8 @@ function App() {
   return (
     <>
       <Router>
-        <Switch>
-          <SignInProvider >
+        {/* <Switch> */}
+          {/* <SignInProvider > */}
           <main>
           <Route exact path='/'>
             <Header />
@@ -34,7 +34,7 @@ function App() {
             <CodeTogether />
           </Route>
           </main>
-            <Route exact path='/details/:id' component={ShowMore} />
+            {/* <Route exact path='/details/:id' component={ShowMore} />
               <Route exact path='/community'>
                 <Community />
               </Route>
@@ -43,9 +43,9 @@ function App() {
 
             <Auth capabilities='read'>
               <Route exact path='/addquestion' component={AddQuestion} />
-            </Auth>
-          </SignInProvider>
-        </Switch>
+            </Auth> */}
+          {/* </SignInProvider> */}
+        {/* </Switch> */}
       </Router>
     </>
   );
