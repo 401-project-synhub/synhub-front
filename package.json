@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "codemirror": "^5.56.0",
     "node-sass": "^4.14.1",
     "pushid": "^1.0.0",

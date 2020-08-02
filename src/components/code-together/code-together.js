@@ -8,12 +8,14 @@ import socketIOClient from "socket.io-client";
 import './code-together.scss';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
-
 import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/css/css';
 import 'codemirror/mode/javascript/javascript';
 import { withRouter } from "react-router"
 import { useParams } from "react-router-dom";
+
+import GetAppIcon from '@material-ui/icons/GetApp';
+
 const ENDPOINT = "http://127.0.0.1:4000";
 const socket = socketIOClient(ENDPOINT);
 const usersArray = ['yousef', 'batool', 'mhmd'];
@@ -113,7 +115,7 @@ class App extends Component {
     });
 
 
-  
+
 
 
     // socket.join(roomName)
@@ -201,6 +203,40 @@ class App extends Component {
     socket.emit('comment', roomName, message, socketId);
   }
 
+  downloadTxtFile = () => {
+    const element = document.createElement("a");
+    var pos = this.state.html.indexOf("<body>");
+    var pos2 = this.state.html.indexOf("</body>");
+    var body = this.state.html.slice(pos + 6, pos2);
+    console.log(body);
+    const code = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Document</title>
+      <style>
+        ${this.state.css}
+      </style>
+    </head>
+    <body>
+      ${body}
+
+      <script type="text/javascript">
+        ${this.state.js}
+      </script>
+    </body>
+    </html>
+  `;
+    const file = new Blob([code], { type: 'text/plain' });
+    element.href = URL.createObjectURL(file);
+    element.download = "index.html";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  }
+
 
   render() {
     const { html, js, css } = this.state;
@@ -219,6 +255,7 @@ class App extends Component {
           <section className="playground">
             <div className="code-editor html-code">
               <div onClick={this.clickHandler} className="editor-header">HTML</div>
+              <GetAppIcon onClick={this.downloadTxtFile} color= 'secondary' ></GetAppIcon>
               <CodeMirror
                 value={html}
                 options={{
@@ -232,6 +269,7 @@ class App extends Component {
                   //   this.setState({ html: data.message })
                   //   return data;
                   // });
+
                   socket.emit('send-chat-message-html', roomName, html);
                 }}
               />
