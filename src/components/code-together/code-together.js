@@ -16,7 +16,7 @@ import { useParams } from "react-router-dom";
 
 import GetAppIcon from '@material-ui/icons/GetApp';
 
-const ENDPOINT = "http://127.0.0.1:4000";
+const ENDPOINT = "https://synhub.herokuapp.com";
 const socket = socketIOClient(ENDPOINT);
 const usersArray = ['yousef', 'batool', 'mhmd'];
 let roomName;

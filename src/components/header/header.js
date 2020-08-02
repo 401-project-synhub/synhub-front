@@ -13,6 +13,9 @@ function Header(props) {
                         <li>Community</li>
                         <li>Code Along</li>
                         <Link className='link' to='./coding'>Code Together</Link>
+                        {/* ////////// */}
+                        <Link className='link' to='./paint'>Paint</Link>
+                        {/* ////////// */}
                     </ul>
                 </nav>
             {/* </div> */}
