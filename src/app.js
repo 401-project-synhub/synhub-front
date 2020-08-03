@@ -11,7 +11,7 @@ import ShowMore from './components/show-more-component/showmore';
 import Search from './components/search/search';
 import TagsSearch from './components/tags-search/tags-search'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
+import Footer from './components/Footer/Footer.js'
 import './app.scss';
 function App() {
   return (
@@ -40,6 +40,7 @@ function App() {
                 <Route exact path='/community/addquestion' component={AddQuestion} />
               </Auth>
             </main>
+            <Footer/>
           </SignInProvider>
         </Switch>
       </BrowserRouter>
