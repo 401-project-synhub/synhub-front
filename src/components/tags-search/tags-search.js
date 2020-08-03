@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Auth from '../auth/';
 import { SignInContext } from '../../context/auth';
-import { _getAllQuestions, _deleteQuestion, _updateQuestion, _searchQuestions, _getAllQuestionsByTag } from '../../store/community-reducer';
+import { _getAllQuestions, _deleteQuestion, _updateQuestion, _searchQuestions, _getAllQuestionsByTag, _bookmark ,_getAllBookmarked} from '../../store/community-reducer';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -19,6 +19,8 @@ import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+
 // import '../community-component/community.scss';
 
 function TagsSearch(props) {
@@ -28,6 +30,8 @@ function TagsSearch(props) {
     let [questionID, setQuestionID] = useState('');
     let [choice, setChoice] = useState('date');
     let [searchInp, setSearchInp] = useState('');
+    let [bol, setBol] = useState(false);
+
 
     const updateQuestionEvent = (e) => {
         e.preventDefault();
@@ -118,11 +122,11 @@ function TagsSearch(props) {
     return (
         <>
             <div className="container">
-            <Auth capability='read' >
-                <Link to='/community/addquestion'>
-                    <button className="show-more">Add Question</button>
-                </Link>
-            </Auth>
+                <Auth capability='read' >
+                    <Link to='/community/addquestion'>
+                        <button className="show-more">Add Question</button>
+                    </Link>
+                </Auth>
                 <FormControl className={classes.formControl}>
                     <NativeSelect
                         className={classes.selectEmpty}
@@ -152,59 +156,62 @@ function TagsSearch(props) {
                         </IconButton>
                     </Link>
                 </Paper>
-                
+
                 {
                     console.log(props.questions),
-                props.questions.questions.map(oneQuestion => (
-                    <Card className={classes.root} key={oneQuestion._id}>
+                    props.questions.questions.map(oneQuestion => (
+                        <Card className={classes.root} key={oneQuestion._id}>
+                            <IconButton onClick={() => { props.bookmark(oneQuestion); setBol(!bol) }}>
+                                {/* {console.log(props.questions.bookmarked.filter(val => val.bookmarked._id === oneQuestion._id).length)} */}
+                                <BookmarkBorderIcon className={`bookmark_${!!(props.questions.bookmarked.filter(val => val.bookmarked._id === oneQuestion._id).length)}`} />
+                            </IconButton>
+                            <Link to={`/community/details/${oneQuestion._id}`}>
+                                <CardHeader
+                                    avatar={
+                                        <Avatar alt={oneQuestion.author} src={oneQuestion.imgUrl ? oneQuestion.imgUrl : '/static/images/avatar/3.jpg'} title={oneQuestion.author} />
+                                    }
+                                    title={oneQuestion.title}
+                                    subheader={oneQuestion.date}
+                                    className={classes.cardHeader}
+                                />
+                            </Link>
 
-                        <Link to={`/community/details/${oneQuestion._id}`}>
-                            <CardHeader
-                                avatar={
-                                    <Avatar alt={oneQuestion.author} src={oneQuestion.imgUrl ? oneQuestion.imgUrl : '/static/images/avatar/3.jpg'} title={oneQuestion.author} />
-                                }
-                                title={oneQuestion.title}
-                                subheader={oneQuestion.date}
-                                className={classes.cardHeader}
-                            />
-                        </Link>
+                            {underUpdating && context.user.username === oneQuestion.author && questionID === oneQuestion._id
+                                ?
+                                <form onSubmit={updateQuestionEvent} id={oneQuestion._id}>
+                                    <input type='text' defaultValue={oneQuestion.title} name='title' onChange={handleInputChange} />
+                                    <input type='text' defaultValue={oneQuestion.description} name='description' onChange={handleInputChange} />
+                                    <input type='text' defaultValue={oneQuestion.tags} name='tags' onChange={handleInputChange} />
+                                    <button className="show-more"> Save</button>
+                                </form>
+                                :
+                                <>
+                                    <CardContent>
+                                        <Typography variant="body2" color="textSecondary" component="p">
+                                            {oneQuestion.description}
+                                        </Typography>
+                                    </CardContent>
 
-                        {underUpdating && context.user.username === oneQuestion.author && questionID === oneQuestion._id
-                            ?
-                            <form onSubmit={updateQuestionEvent} id={oneQuestion._id}>
-                                <input type='text' defaultValue={oneQuestion.title} name='title' onChange={handleInputChange} />
-                                <input type='text' defaultValue={oneQuestion.description} name='description' onChange={handleInputChange} />
-                                <input type='text' defaultValue={oneQuestion.tags} name='tags' onChange={handleInputChange} />
-                                <button className="show-more"> Save</button>
-                            </form>
-                            :
-                            <>
-                                <CardContent>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        {oneQuestion.description}
-                                    </Typography>
-                                </CardContent>
+                                    {/* <button className="show-more">Show More</button> */}
+                                    <ButtonGroup size="small" aria-label="small outlined button group">
+                                        {oneQuestion.tags.map(tag => (
+                                            <Link to={`/community/tags/${tag}`} >
+                                                <Button onClick={() => props.tagsSearch(tag)} key={tag}>{tag}</Button>
+                                            </Link>
 
-                                {/* <button className="show-more">Show More</button> */}
-                                <ButtonGroup size="small" aria-label="small outlined button group">
-                                    {oneQuestion.tags.map(tag => (
-                                        <Link to={`/community/tags/${tag}`} >
-                                            <Button onClick={() => props.tagsSearch(tag)} key={tag}>{tag}</Button>
-                                        </Link>
+                                        ))}
+                                    </ButtonGroup>
+                                </>
+                            }
+                            <Auth capability='delete' >
+                                {context.user.capabilities ? context.user.username === oneQuestion.author || context.user.capabilities.role === 'admin' ? <button className="show-more" onClick={() => props.delete(oneQuestion._id)}>Delete Question</button> : null : null}
+                            </Auth>
+                            <Auth capability='update' >
+                                {context.user.capabilities ? context.user.username === oneQuestion.author ? <button className="show-more" onClick={toggle} id={oneQuestion._id}>Edit</button> : null : null}
+                            </Auth>
+                        </Card>
 
-                                    ))}
-                                </ButtonGroup>
-                            </>
-                        }
-                        <Auth capability='delete' >
-                            {context.user.capabilities ? context.user.username === oneQuestion.author || context.user.capabilities.role === 'admin' ? <button className="show-more" onClick={() => props.delete(oneQuestion._id)}>Delete Question</button> : null : null}
-                        </Auth>
-                        <Auth capability='update' >
-                            {context.user.capabilities ? context.user.username === oneQuestion.author ? <button className="show-more" onClick={toggle} id={oneQuestion._id}>Edit</button> : null : null}
-                        </Auth>
-                    </Card>
-
-                ))}
+                    ))}
             </div>
         </>
     );
@@ -219,6 +226,10 @@ const mapDispatchToProps = (dispatch) => ({
     delete: (_id) => dispatch(_deleteQuestion(_id)),
     update: (body, _id) => dispatch(_updateQuestion(body, _id)),
     search: (input) => dispatch(_searchQuestions(input)),
-    tagsSearch: (tag) => { dispatch(_getAllQuestionsByTag(tag)) }
+    tagsSearch: (tag) => { dispatch(_getAllQuestionsByTag(tag)) },
+    bookmark: (body) => dispatch(_bookmark(body)),
+
+    getMarked: () => dispatch(_getAllBookmarked())
+
 });
 export default connect(mapStateToProps, mapDispatchToProps)(TagsSearch);

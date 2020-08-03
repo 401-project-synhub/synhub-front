@@ -124,7 +124,7 @@ function Community(props) {
         const name = e.target.value;
         setChoice(name);
     };
-    console.log('bookmarked', props.questions.bookmarked)
+    // console.log('bookmarked', props.questions.bookmarked)
 
     return (
         <>
