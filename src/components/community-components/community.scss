@@ -28,6 +28,16 @@
         .MuiPaper-root {
             box-shadow: 5px 6px 10px #88af88;
             margin-top: 35px;
+            button{
+                span{
+                    .bookmark_true{
+                        background-color: red;
+                    }
+                    .bookmark_false{
+                        // background-color: red;
+                    }
+                }
+            }
             .MuiCardContent-root{
                 .MuiTypography-body2 {
                     font-size: 1rem;
