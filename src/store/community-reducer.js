@@ -3,7 +3,7 @@ import superagent from 'superagent';
 
 
 
-const initialState = { questions: [], answers: [], qDetails: {}, bookmarked:[] };
+const initialState = { questions: [], answers: [], qDetails: {}, bookmarked:[], profile:{} };
 // const API = 'https://synhub.herokuapp.com';
 const API = 'https://synhub-project.herokuapp.com';
 
@@ -59,7 +59,7 @@ export default (state = initialState, action) => {
             console.log('filtered quedtions', filteredQuestions)
             return { ...state, questions: filteredQuestions }
 
-        //bookmark
+        //==================bookmark
         case 'postBookmark':
             console.log('payload in add bookmark',payload)
             return {...state, bookmarked:[...state.bookmarked, payload]}
@@ -71,6 +71,9 @@ export default (state = initialState, action) => {
             let filteredArr = payload.arr.filter(val => val.user === payload.username)
 
             return {...state, bookmarked:filteredArr}
+            //================profile
+            case 'getProfile':
+                return {...state,profile:payload}
         default:
             return state;
     }
@@ -232,6 +235,22 @@ export const _bookmark = (body) => {
         }).catch(console.error);
     }
 }
+//====================Profile======================
+export const _getProfile = (id)=>{
+    const cookieToken = cookie.load('auth');
+    let token = cookieToken || null;
+    const userPro = cookie.load('user');
+    let theUser = userPro || null;
+    return (dispatch) => {
+    superagent.get(`${API}/api/v1/users/${theUser.id||id}`)
+    .accept('application/json')
+    .then(record => {
+        console.log('data profile', record.body.records[0])
+        dispatch(getProfileAction(record.body.records[0]))
+    }).catch(console.error);
+}
+
+}
 // ===================ANSWERS=======================
 export const _addAnswer = (body, qTitle) => {
     const cookieToken = cookie.load('auth');
@@ -311,7 +330,13 @@ export const deleteBookmarkAction = (payload) =>{
         payload:payload,
     }
 }
-
+//===================Profile=======================
+export const getProfileAction = (payload) => {
+    return {
+        type: 'getProfile',
+        payload: payload,
+    }
+}
 // ===================ANSWERS=======================
 export const addAnswerAction = (payload) => {
     return {

@@ -20,7 +20,6 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
-import Community from '../community-components/community'
 
 // import '../community-component/community.scss';
 

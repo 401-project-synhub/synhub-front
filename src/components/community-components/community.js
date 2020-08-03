@@ -129,6 +129,11 @@ function Community(props) {
     return (
         <>
             <div className="container">
+            <Auth capability='read' >
+                    <Link to='/profile'>
+                        <button className="show-more">Go Profile</button>
+                    </Link>
+                </Auth>
                 <Auth capability='read' >
                     <Link to='/community/addquestion'>
                         <button className="show-more">Add Question</button>
