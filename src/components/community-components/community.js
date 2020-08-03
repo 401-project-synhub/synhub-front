@@ -116,7 +116,6 @@ function Community(props) {
     };
     return (
         <>
-            <div className="container">
                 <Link to='/community/addquestion'>
                     <button className="show-more">Add Question</button>
                 </Link>
@@ -149,7 +148,8 @@ function Community(props) {
                         </IconButton>
                     </Link>
                 </Paper>
-                {props.questions.questions.map(oneQuestion => (
+            <div id='cards'>
+                {/* {props.questions.questions.map(oneQuestion => (
 
                     <Card className={classes.root} key={oneQuestion._id}>
                         <IconButton >
@@ -182,13 +182,12 @@ function Community(props) {
                                     </Typography>
                                 </CardContent>
 
-                                {/* <button className="show-more">Show More</button> */}
+                                <button className="show-more">Show More</button>
                                 <ButtonGroup size="small" aria-label="small outlined button group">
                                     {oneQuestion.tags.map(tag => (
                                         <Link to={`/community/tags/${tag}`} >
                                             <Button onClick={() => props.tagsSearch(tag)} key={tag}>{tag}</Button>
                                         </Link>
-
                                     ))}
                                 </ButtonGroup>
                             </>
@@ -200,8 +199,39 @@ function Community(props) {
                             {context.user.capabilities ? context.user.username === oneQuestion.author ? <button className="show-more" onClick={toggle} id={oneQuestion._id}>Edit</button> : null : null}
                         </Auth>
                     </Card>
+                ))} */}
+                {props.questions.questions.map(oneQuestion => (
+                    <div id='card'>
+                        <div id='card-header'>
+                            <div id='card-header-avatar'>
+                                <img alt='avatar' src={oneQuestion.imgUrl}></img>
+                            </div>
+                            <div id='card-header-text'>
+                                <h3>{oneQuestion.title}</h3>
+                                <h4>{oneQuestion.date}</h4>
+                            </div >
+                        </div>
+                        <div id='card-body'>
+                            <div id='card-body-description'>
+                                <p>{oneQuestion.description.slice(0, 10)}...</p>
+                            </div>
+                            <div id='card-body-clickables'>
+                                <div id='card-body-clickables-tags'>
+                                {oneQuestion.tags.map(tag => (
+                                        <Link to={`/community/tags/${tag}`} >
+                                            <button className='tag-btn' onClick={() => props.tagsSearch(tag)} key={tag}>{tag}</button>
+                                        </Link>
+                                    ))}
+                                </div>
+                                <div id='card-body-clickables-button'>
+                                    <button className='show-btn'>Show More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 ))}
+
             </div>
         </>
     );

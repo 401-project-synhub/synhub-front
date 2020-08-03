@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900');
+@import "~bootstrap/scss/bootstrap";
 
 
 .home{
@@ -70,15 +71,17 @@
 
         .container{
             background: url('/assets/home/illu-l.png');
-            width: 91%;
+            width: 61%;
             height: 100vh;
             position: absolute;
+            right: 0;
             background-repeat: no-repeat;
-            background-position-x: 100%;
+            // background-position-x: 100%;
             margin: 0;
             overflow-x: hidden;
             opacity: .5;
             opacity: .8;
+            z-index: 0;
         }
 
         .services-text{
@@ -126,7 +129,7 @@
                 cursor: pointer;
                 letter-spacing: 1.3px;
                 background: linear-gradient(114deg,#4cddbd,#06f286);
-                z-index: 0;
+                z-index: 1;
                 span{
                     text-shadow: 0px 0px 20px #6e9162;
                 }
@@ -163,6 +166,10 @@
             }
             a:hover{
                 padding: 20px 60px 20px 60px;
+            }
+            a:focus{
+                border: none;
+                outline: none;
             }
         }
         .services-pic{
@@ -286,6 +293,99 @@
             img{
                 width: 110%;
             }
+        }
+    }
+
+
+    #carousel-section{
+
+        margin-top:17%;
+        h2{
+            margin-bottom: 3%;
+        }
+        #gr-sp{
+            margin-bottom: 3%;
+        }
+        #carousel{
+            background: url('/assets/home/cloud.png');
+            height: 60vh;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 61%;
+            margin: auto; 
+            
+        .carousel-inner{
+            background: url('/assets/home/cutestars.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            }
+        .carousel-indicators {
+            bottom: -30px;
+            li{
+                background-color: #0ebfaa;
+            }
+        }
+
+
+        }
+        .CI{
+            height:40vh;
+            display: grid;
+            margin-top: 10%;
+            grid-template-rows: 70% 30%;
+            grid-template-columns: 100%;
+            grid-template-areas: 'text'
+                                'img';
+            
+            #slider-text{
+                grid-area: text;
+                line-height: 80px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                flex-direction: column;
+                font-family: 'Heebo', sans-serif;
+                font-weight: 500;
+                color: white;
+                font-size: 20px;
+            }
+            #slider-img{
+                grid-area: img;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+            }
+
+            svg{
+                margin-bottom: 0%;
+                position: relative;
+                top: -11%;
+                width: 7%;        }
+
+            img{
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+            }
+            p{
+                width:80%;
+                margin:auto;
+                line-height: 30px;
+                margin-bottom: 2%;
+                font-style: italic;
+            }
+            h4{
+                font-weight: 300;
+                font-size: 22px;
+            }
+            h5{
+                font-weight: 300;
+                font-size: 20px;
+
+            }
+            
         }
     }
 }
