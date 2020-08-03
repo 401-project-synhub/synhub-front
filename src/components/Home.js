@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addBoard } from "../actions";
 import BoardThumbnail from "./BoardThumbnail";
+import './style.scss'
 
 const Thumbnails = styled.div`
   flex: 1;
@@ -13,6 +14,7 @@ const Thumbnails = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  outline: none;
 `;
 
 const HomeContainer = styled.div`
@@ -24,22 +26,28 @@ const HomeContainer = styled.div`
 
 const CreateTitle = styled.h3`
   font-size: 48px;
-  color: white;
+  color: #172b4d;
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
 `;
 
 const CreateInput = styled.input`
-  width: 400px;
-  height: 80px;
-  font-size: 22px;
+  
   padding: 10px;
   box-sizing: border-box;
-  border-radius: 3px;
-  border: none;
-  outline-color: blue;
+  height: 280px;
+  width: 280px;
+  background: rgba(9,30,66,.04);
+  padding: 10px;
+  cursor: pointer;
   box-shadow: 0 2px 4px grey;
+  color: #172b4d;
+  border: none;
   align-self: center;
+  outline: none;
+  font-size: large;
+  text-align: center;
+  padding: 0px;
 `;
 
 const Home = ({ boards, boardOrder, dispatch }) => {
@@ -78,11 +86,11 @@ console.log('boardOrder',boardOrder)
   const renderCreateBoard = () => {
     return (
       <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
-        <CreateTitle>Create a new Board</CreateTitle>
-        <CreateInput
+        {/* <CreateTitle>Create a new Board</CreateTitle> */}
+        <CreateInput id='createInput'
           onChange={handleChange}
           value={newBoardTitle}
-          placeholder="Your boards title..."
+          placeholder="Your new board's title..."
           type="text"
         />
       </form>

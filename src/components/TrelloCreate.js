@@ -63,7 +63,7 @@ class TrelloCreate extends React.PureComponent {
     const buttonText = list ? "Add another list" : "Add another card";
     const buttonTextOpacity = list ? 1 : 0.5;
     const buttonTextColor = list ? "white" : "inherit";
-    const buttonTextBackground = list ? "rgba(0,0,0,.15)" : "inherit";
+    const buttonTextBackground = list ? "#d0e9df" : "inherit";
 
     const OpenFormButton = styled.div`
       display: flex;
@@ -97,7 +97,7 @@ class TrelloCreate extends React.PureComponent {
         onChange={this.handleInputChange}
         closeForm={this.closeForm}
       >
-        <TrelloButton onClick={list ? this.handleAddList : this.handleAddCard}>
+        <TrelloButton id='add-card-button' onClick={list ? this.handleAddList : this.handleAddCard}>
           {list ? "Add List" : "Add Card"}
         </TrelloButton>
       </TrelloForm>

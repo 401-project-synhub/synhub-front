@@ -8,9 +8,11 @@ import { editTitle, deleteList } from "../actions";
 import Icon from "@material-ui/core/Icon";
 
 import DeleteIcon from '@material-ui/icons/Delete';
+import './style.scss'
+
 
 const ListContainer = styled.div`
-  background-color: #dfe3e6;
+  background-color: #d0e9df;
   border-radius: 3px;
   width: 300px;
   padding: 8px;
@@ -21,7 +23,7 @@ const ListContainer = styled.div`
 const StyledInput = styled.input`
   width: 100%;
   border: none;
-  outline-color: blue;
+  outline-color: none;
   border-radius: 3px;
   margin-bottom: 3px;
   padding: 5px;
@@ -47,9 +49,7 @@ const DeleteButton = styled(Icon)`
 
 const ListTitle = styled.h4`
   transition: background 0.3s ease-in;
-  ${TitleContainer}:hover & {
-    background: #ccc;
-  }
+ 
 `;
 
 const TrelloList = ({ title, cards, listID, index, dispatch }) => {
@@ -106,7 +106,7 @@ const TrelloList = ({ title, cards, listID, index, dispatch }) => {
                   ) : (
                     <TitleContainer onClick={() => setIsEditing(true)}>
                       <ListTitle>{listTitle}</ListTitle>
-                      <DeleteIcon onClick={handleDeleteList}>
+                      <DeleteIcon className='delete' onClick={handleDeleteList}>
                         delete
                       </DeleteIcon>
                     </TitleContainer>

@@ -1,0 +1,110 @@
+#title{
+    color: #4cbca3;
+    font-size: xx-large;
+    font-weight: bolder;
+    font-family: sans-serif;
+}
+#createInput{
+    transition-property: background-color;
+    transition-duration: 85ms;
+    &:hover{
+        background-color: rgba(0,0,0,.15);
+        
+    }
+    margin-top: 10%;
+}
+
+#Thumbnail{
+    &:hover{
+        opacity: 56%;
+    }
+}
+
+.delete{
+    cursor: pointer;
+    &:hover{
+        opacity: 56%;
+    }
+}
+
+#yourBoards-link{
+    text-decoration: none;
+    font-family: serif;
+    font-weight: 600;
+    color: #388876;
+    font-size: xx-large;
+}
+
+#board-title{
+    text-decoration: none;
+    font-family: serif;
+    font-weight: 600;
+    color: #449986;
+    font-size: xx-large;
+}
+
+.dVBlKz{
+    background-color: #d0e9df;
+}
+
+#list{
+    background-color: #d0e9df;
+
+}
+
+#edit-card{
+ position: absolute;
+  display: none;
+  right: 5px;
+  top: 5px;
+  opacity: 0.5;
+  #edit-delete:hover & {
+    display: block;
+    cursor: pointer;
+  }
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+#edit-card{
+ position: absolute;
+  display: none;
+  right: 5px;
+  top: 10%;
+  opacity: 0.5;
+  #edit-delete:hover & {
+    display: block;
+    cursor: pointer;
+  }
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+#delete-card{
+    position: absolute;
+     display: none;
+     right: 5px;
+     top: 65%;
+     opacity: 0.5;
+     #edit-delete:hover & {
+       display: block;
+       cursor: pointer;
+     }
+     &:hover {
+       opacity: 0.8;
+     }
+   }
+
+
+#edit-delete{
+    margin: 0 0 8px 0;
+  position: relative;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+#add-card-button{
+
+}
