@@ -118,9 +118,11 @@ function TagsSearch(props) {
     return (
         <>
             <div className="container">
+            <Auth capability='read' >
                 <Link to='/community/addquestion'>
                     <button className="show-more">Add Question</button>
                 </Link>
+            </Auth>
                 <FormControl className={classes.formControl}>
                     <NativeSelect
                         className={classes.selectEmpty}
