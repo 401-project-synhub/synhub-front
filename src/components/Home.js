@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addBoard } from "../actions";
 import BoardThumbnail from "./BoardThumbnail";
+// import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
+import PersonIcon from '@material-ui/icons/Person';
 import './style.scss'
 
 const Thumbnails = styled.div`
@@ -22,6 +24,7 @@ const HomeContainer = styled.div`
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  height:100%
 `;
 
 const CreateTitle = styled.h3`
@@ -35,8 +38,8 @@ const CreateInput = styled.input`
   
   padding: 10px;
   box-sizing: border-box;
-  height: 280px;
-  width: 280px;
+  height: 230px;
+  width: 230px;
   background: rgba(9,30,66,.04);
   padding: 10px;
   cursor: pointer;
@@ -48,6 +51,8 @@ const CreateInput = styled.input`
   font-size: large;
   text-align: center;
   padding: 0px;
+  opacity: 60%;
+
 `;
 
 const Home = ({ boards, boardOrder, dispatch }) => {
@@ -57,7 +62,7 @@ const Home = ({ boards, boardOrder, dispatch }) => {
 
   const handleChange = e => {
     setNewBoardTitle(e.target.value);
-    console.log('onchange',newBoardTitle)
+    console.log('onchange', newBoardTitle)
 
   };
 
@@ -66,9 +71,9 @@ const Home = ({ boards, boardOrder, dispatch }) => {
     dispatch(addBoard(newBoardTitle));
     console.log(newBoardTitle)
   };
-console.log('boardOrder',boardOrder)
+  console.log('boardOrder', boardOrder)
   const renderBoards = () => {
-    return boardOrder?boardOrder.map(boardID => {
+    return boardOrder ? boardOrder.map(boardID => {
       const board = boards[boardID];
 
       return (
@@ -80,7 +85,7 @@ console.log('boardOrder',boardOrder)
           <BoardThumbnail {...board} />
         </Link>
       );
-    }):null;
+    }) : null;
   };
 
   const renderCreateBoard = () => {
@@ -98,10 +103,16 @@ console.log('boardOrder',boardOrder)
   };
 
   return (
-    <HomeContainer>
-      <Thumbnails>{renderBoards()}</Thumbnails>
-      {renderCreateBoard()}
-    </HomeContainer>
+    <div id='trello-home'>
+      <div id='trello-header'>
+      <PersonIcon fontSize="large"/>      
+        <h1 id='trello-title'>Your Boards</h1>
+      </div>
+      <HomeContainer>
+        <Thumbnails>{renderBoards()}</Thumbnails>
+        {renderCreateBoard()}
+      </HomeContainer>
+    </div>
   );
 };
 

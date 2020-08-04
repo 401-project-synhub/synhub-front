@@ -12,12 +12,11 @@ import './style.scss'
 
 
 const ListContainer = styled.div`
-  background-color: #d0e9df;
-  border-radius: 3px;
-  width: 300px;
-  padding: 8px;
-  height: 100%;
-  margin: 0 8px 0 0;
+background-color: white;
+width: 300px;
+padding: 15px;
+height: 100%;
+margin: 0 8px 8px 0;
 `;
 
 const StyledInput = styled.input`
