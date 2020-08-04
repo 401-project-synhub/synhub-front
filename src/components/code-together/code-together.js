@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Controlled as CodeMirror } from 'react-codemirror2';
 import pushid from 'pushid';
 // import RoomForm from './create-room-form/create-room-form.js'
-// import'http://localhost:4000/socket.io/socket.io.js';
+// import'http://https://synhub.herokuapp.com/socket.io/socket.io.js';
 import '../../../node_modules/socket.io-client/dist/socket.io.js';
 import socketIOClient from "socket.io-client";
 import './code-together.scss';
@@ -14,6 +14,7 @@ import 'codemirror/mode/javascript/javascript';
 import { withRouter } from "react-router"
 import { useParams } from "react-router-dom";
 import GetAppIcon from '@material-ui/icons/GetApp';
+import Paint from '../paint/paint'
 
 const ENDPOINT = "https://synhub.herokuapp.com";
 const socket = socketIOClient(ENDPOINT);
@@ -41,6 +42,7 @@ class App extends Component {
       js2: '',
       css2: '',
       messagesArray: [{ name: 'Batool', message: 'shit' }],
+      paintComp: false,
     };
   }
 
@@ -86,6 +88,11 @@ class App extends Component {
       this.setState({ html: data.message })
       return data;
     });
+    socket.on('toggle-paint', data => {
+      console.log('toggle',data.message);
+      this.setState({ paintComp: data.message })
+      return data;
+    });
     socket.on('chat-message-html', data => {
       console.log(data.message);
       this.setState({ html: data.message })
@@ -129,6 +136,7 @@ class App extends Component {
     console.log('react socket id', socket);
     // socket.emit('new-user', roomName, `${Math.floor(Math.random() * 10)}`, socketId);
     socket.emit('new-user', roomName, `${Math.floor(Math.random() * 10)}`, socketId);
+    
 
   }
 
@@ -235,7 +243,16 @@ class App extends Component {
     element.click();
   }
 
-
+  toggle = () => {
+    console.log('paint1',this.state.paintComp);
+    let paint = !this.state.paintComp ;
+    console.log('paint', paint);
+    this.setState({ paintComp: paint });
+    console.log('paint12',this.state.paintComp)
+    console.log('paint room name', roomName);
+    socket.emit('send-toggle-paint', roomName, paint);
+    console.log('paint2',this.state.paintComp);
+  }
   render() {
     const { html, js, css } = this.state;
     const codeMirrorOptions = {
@@ -249,11 +266,14 @@ class App extends Component {
     return (
       <>
         <button id='runButton' onClick={this.clickHandler}>Run</button>
+        <div className={this.state.paintComp.toString()}>
+          <Paint />
+        </div>
         <div className="App">
           <section className="playground">
             <div className="code-editor html-code">
               <div onClick={this.clickHandler} className="editor-header">HTML</div>
-              <GetAppIcon onClick={this.downloadTxtFile} color= 'secondary' ></GetAppIcon>
+              <GetAppIcon onClick={this.downloadTxtFile} color='secondary' ></GetAppIcon>
               <CodeMirror
                 value={html}
                 options={{
@@ -311,6 +331,7 @@ class App extends Component {
               />
             </div>
           </section>
+
           <section className="result">
             <iframe title="result" className="iframe" ref="iframe" />
             <div>
@@ -327,6 +348,8 @@ class App extends Component {
                 <input name="comment" type="text" required></input>
                 <button>send</button>
               </form>
+              <button onClick={this.toggle}>Draw</button>
+
             </div>
           </section>
 

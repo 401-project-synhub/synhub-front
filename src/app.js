@@ -10,8 +10,25 @@ import AddQuestion from './components/add-question/add-question';
 import ShowMore from './components/show-more-component/showmore';
 import Search from './components/search/search';
 import TagsSearch from './components/tags-search/tags-search'
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import Footer from './components/Footer/Footer.js';
+//oauth
+import GitHub from './components/oauthsign/github';
+import LinkedIn from './components/oauthsign/linkedin';
+import Hello from './components/hello/'
+import Hey from './components/hello/LI'
 
+///
+
+//profile
+import Profile from './components/profile/profile'
+///
+import TrelloList from "./components/TrelloList";
+import { connect } from "react-redux";
+import TrelloCreate from "./components/TrelloCreate";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { sort } from "./actions";
+import Routes from "./routes";
 import './app.scss';
 function App() {
   return (
@@ -25,12 +42,22 @@ function App() {
               <Route exact path='/'>
                 <Header />
                 <Home />
+                {/* <Routes /> */}
+                <GitHub />
+                <LinkedIn />
               </Route>
+              
+              <Route exact path='/profile' component={Profile} />
+              <Route exact path='/oauth' component={Hello} />
+              <Route component={Routes} />
               <Route exact path='/coding' component={(props) => <RoomsForm {...props} key={window.location.pathname} />} />
               <Route exact path='/coding/:room'>
                 <CodeTogether />
               </Route>
               <Route exact path='/community'>
+                <Community />
+              </Route>
+              <Route exact path='/community/search'>
                 <Community />
               </Route>
               <Route exact path='/community/search/:key' component={Search} />
@@ -40,6 +67,7 @@ function App() {
                 <Route exact path='/community/addquestion' component={AddQuestion} />
               </Auth>
             </main>
+            {/* <Footer/> */}
           </SignInProvider>
         </Switch>
       </BrowserRouter>

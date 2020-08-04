@@ -71,3 +71,26 @@ html {
 	height: 40px;
 	z-index: 9999;
 }
+.true{
+	display: block;
+	z-index: 1000000;
+	position: absolute;
+	left: 10%;
+	top: 0%;
+	width: 90px;
+	height: 40px;
+	z-index: 9999;
+	max-height: 200px;
+}
+
+.false{
+	display: none;
+	z-index: 1000000;
+	position: absolute;
+	left: 10%;
+	top: 0%;
+	width: 90px;
+	height: 40px;
+	z-index: 9999;
+	max-height: 200px;
+}

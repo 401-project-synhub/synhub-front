@@ -241,6 +241,9 @@ export const _getProfile = (id)=>{
     let token = cookieToken || null;
     const userPro = cookie.load('user');
     let theUser = userPro || null;
+
+    console.log(theUser,'id')
+
     return (dispatch) => {
     superagent.get(`${API}/api/v1/users/${theUser.id||id}`)
     .accept('application/json')

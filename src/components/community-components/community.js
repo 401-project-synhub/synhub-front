@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Auth from '../auth/';
 import { SignInContext } from '../../context/auth';
-import { _getAllQuestions, _deleteQuestion, _updateQuestion, _searchQuestions, _getAllQuestionsByTag } from '../../store/community-reducer';
+import { _getAllQuestions, _deleteQuestion, _updateQuestion, _searchQuestions, _getAllQuestionsByTag, _bookmark, _getAllBookmarked } from '../../store/community-reducer';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -28,6 +28,7 @@ function Community(props) {
     let [questionID, setQuestionID] = useState('');
     let [choice, setChoice] = useState('date');
     let [searchInp, setSearchInp] = useState('');
+    let [bol, setBol] = useState(false);
 
     const updateQuestionEvent = (e) => {
         e.preventDefault();
@@ -50,7 +51,9 @@ function Community(props) {
     }
     const handleSearchSubmit = (e) => {
         e.preventDefault();
+        if(searchInp !== ''){
         props.search(searchInp);
+    }
         // setSearchInp('');
         e.target.reset();
         console.log('searchInp', searchInp);
@@ -65,7 +68,16 @@ function Community(props) {
 
     useEffect(() => {
         fetchData('date');
+        props.getMarked();
+        console.log('jhjhjh')
     }, [])
+    //the marked array changed
+    // useEffect(() => {
+    //     props.getMarked();
+    //     console.log('bookmarked e', props.questions.bookmarked)
+
+    // }, [bol])
+
     const toggle = (e) => {
         setUnderUpdating(!underUpdating);
         setQuestionID(e.target.id);
@@ -114,11 +126,21 @@ function Community(props) {
         const name = e.target.value;
         setChoice(name);
     };
+    // console.log('bookmarked', props.questions.bookmarked)
+
     return (
         <>
-                <Link to='/community/addquestion'>
-                    <button className="show-more">Add Question</button>
-                </Link>
+            <div className='container'>
+            <Auth capability='read' >
+                    <Link to='/profile'>
+                        <button className="show-more">Go Profile</button>
+                    </Link>
+                </Auth>
+                <Auth capability='read' >
+                    <Link to='/community/addquestion'>
+                        <button className="show-more">Add Question</button>
+                    </Link>
+                </Auth>
                 <FormControl className={classes.formControl}>
                     <NativeSelect
                         className={classes.selectEmpty}
@@ -148,12 +170,12 @@ function Community(props) {
                         </IconButton>
                     </Link>
                 </Paper>
-            <div id='cards'>
-                {/* {props.questions.questions.map(oneQuestion => (
-
+                {props.questions.questions.map(oneQuestion => (
+                    console.log((props.questions.bookmarked.filter(val=>val.bookmarked._id===oneQuestion._id))),
                     <Card className={classes.root} key={oneQuestion._id}>
-                        <IconButton >
-                            <BookmarkBorderIcon />
+                        <IconButton onClick={() => { props.bookmark(oneQuestion); setBol(!bol) }}>
+                             {/* {console.log(props.questions.bookmarked.filter(val => val.bookmarked._id === oneQuestion._id).length) */}
+                            <BookmarkBorderIcon  className={`bookmark_${!!(props.questions.bookmarked.filter(val => val.bookmarked._id === oneQuestion._id).length)}`} />
                         </IconButton>
                         <Link to={`/community/details/${oneQuestion._id}`}>
                             <CardHeader
@@ -199,7 +221,10 @@ function Community(props) {
                             {context.user.capabilities ? context.user.username === oneQuestion.author ? <button className="show-more" onClick={toggle} id={oneQuestion._id}>Edit</button> : null : null}
                         </Auth>
                     </Card>
-                ))} */}
+                ))} 
+            </div>
+
+            <div id='cards'>
                 {props.questions.questions.map(oneQuestion => (
                     <div id='card'>
                         <div id='card-header'>
@@ -246,6 +271,8 @@ const mapDispatchToProps = (dispatch) => ({
     delete: (_id) => dispatch(_deleteQuestion(_id)),
     update: (body, _id) => dispatch(_updateQuestion(body, _id)),
     search: (input) => dispatch(_searchQuestions(input)),
-    tagsSearch: (tag) => { dispatch(_getAllQuestionsByTag(tag)) }
+    tagsSearch: (tag) => { dispatch(_getAllQuestionsByTag(tag)) },
+    bookmark: (body) => dispatch(_bookmark(body)),
+    getMarked: () => dispatch(_getAllBookmarked())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Community);
