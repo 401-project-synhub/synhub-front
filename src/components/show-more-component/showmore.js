@@ -41,49 +41,49 @@ function ShowMore(props) {
                 setDetails(data.body.records[0])
             }).catch(console.error);
     }
-    const useStyles = makeStyles((theme) => ({
-        root: {
-            maxWidth: 345,
-            padding: 15,
-            border: '#88E766 2px solid',
-            backgroundColor: '#F8FFF1',
-        },
-        avatar: {
-            backgroundColor: 'black',
-        },
-        cardHeader: {
-            // borderBottom: '#C7FDB4 2px solid',
-        },
-        formControl: {
-            margin: theme.spacing(1),
-            minWidth: 120,
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(2),
-        },
-        root2: {
-            padding: '2px 4px',
-            display: 'flex',
-            alignItems: 'center',
-            width: 400,
-            maxHeight: 60,
-        },
-        input: {
-            marginLeft: theme.spacing(1),
-            flex: 1,
-        },
-        iconButton: {
-            padding: 10,
-        },
-        divider: {
-            height: 28,
-            margin: 4,
-        },
-        paragraph:{
-            borderBottom: '#C7FDB4 2px solid',
-        }
-    }));
-    const classes = useStyles();
+    // const useStyles = makeStyles((theme) => ({
+    //     root: {
+    //         maxWidth: 345,
+    //         padding: 15,
+    //         border: '#88E766 2px solid',
+    //         backgroundColor: '#F8FFF1',
+    //     },
+    //     avatar: {
+    //         backgroundColor: 'black',
+    //     },
+    //     cardHeader: {
+    //         // borderBottom: '#C7FDB4 2px solid',
+    //     },
+    //     formControl: {
+    //         margin: theme.spacing(1),
+    //         minWidth: 120,
+    //     },
+    //     selectEmpty: {
+    //         marginTop: theme.spacing(2),
+    //     },
+    //     root2: {
+    //         padding: '2px 4px',
+    //         display: 'flex',
+    //         alignItems: 'center',
+    //         width: 400,
+    //         maxHeight: 60,
+    //     },
+    //     input: {
+    //         marginLeft: theme.spacing(1),
+    //         flex: 1,
+    //     },
+    //     iconButton: {
+    //         padding: 10,
+    //     },
+    //     divider: {
+    //         height: 28,
+    //         margin: 4,
+    //     },
+    //     paragraph:{
+    //         borderBottom: '#C7FDB4 2px solid',
+    //     }
+    // }));
+    // const classes = useStyles();
 
     // console.log('props.details', props.details);
 
@@ -112,7 +112,7 @@ function ShowMore(props) {
                         }
                         title={details.title}
                         subheader={details.date}
-                        className={classes.cardHeader}
+                        // className={classes.cardHeader}
                     />
                     <p>Description: {details.description}</p>
                     <ButtonGroup size="small" aria-label="small outlined button group">
@@ -138,11 +138,11 @@ function ShowMore(props) {
                             }
                             title={oneAns.title}
                             subheader={oneAns.date}
-                            className={classes.cardHeader}
+                            // className={classes.cardHeader}
                         />
                         {/* <h3> Answer Title: {oneAns.title}</h3>
                         <h4> Answer Author: {oneAns.author}</h4> */}
-                        <p className={classes.paragraph}>
+                        <p >
                             Answer Description :
                             {oneAns.description}
                         </p>

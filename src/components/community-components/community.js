@@ -19,7 +19,10 @@ import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
 import SearchIcon from '@material-ui/icons/Search';
+
 import './community.scss';
 
 function Community(props) {
@@ -51,9 +54,9 @@ function Community(props) {
     }
     const handleSearchSubmit = (e) => {
         e.preventDefault();
-        if(searchInp !== ''){
-        props.search(searchInp);
-    }
+        if (searchInp !== '') {
+            props.search(searchInp);
+        }
         // setSearchInp('');
         e.target.reset();
         console.log('searchInp', searchInp);
@@ -79,6 +82,7 @@ function Community(props) {
     // }, [bol])
 
     const toggle = (e) => {
+        console.log('hola');    
         setUnderUpdating(!underUpdating);
         setQuestionID(e.target.id);
     }
@@ -130,7 +134,7 @@ function Community(props) {
 
     return (
         <>
-            <div className='container'>
+            {/* <div className='container'>
             <Auth capability='read' >
                     <Link to='/profile'>
                         <button className="show-more">Go Profile</button>
@@ -174,7 +178,6 @@ function Community(props) {
                     console.log((props.questions.bookmarked.filter(val=>val.bookmarked._id===oneQuestion._id))),
                     <Card className={classes.root} key={oneQuestion._id}>
                         <IconButton onClick={() => { props.bookmark(oneQuestion); setBol(!bol) }}>
-                             {/* {console.log(props.questions.bookmarked.filter(val => val.bookmarked._id === oneQuestion._id).length) */}
                             <BookmarkBorderIcon  className={`bookmark_${!!(props.questions.bookmarked.filter(val => val.bookmarked._id === oneQuestion._id).length)}`} />
                         </IconButton>
                         <Link to={`/community/details/${oneQuestion._id}`}>
@@ -222,39 +225,114 @@ function Community(props) {
                         </Auth>
                     </Card>
                 ))} 
+            </div> */}
+            <div>
+            <Auth capability='read' >
+                    <Link to='/community/addquestion'>
+                        <button className="show-more">Add Question</button>
+                    </Link>
+                </Auth>
+                <FormControl className={classes.formControl}>
+                    <NativeSelect
+                        className={classes.selectEmpty}
+                        value={choice}
+                        name="date"
+                        onChange={handleChoiceChange}
+                        inputProps={{ 'aria-label': 'age' }}
+                    >
+                        <option value="" disabled>
+                            Sort By
+                        </option>
+                        <option value={'date'}>Date</option>
+                        <option value={'title'}>Title</option>
+                    </NativeSelect>
+                </FormControl>
+                <Paper onSubmit={handleSearchSubmit} component="form" className={classes.root2}>
+                    <InputBase
+                        onChange={handleSearchChange}
+                        className={classes.input}
+                        placeholder="Search Questions"
+                        inputProps={{ 'aria-label': 'search google maps' }}
+                    />
+                    <Divider className={classes.divider} orientation="vertical" />
+                    <Link to={`/community/search/${searchInp}`}>
+                        <IconButton type="submit" className={classes.iconButton} aria-label="search">
+                            <SearchIcon />
+                        </IconButton>
+                    </Link>
+                </Paper>
             </div>
-
             <div id='cards'>
                 {props.questions.questions.map(oneQuestion => (
-                    <div id='card'>
-                        <div id='card-header'>
-                            <div id='card-header-avatar'>
-                                <img alt='avatar' src={oneQuestion.imgUrl}></img>
+                    <>
+                        <div id='card'>
+                            <div id='cloud'>
+                                <Auth capability='delete' >
+                                    <IconButton id='bookmark' onClick={() => { props.bookmark(oneQuestion); setBol(!bol) }}>
+                                        <BookmarkBorderIcon className={`bookmark_${!!(props.questions.bookmarked.filter(val => val.bookmarked._id === oneQuestion._id).length)}`} />
+                                    </IconButton>
+                                </Auth>
+                                <Auth capability='delete' >
+                                    {context.user.capabilities ? context.user.username === oneQuestion.author || context.user.capabilities.role === 'admin' ? 
+                                    // <button className="show-more" onClick={() => props.delete(oneQuestion._id)}>Delete Question</button> 
+                                    <IconButton id='delete' onClick={() => { props.delete(oneQuestion._id)}}>
+                                        <DeleteForeverIcon />
+                                    </IconButton>
+                                    : null : null}
+                                </Auth>
+                                <Auth capability='update' >
+                                    {context.user.capabilities ? context.user.username === oneQuestion.author ? 
+                                    // <button className="show-more" onClick={toggle} id={oneQuestion._id}>Edit</button> 
+                                    <IconButton id={'edit'} onClick={toggle} >
+                                        <EditIcon />
+                                    </IconButton>
+                                    : null : null}
+                                </Auth>
                             </div>
-                            <div id='card-header-text'>
-                                <h3>{oneQuestion.title}</h3>
-                                <h4>{oneQuestion.date}</h4>
-                            </div >
-                        </div>
-                        <div id='card-body'>
-                            <div id='card-body-description'>
-                                <p>{oneQuestion.description.slice(0, 10)}...</p>
-                            </div>
-                            <div id='card-body-clickables'>
-                                <div id='card-body-clickables-tags'>
-                                {oneQuestion.tags.map(tag => (
-                                        <Link to={`/community/tags/${tag}`} >
-                                            <button className='tag-btn' onClick={() => props.tagsSearch(tag)} key={tag}>{tag}</button>
-                                        </Link>
-                                    ))}
+                            <div id='card-header'>
+                                <div id='card-header-avatar'>
+                                    <img alt='avatar' src={oneQuestion.imgUrl}></img>
                                 </div>
-                                <div id='card-body-clickables-button'>
-                                    <button className='show-btn'>Show More</button>
-                                </div>
+                                <div id='card-header-text'>
+                                    <h3>{oneQuestion.title}</h3>
+                                    <h4>{oneQuestion.date}</h4>
+                                </div >
                             </div>
-                        </div>
-                    </div>
+                            <div id='card-body'>
 
+                                {underUpdating && context.user.username === oneQuestion.author && questionID === oneQuestion._id
+                                    ?
+                                    <form onSubmit={updateQuestionEvent} id={oneQuestion._id}>
+                                        <input type='text' defaultValue={oneQuestion.title} name='title' onChange={handleInputChange} />
+                                        <input type='text' defaultValue={oneQuestion.description} name='description' onChange={handleInputChange} />
+                                        <input type='text' defaultValue={oneQuestion.tags} name='tags' onChange={handleInputChange} />
+                                        <button className="show-more"> Save</button>
+                                    </form>
+                                    :
+                                    <>
+                                        <div id='card-body-description'>
+                                            <p>{oneQuestion.description.slice(0, 100)}...</p>
+                                        </div>
+                                        <div id='card-body-clickables'>
+                                            <div id='card-body-clickables-tags'>
+                                                {oneQuestion.tags.map(tag => (
+                                                    <Link to={`/community/tags/${tag}`} >
+                                                        <button className='tag-btn' onClick={() => props.tagsSearch(tag)} key={tag}>{tag}</button>
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                            <div id='card-body-clickables-button'>
+                                                <Link to={`/community/details/${oneQuestion._id}`}>
+                                                    <button className='show-btn'>Show More</button>
+                                                </Link>
+                                            </div>
+
+                                        </div>
+                                    </>
+                                }
+                            </div>
+                        </div>
+                    </>
                 ))}
 
             </div>
