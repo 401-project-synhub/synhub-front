@@ -22,7 +22,6 @@ import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import SearchIcon from '@material-ui/icons/Search';
-
 import './community.scss';
 
 function Community(props) {
@@ -264,7 +263,7 @@ function Community(props) {
             </div>
             <div id='cards'>
                 {props.questions.questions.map(oneQuestion => (
-                    <>
+                    <>  
                         <div id='card'>
                             <div id='cloud'>
                                 <Auth capability='delete' >
