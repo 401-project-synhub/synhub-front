@@ -57,6 +57,9 @@ function App() {
               <Route exact path='/community'>
                 <Community />
               </Route>
+              <Route exact path='/community/search'>
+                <Community />
+              </Route>
               <Route exact path='/community/search/:key' component={Search} />
               <Route exact path='/community/tags/:tag' component={TagsSearch} />
               <Route exact path='/community/details/:id' component={ShowMore} />

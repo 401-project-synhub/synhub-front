@@ -51,7 +51,9 @@ function Community(props) {
     }
     const handleSearchSubmit = (e) => {
         e.preventDefault();
+        if(searchInp !== ''){
         props.search(searchInp);
+    }
         // setSearchInp('');
         e.target.reset();
         console.log('searchInp', searchInp);
@@ -128,7 +130,7 @@ function Community(props) {
 
     return (
         <>
-            <div className="container">
+            <div className='container'>
             <Auth capability='read' >
                     <Link to='/profile'>
                         <button className="show-more">Go Profile</button>
@@ -169,10 +171,10 @@ function Community(props) {
                     </Link>
                 </Paper>
                 {props.questions.questions.map(oneQuestion => (
-                    // console.log((props.questions.bookmarked.filter(val=>val.bookmarked._id===oneQuestion._id))),
+                    console.log((props.questions.bookmarked.filter(val=>val.bookmarked._id===oneQuestion._id))),
                     <Card className={classes.root} key={oneQuestion._id}>
                         <IconButton onClick={() => { props.bookmark(oneQuestion); setBol(!bol) }}>
-                            {/* {console.log(props.questions.bookmarked.filter(val => val.bookmarked._id === oneQuestion._id).length)} */}
+                             {/* {console.log(props.questions.bookmarked.filter(val => val.bookmarked._id === oneQuestion._id).length) */}
                             <BookmarkBorderIcon  className={`bookmark_${!!(props.questions.bookmarked.filter(val => val.bookmarked._id === oneQuestion._id).length)}`} />
                         </IconButton>
                         <Link to={`/community/details/${oneQuestion._id}`}>
@@ -202,13 +204,12 @@ function Community(props) {
                                     </Typography>
                                 </CardContent>
 
-                                {/* <button className="show-more">Show More</button> */}
+                                <button className="show-more">Show More</button>
                                 <ButtonGroup size="small" aria-label="small outlined button group">
                                     {oneQuestion.tags.map(tag => (
                                         <Link to={`/community/tags/${tag}`} >
                                             <Button onClick={() => props.tagsSearch(tag)} key={tag}>{tag}</Button>
                                         </Link>
-
                                     ))}
                                 </ButtonGroup>
                             </>
@@ -220,8 +221,42 @@ function Community(props) {
                             {context.user.capabilities ? context.user.username === oneQuestion.author ? <button className="show-more" onClick={toggle} id={oneQuestion._id}>Edit</button> : null : null}
                         </Auth>
                     </Card>
+                ))} 
+            </div>
+
+            <div id='cards'>
+                {props.questions.questions.map(oneQuestion => (
+                    <div id='card'>
+                        <div id='card-header'>
+                            <div id='card-header-avatar'>
+                                <img alt='avatar' src={oneQuestion.imgUrl}></img>
+                            </div>
+                            <div id='card-header-text'>
+                                <h3>{oneQuestion.title}</h3>
+                                <h4>{oneQuestion.date}</h4>
+                            </div >
+                        </div>
+                        <div id='card-body'>
+                            <div id='card-body-description'>
+                                <p>{oneQuestion.description.slice(0, 10)}...</p>
+                            </div>
+                            <div id='card-body-clickables'>
+                                <div id='card-body-clickables-tags'>
+                                {oneQuestion.tags.map(tag => (
+                                        <Link to={`/community/tags/${tag}`} >
+                                            <button className='tag-btn' onClick={() => props.tagsSearch(tag)} key={tag}>{tag}</button>
+                                        </Link>
+                                    ))}
+                                </div>
+                                <div id='card-body-clickables-button'>
+                                    <button className='show-btn'>Show More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 ))}
+
             </div>
         </>
     );

@@ -3,7 +3,7 @@ import { SignInContext } from '../../context/auth';
 import {Redirect} from 'react-router-dom'
 
 const superagent = require('superagent');
-const axios = require('axios');
+// const axios = require('axios');
 
 
 export default function Hello(props) {
@@ -16,7 +16,7 @@ export default function Hello(props) {
   let TOKEN_SERVER_GITHUB = 'https://github.com/login/oauth/access_token'
   let REMOTE_API_GITHUB = 'https://api.github.com/user'
 
-  const tokenServerUrl = TOKEN_SERVER_GITHUB;
+  // const tokenServerUrl = TOKEN_SERVER_GITHUB;
   // console.log('tokenServerUrl', tokenServerUrl);
 
   const remoteAPI = REMOTE_API_GITHUB;
