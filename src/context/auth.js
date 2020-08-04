@@ -29,16 +29,23 @@ class SignInProvider extends React.Component {
   }
 
   signup = async (username, password,ranking, imgUrl, gender, role) => {//email
-      
+      // console.log(password)
     try {
     
       superagent.post(`${API}/signup`)
       .send({ username, password, ranking, imgUrl, gender, role })
+      // .set('Access-Control-Allow-Origin')
       .accept('application/json')
       // .set('Authorization', `Bearer ${token}`)
       .then(data => {
-          // console.log('token',data.body)
-          this.validateToken(data.body.token.token);
+          console.log('token in up',data.body.token.token)
+          if(data.body.token.token.result){
+            // console.log(true)
+            this.signin(username,password)
+          }else{
+
+            this.validateToken(data.body.token.token);
+          }
         }).catch(console.error);
       
     } catch (ex) {

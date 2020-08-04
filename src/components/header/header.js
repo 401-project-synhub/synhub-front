@@ -30,33 +30,38 @@ function Header(props) {
             {/* <div> */}
             <nav>
                 <ul>
-                    <li>Home</li>
+                    {/* <li>Home</li> */}
+                    <NavLink className='link' to='/'>Home</NavLink>
+
                     {/* <li>Community</li> */}
                     <NavLink className='link' to='/community'>Community</NavLink>
                     {/* <li>Code Along</li> */}
                     <NavLink className='link' to='./coding'>Code Together</NavLink>
+                    <Show condition={!context.signedIn}>
+                        <button onClick={signInToggle} className='sign-btn'>
+                            SIGNIN
+                        </button>
+                    </Show>
+   
+
+
+                    <Show condition={!context.signedIn}>
+                        <button onClick={signUpToggle} className='sign-btn'>
+                            SIGNUP
+                        </button>
+                    </Show>
+                 
+                    <Show condition={context.signedIn}>
+                        <button onClick={saveTheDay}>SIGNOUT</button>
+                    </Show>
                 </ul>
-                <Show condition={!context.signedIn}>
-                    <button onClick={signInToggle} className="signing">
-                        SIGNIN
-                </button>
-                </Show>
-                <Show condition={signIN}>
-                    <SignIn />
-                </Show>
 
-
-                <Show condition={!context.signedIn}>
-                    <button onClick={signUpToggle} className="signing">
-                        SIGNUP
-                </button>
-                </Show>
-                <Show condition={signUP}>
-                    <SignUp />
-                </Show>
-                <Show condition={context.signedIn}>
-                    <button onClick={saveTheDay}>SIGNOUT</button>
-                </Show>
+            <Show condition={signIN}>
+                        <SignIn />
+                    </Show>
+            <Show condition={signUP}>
+                        <SignUp />
+                    </Show>
             </nav>
             {/* </div> */}
             <div>
