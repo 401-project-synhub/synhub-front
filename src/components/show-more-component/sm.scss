@@ -1,0 +1,28 @@
+#root{
+    main{
+
+        // .MuiPaper-root {
+        //     box-shadow: 5px 6px 10px #88af88;
+        //     margin-top: 35px;
+        .MuiButtonBase-root{
+                span{
+                    .bookmark_true{
+                        background-color: red;
+                    }
+                    .bookmark_false{
+                        // background-color: red;
+                    }
+                }
+            }
+            .MuiCardContent-root{
+                .MuiTypography-body2 {
+                    font-size: 1rem;
+                    font-family: 'Zilla slab',serif;
+                    font-weight: 600;
+                    letter-spacing: .6px;
+                }
+    
+            // }
+        }
+    }
+    }

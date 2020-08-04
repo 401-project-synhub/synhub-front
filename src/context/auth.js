@@ -33,7 +33,7 @@ class SignInProvider extends React.Component {
     try {
     
       superagent.post(`${API}/signup`)
-      .send({ username, password, ranking, imgUrl, gender, role })
+      .send({ username, password, ranking, imgUrl:imgUrl?imgUrl:gender==='male' ? 'https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236__340.png' : 'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407__340.png', gender, role })
       // .set('Access-Control-Allow-Origin')
       .accept('application/json')
       // .set('Authorization', `Bearer ${token}`)

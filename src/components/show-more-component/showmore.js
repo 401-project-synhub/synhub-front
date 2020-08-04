@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import superagent from 'superagent';
 // import cookie from 'react-cookies';
-import { Link } from 'react-router-dom'
+import Auth from '../auth/';
+// import Show from '../show/';
+
+import { Link, Redirect,useHistory  } from 'react-router-dom'
 import { ButtonGroup, Button, CardHeader, Avatar } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,10 +14,10 @@ import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import { connect } from 'react-redux';
 import Show from '../show/index';
 import { SignInContext } from '../../context/auth';
-import { _addAnswer, _getQuestionDetails, _getAllQuestionsByTag } from '../../store/community-reducer';
+import { _addAnswer, _getQuestionDetails, _getAllQuestionsByTag, _bookmark, _getAllBookmarked, _deleteQuestion, _updateQuestion ,_deleteAns} from '../../store/community-reducer';
 
 
-
+import './sm.scss';
 
 // const API = 'https://synhub.herokuapp.com';
 const API = 'https://synhub-project.herokuapp.com';
@@ -27,11 +30,16 @@ function ShowMore(props) {
     const [input, setInput] = useState({})
     const [details, setDetails] = useState({});
     const context = useContext(SignInContext);
+    let [bol, setBol] = useState(false);
+    const history = useHistory();
+
     // const [data, setData] = useState({});
     useEffect(() => {
         getQuestionDetails();
+        props.getMarked();
+
     }, [])
-    useEffect(()=>{
+    useEffect(() => {
         getQuestionDetails();
     }, [details.answers])
     const getQuestionDetails = () => {
@@ -79,7 +87,7 @@ function ShowMore(props) {
             height: 28,
             margin: 4,
         },
-        paragraph:{
+        paragraph: {
             borderBottom: '#C7FDB4 2px solid',
         }
     }));
@@ -100,8 +108,8 @@ function ShowMore(props) {
         <>
             {details ?
                 <>
-                    <IconButton >
-                        <BookmarkBorderIcon />
+                    <IconButton onClick={() => { props.bookmark(details); setBol(!bol) }}>
+                        <BookmarkBorderIcon className={`bookmark_${!!(props.bookmarked.filter(val => val.bookmarked._id === details._id).length)}`} />
                     </IconButton>
 
                     <CardHeader
@@ -114,6 +122,14 @@ function ShowMore(props) {
                         subheader={details.date}
                         className={classes.cardHeader}
                     />
+                    <Show condition={context.signedIn&&context.user.capabilities ? context.user.username === details.author || context.user.capabilities.role === 'admin':null}>
+                        <Auth capability='delete' >
+                            {context.user.capabilities ? context.user.username === details.author || context.user.capabilities.role === 'admin' ? <button className="show-more" onClick={() => {props.delete(details._id);history.goBack()}}>Delete Question</button> : null : null}
+                        </Auth>
+                        {/* <Redirect to='/community'/> */}
+
+                    </Show>
+
                     <p>Description: {details.description}</p>
                     <ButtonGroup size="small" aria-label="small outlined button group">
                         {details.tags ? details.tags.map(tag => (
@@ -127,7 +143,7 @@ function ShowMore(props) {
                 : null
             }
             <div className='answers'>
-                {details.answers ? details.answers.sort((a, b)=>{
+                {details.answers ? details.answers.sort((a, b) => {
                     return new Date(a.date) - new Date(b.date);
                 }).map(oneAns => (
 
@@ -146,7 +162,14 @@ function ShowMore(props) {
                             Answer Description :
                             {oneAns.description}
                         </p>
+                    <Show condition={context.signedIn&&context.user.capabilities ? context.user.username === oneAns.author || context.user.capabilities.role === 'admin':null}>
+
+                        <Auth capability='delete' >
+                            {context.user.capabilities ? context.user.username === oneAns.author || context.user.capabilities.role === 'admin' ? <button className="show-more" onClick={() => props.deleteAns(oneAns._id)}>Delete Answer</button> : null : null}
+                        </Auth>
+                    </Show>
                     </div>
+
 
 
                 )) : ''}
@@ -169,11 +192,19 @@ function ShowMore(props) {
     )
 }
 const mapStateToProps = (state) => {
-    return { details: state.communityReducer.qDetails }
+    return {
+        details: state.communityReducer.qDetails,
+        bookmarked: state.communityReducer.bookmarked
+    }
 }
 const mapDispatchToProps = (dispatch) => ({
     add: (answer, qTitle) => dispatch(_addAnswer(answer, qTitle)),
     get: (id) => dispatch(_getQuestionDetails(id)),
-    tagsSearch: (tag) => { dispatch(_getAllQuestionsByTag(tag)) }
+    delete: (_id) => dispatch(_deleteQuestion(_id)),
+    update: (body, _id) => dispatch(_updateQuestion(body, _id)),
+    tagsSearch: (tag) => { dispatch(_getAllQuestionsByTag(tag)) },
+    bookmark: (body) => dispatch(_bookmark(body)),
+    getMarked: () => dispatch(_getAllBookmarked()),
+    deleteAns:(id) => dispatch(_deleteAns(id))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(ShowMore);

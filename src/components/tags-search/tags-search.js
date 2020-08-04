@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Auth from '../auth/';
 import { SignInContext } from '../../context/auth';
-import { _getAllQuestions, _deleteQuestion, _updateQuestion, _searchQuestions, _getAllQuestionsByTag, _bookmark ,_getAllBookmarked} from '../../store/community-reducer';
+import { _getAllQuestions, _deleteQuestion, _updateQuestion, _searchQuestions, _getAllQuestionsByTag, _bookmark, _getAllBookmarked } from '../../store/community-reducer';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -122,6 +122,11 @@ function TagsSearch(props) {
     return (
         <>
             <div className="container">
+                <Auth capability='read' >
+                    <Link to='/profile'>
+                        <button className="show-more">Go Profile</button>
+                    </Link>
+                </Auth>
                 <Auth capability='read' >
                     <Link to='/community/addquestion'>
                         <button className="show-more">Add Question</button>

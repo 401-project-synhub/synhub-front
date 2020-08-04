@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@200&display=swap');
+
+#root{
+    font-family: 'Heebo', sans-serif;
+    main{
+        .user-info{
+            margin-bottom: 5%;
+            display: flex;
+            justify-content: space-around;
+
+            .profile-img{
+                width: 250px;
+                height: 250px;
+                border-radius: 50%;
+            }
+            .name{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                margin-right: 50%;
+            }
+        }
+        .makeStyles-root-1{
+            .MuiPaper-root {
+                // background-image: url('/assets/header-illus2.png');
+                // // background-size: cover;
+            }
+            .MuiCollapse-container{
+                background-image: url(/assets/header-illus2.png);
+                background-size: 20%;
+                background-repeat: no-repeat;
+                .MuiCollapse-wrapper{
+                    .MuiCollapse-wrapperInner{
+                        #panel1bh-content{
+                            a{
+                                text-decoration: none;
+                                color: green;
+                                font-weight: 500;
+                                &:hover{
+                                    color: orange;
+                                    font-weight: 900;
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+// @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@200&display=swap');
+
+// #root{
+//     font-family: 'Heebo', sans-serif;
+//     main{
+//         .user-info{
+//             margin-bottom: 5%;
+//             display: flex;
+//             justify-content: space-around;
+
+//             .profile-img{
+//                 width: 250px;
+//                 height: 250px;
+//                 border-radius: 50%;
+//             }
+//             .name{
+//                 display: flex;
+//                 flex-direction: column;
+//                 justify-content: space-around;
+//                 margin-right: 50%;
+//             }
+//         }
+//         .makeStyles-root-1{
+//             .MuiPaper-root {
+//                 // background-image: url('/assets/header-illus2.png');
+//                 // // background-size: cover;
+//             }
+//             .MuiCollapse-container{
+//                 // background-image: url('/assets/header-illus2.png');
+//                 // background-size: 20%;
+//                 // background-repeat: no-repeat;
+//                 .MuiCollapse-wrapper{
+//                     img{
+//                         width: 16%;
+//                         position: absolute;
+//                         left: 50%;
+//                         bottom: 0px;
+//                     }   
+                    
+//                     .img-ins{
+//                         position: relative;
+//                         img{
+//                             // background-size: 20%;
+//                             // background-repeat: no-repeat;
+//                             width: 15%;
+//                             position: absolute;
+//                             left: 54%;
+//                             bottom:5%;
+//                         }
+//                         position: absolute;
+//                         background-image: url('/assets/header-illus2.png');
+                        
+//                     }
+//                     .MuiCollapse-wrapperInner{
+//                         #panel1bh-content{
+//                             a{
+//                                 text-decoration: none;
+//                                 color: green;
+//                                 font-weight: 500;
+//                                 &:hover{
+//                                     color: orange;
+//                                     font-weight: 900;
+//                                 }
+//                             }
+//                         }
+//                     }
+
+//                 }
+//             }
+//         }
+//     }
+//     .img-ins{
+//         position: relative;
+//         img{
+//             // background-size: 20%;
+//             // background-repeat: no-repeat;
+//             width: 15%;
+//             position: absolute;
+//             left: 54%;
+//             bottom:5%;
+//         }
+//     }
+// }

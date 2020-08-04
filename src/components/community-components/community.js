@@ -71,7 +71,7 @@ function Community(props) {
     useEffect(() => {
         fetchData('date');
         props.getMarked();
-        console.log('jhjhjh')
+        // console.log('jhjhjh')
     }, [])
     //the marked array changed
     // useEffect(() => {
