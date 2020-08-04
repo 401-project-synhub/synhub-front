@@ -1,0 +1,40 @@
+#root{
+    main{
+        .user-info{
+            display: flex;
+            justify-content: space-around;
+
+            .profile-img{
+                width: 250px;
+                height: 250px;
+                border-radius: 50%;
+            }
+            .name{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                margin-right: 50%;
+            }
+        }
+        .makeStyles-root-1{
+            .MuiCollapse-container{
+                .MuiCollapse-wrapper{
+                    .MuiCollapse-wrapperInner{
+                        #panel1bh-content{
+                            a{
+                                text-decoration: none;
+                                color: green;
+                                font-weight: 500;
+                                &:hover{
+                                    color: orange;
+                                    font-weight: 900;
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}
