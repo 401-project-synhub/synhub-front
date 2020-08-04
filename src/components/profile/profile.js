@@ -37,12 +37,13 @@ function Profile(props) {
         setExpanded(isExpanded ? panel : false);
     };
     const featchData = () => {
+        props.get();
         props.getprofile();
+        console.log('profile', props.questions.questions)
     }
     useEffect(() => {
-        featchData(props.match.params.id)
+        featchData()
     }, [])
-    console.log('profile', props)
     return (
         <>
             <div className='user-info'>
@@ -57,6 +58,7 @@ function Profile(props) {
             <div className={classes.root}>
 
                 <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} >
+
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1bh-content"
@@ -65,15 +67,21 @@ function Profile(props) {
                         <Typography className={classes.heading}>Bookmarked Questions</Typography>
                         <Typography className={classes.secondaryHeading}> Number Of marked Questions :{props.profile.bookmarks.length}</Typography>
                     </AccordionSummary>
+                    {/* <img alt='lk' src='/assets/header-illus2.png' /> */}
+
+                    {/* <div className='img-ins'> */}
+                    {/* <img alt='lk' src='/assets/header-illus2.png' /> */}
                     {props.profile.bookmarks.map(book =>
                         // <div>
-                            <Link to={`/community/details/${book.bookmarked.id}`}  key={book.id}>
-                                <AccordionDetails>
-                                    <Typography>Question Title : {book.bookmarked.title}</Typography>
-                                </AccordionDetails>
-                            </Link>
+                        <Link to={`/community/details/${book.bookmarked.id}`} key={book.id}>
+                            <AccordionDetails>
+
+                                <Typography>Question Title : {book.bookmarked.title}</Typography>
+                            </AccordionDetails>
+                        </Link>
                         // </div>
                     )}
+                    {/* </div> */}
                 </Accordion>
 
                 <Accordion expanded={expanded === 'myQuestions'} onChange={handleChange('myQuestions')} >
@@ -85,19 +93,24 @@ function Profile(props) {
                         <Typography className={classes.heading}>My Questions</Typography>
                         <Typography className={classes.secondaryHeading}> Number Of My Questions :{props.profile.questions.length}</Typography>
                     </AccordionSummary>
+
                     {/* <span>
                         My Questions {props.profile.questions.length}
                     </span> */}
-                    {props.profile.questions.map(oneQ =>
-                        <div key={oneQ.id}>
-                            <Link to={`/community/details/${oneQ.id}`}>
-                                <AccordionDetails>
-                                    <Typography>Question Title : {oneQ.title}</Typography>
-                                </AccordionDetails>
-                            </Link>
+                    {/* <div className='img-ins'> */}
+                        {/* <img alt='lk' src='/assets/header-illus2.png' /> */}
+                        {props.profile.questions.map(oneQ =>
+                            <div key={oneQ.id}>
+                                <Link to={`/community/details/${oneQ.id}`}>
+                                    <AccordionDetails>
+                                        <Typography>Question Title : {oneQ.title}</Typography>
+                                    </AccordionDetails>
+                                </Link>
 
-                        </div>
-                    )}
+                            </div>
+                        )}
+                    {/* </div> */}
+
                 </Accordion>
 
 
@@ -113,7 +126,7 @@ function Profile(props) {
 
                     {props.profile.answers.map(oneA =>
                         <div key={oneA.id}>
-                            <Link to={`/community/details/${props.questions.questions.filter(val => oneA.questionTitle === val.title)[0]._id}`}>
+                            <Link to={`/community/details/${props.questions.questions.filter(val => val.title === oneA.questionTitle)[0]?props.questions.questions.filter(val => val.title === oneA.questionTitle)[0]._id:null}`}>
                                 <AccordionDetails>
                                     <Typography>Question Title : {oneA.questionTitle}</Typography>
                                 </AccordionDetails>
