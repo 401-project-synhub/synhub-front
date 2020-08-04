@@ -33,6 +33,7 @@ function Community(props) {
     let [bol, setBol] = useState(false);
 
     const updateQuestionEvent = (e) => {
+        // console.log('hi')
         e.preventDefault();
         props.update(input, e.target.id);
         setUnderUpdating(!underUpdating);
