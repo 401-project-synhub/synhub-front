@@ -274,3 +274,24 @@
   border: 2px solid #71e995;
   border-radius: 20px 20px 20px 20px;
 }
+
+#trello-aside{
+  display: flex;
+  flex-direction: row;
+  color: #467167;
+  padding-left: 3.2%;
+  padding-top: 10px;
+  background-color: #e0e0e0;
+  // position: fixed;
+  a{
+  .MuiSvgIcon-root{
+
+    color: #467167;
+    margin: 10px;
+    &:hover{
+      color: #b7b6b6;
+    }
+
+  }}
+
+}

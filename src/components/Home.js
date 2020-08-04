@@ -5,7 +5,11 @@ import { connect } from "react-redux";
 import { addBoard } from "../actions";
 import BoardThumbnail from "./BoardThumbnail";
 // import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
+import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
+import ListIcon from '@material-ui/icons/List';
 import './style.scss'
 
 const Thumbnails = styled.div`
@@ -108,6 +112,12 @@ const Home = ({ boards, boardOrder, dispatch }) => {
       <PersonIcon fontSize="large"/>      
         <h1 id='trello-title'>Your Boards</h1>
       </div>
+      <aside id='trello-aside'>
+      <a href='#'><ArrowBackIcon/></a>
+        <a href='#'><HomeIcon/></a>
+        <a href='#'><NotificationImportantIcon/></a>
+        <a href='#'><ListIcon/></a>
+      </aside>
       <HomeContainer>
         <Thumbnails>{renderBoards()}</Thumbnails>
         {renderCreateBoard()}

@@ -8,6 +8,11 @@ import { sort, setActiveBoard } from "../actions";
 import { Link } from "react-router-dom";
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import HomeIcon from '@material-ui/icons/Home';
+import PersonIcon from '@material-ui/icons/Person';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
+import ListIcon from '@material-ui/icons/List';
 import './style.scss'
 const ListsContainer = styled.div`
   display: flex;
@@ -57,9 +62,15 @@ class TrelloBoard extends PureComponent {
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Link to="/todo" id='yourBoards-link'></Link>
           <div id='list-title'>
-            <DashboardIcon fontSize="large"/>
+            <DashboardIcon fontSize="large" />
             <h2 id='title'>{board.title}</h2>
           </div>
+          <aside id='trello-aside'>
+            <a href='#'><ArrowBackIcon /></a>
+            <a href='#'><HomeIcon /></a>
+            <a href='#'><NotificationImportantIcon /></a>
+            <a href='#'><ListIcon /></a>
+          </aside>
 
           <Droppable droppableId="all-lists" direction="horizontal" type="list">
             {provided => (
