@@ -7,7 +7,7 @@ import { _getAllQuestions, _deleteQuestion, _updateQuestion, _searchQuestions, _
 
 
 function Profile(props) {
-    const featchData = ()=>{
+    const featchData = () => {
         props.getprofile();
     }
     useEffect(() => {
@@ -15,17 +15,40 @@ function Profile(props) {
     }, [])
     // console.log('profile', props)
     return (
-        <>{
-            props.questions.profile
-                ?
-                <>
-                <img alt={props.questions.profile.username} src={props.profile.imgUrl}/>
-                <h2>{props.profile.username}</h2>
+        <>
 
-                </>
-        :
-                null
-        }
+            <img alt={props.questions.profile.username} src={props.profile.imgUrl} />
+            <h2>{props.profile.username}</h2>
+            <div>
+                <span>
+                    My Questions {props.profile.questions.length}
+                </span>
+                {props.profile.questions.map(oneQ =>
+                    <div key={oneQ.id}>
+                        <h4>{oneQ.title}</h4>
+                        <p>{oneQ.description.slice(0, 200)}</p>
+                        <ul>
+                            {oneQ.tags.map(tag =>
+                                <li key={tag}>{tag}</li>
+                            )}
+                        </ul>
+                    </div>
+                )}
+            </div>
+            <div>
+                <span>
+                    My Answers {props.profile.answers.length}
+                </span>
+                {props.profile.answers.map(oneA =>
+                    <div key={oneA.id}>
+                        <h4>{oneA.title}</h4>
+                        <p>{oneA.description.slice(0, 200)}</p>
+                    </div>
+                )}
+            </div>
+
+
+
         </>
     )
 }
@@ -40,7 +63,7 @@ const mapDispatchToProps = (dispatch) => ({
     delete: (_id) => dispatch(_deleteQuestion(_id)),
     update: (body, _id) => dispatch(_updateQuestion(body, _id)),
     search: (input) => dispatch(_searchQuestions(input)),
-    tagsSearch: (tag) =>  dispatch(_getAllQuestionsByTag(tag)) ,
+    tagsSearch: (tag) => dispatch(_getAllQuestionsByTag(tag)),
     bookmark: (body) => dispatch(_bookmark(body)),
     getMarked: () => dispatch(_getAllBookmarked()),
     getprofile: () => dispatch(_getProfile())
