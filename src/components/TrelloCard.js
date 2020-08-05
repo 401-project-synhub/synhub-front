@@ -22,35 +22,7 @@ const CardContainer = styled.div`
   word-wrap: break-word;
 `;
 
-const EditButton = styled(Icon)`
-  position: absolute;
-  display: none;
-  right: 5px;
-  top: 5px;
-  opacity: 0.5;
-  ${CardContainer}:hover & {
-    display: block;
-    cursor: pointer;
-  }
-  &:hover {
-    opacity: 0.8;
-  }
-`;
 
-const DeleteButton = styled(Icon)`
-  position: absolute;
-  display: none;
-  right: 5px;
-  bottom: 5px;
-  opacity: 0.5;
-  ${CardContainer}:hover & {
-    display: block;
-    cursor: pointer;
-  }
-  &:hover {
-    opacity: 0.8;
-  }
-`;
 
 const TrelloCard = React.memo(({ text, id, listID, index, dispatch }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -88,21 +60,21 @@ const TrelloCard = React.memo(({ text, id, listID, index, dispatch }) => {
     return (
       <Draggable draggableId={String(id)} index={index}>
         {provided => (
-          <CardContainer
+          <CardContainer id ='edit-delete'
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
             onDoubleClick={() => setIsEditing(true)}
           >
             <Card>
-              <EditIcon
-                onMouseDown={() => setIsEditing(true)}
-                fontSize="small"
-              >
-                edit
+                <EditIcon className='delete' id= 'edit-card'
+                  onMouseDown={() => setIsEditing(true)}
+                  fontSize="small"
+                >
+                  edit
               </EditIcon>
-              <DeleteIcon fontSize="small" onMouseDown={handleDeleteCard}>
-                delete
+                <DeleteIcon className='delete' id='delete-card' fontSize="small" onMouseDown={handleDeleteCard}>
+                  delete
               </DeleteIcon>
 
               <CardContent>

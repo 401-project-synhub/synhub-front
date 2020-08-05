@@ -235,13 +235,13 @@ function Community(props) {
             <div id='control'>
                 <FormControl className={classes.formControl}>
                     <NativeSelect
-                        className={classes.selectEmpty}
+                        className='selectEmpty'
                         value={choice}
                         name="date"
                         onChange={handleChoiceChange}
                         inputProps={{ 'aria-label': 'age' }}
                     >
-                        <option value="" disabled>
+                        <option value="" >
                             Sort By
                         </option>
                         <option value={'date'}>Date</option>
@@ -264,7 +264,7 @@ function Community(props) {
                 </Paper>
             <Auth capability='read' >
                     <Link to='/community/addquestion'>
-                        <button className="show-more">Add Question</button>
+                        <button className="show-more"><img src='/assets/community/add.png'></img>Add Question</button>
                     </Link>
                 </Auth>
             </div>
