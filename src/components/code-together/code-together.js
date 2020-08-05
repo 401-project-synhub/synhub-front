@@ -17,6 +17,7 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import Paint from '../paint/paint'
 // import NavBar from '../header/navbar/navbar.js'
 import Sidebar from "react-sidebar";
+// import NavBar from '../header/navbar/navbar.js'
 
 const ENDPOINT = "https://synhub.herokuapp.com";
 const socket = socketIOClient(ENDPOINT);
@@ -275,7 +276,7 @@ class App extends Component {
         <button id='sidebar' onClick={() => this.onSetSidebarOpen(true)}>
             Open sidebar
         </button>
-        
+
         <Sidebar
           sidebar={<b>Sidebar content
           </b>,
