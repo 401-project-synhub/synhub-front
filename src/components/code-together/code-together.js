@@ -15,6 +15,8 @@ import { withRouter } from "react-router"
 import { useParams } from "react-router-dom";
 import GetAppIcon from '@material-ui/icons/GetApp';
 import Paint from '../paint/paint'
+// import NavBar from '../header/navbar/navbar.js'
+import Sidebar from "react-sidebar";
 
 const ENDPOINT = "https://synhub.herokuapp.com";
 const socket = socketIOClient(ENDPOINT);
@@ -43,6 +45,7 @@ class App extends Component {
       css2: '',
       messagesArray: [{ name: 'Batool', message: 'shit' }],
       paintComp: false,
+      sidebarOpen: false
     };
   }
 
@@ -70,6 +73,10 @@ class App extends Component {
   //   return data;
   // })
   // }
+  onSetSidebarOpen = (open) => {
+    this.setState({ sidebarOpen: open });
+  }
+
   componentWillMount() {
     roomName = this.props.match.params.room;
     this.setState({ messagesArray: [...this.state.messagesArray, { message: 'Connected', name: 'You' }] });
@@ -89,7 +96,7 @@ class App extends Component {
       return data;
     });
     socket.on('toggle-paint', data => {
-      console.log('toggle',data.message);
+      console.log('toggle', data.message);
       this.setState({ paintComp: data.message })
       return data;
     });
@@ -136,7 +143,7 @@ class App extends Component {
     console.log('react socket id', socket);
     // socket.emit('new-user', roomName, `${Math.floor(Math.random() * 10)}`, socketId);
     socket.emit('new-user', roomName, `${Math.floor(Math.random() * 10)}`, socketId);
-    
+
 
   }
 
@@ -244,14 +251,14 @@ class App extends Component {
   }
 
   toggle = () => {
-    console.log('paint1',this.state.paintComp);
-    let paint = !this.state.paintComp ;
+    console.log('paint1', this.state.paintComp);
+    let paint = !this.state.paintComp;
     console.log('paint', paint);
     this.setState({ paintComp: paint });
-    console.log('paint12',this.state.paintComp)
+    console.log('paint12', this.state.paintComp)
     console.log('paint room name', roomName);
     socket.emit('send-toggle-paint', roomName, paint);
-    console.log('paint2',this.state.paintComp);
+    console.log('paint2', this.state.paintComp);
   }
   render() {
     const { html, js, css } = this.state;
@@ -265,6 +272,36 @@ class App extends Component {
 
     return (
       <>
+        <button id='sidebar' onClick={() => this.onSetSidebarOpen(true)}>
+            Open sidebar
+        </button>
+        
+        <Sidebar
+          sidebar={<b>Sidebar content
+          </b>,
+            <button>hasdassadasdsadsad</button>
+          }
+          open={this.state.sidebarOpen}
+          onSetOpen={this.onSetSidebarOpen}
+          styles={{ sidebar: { 
+            background: "white",
+            // zIndex: 1,
+            // position: 'fixed',
+            // top: 0 + 'px',
+            // left: 0 + 'px',
+            // right: 0 + 'px',
+            // bottom: 0 + 'px',
+            // opacity: 0,
+            // // visibility: 'hidden',
+            // // transition: opacity 0.3s ease-out 0s, 
+            // // visibility 0.3s ease-out 0s,
+            // backgroundColor: 'white',
+         } }}
+        >
+        </Sidebar>
+
+
+        
         <button id='runButton' onClick={this.clickHandler}>Run</button>
         <div className={this.state.paintComp.toString()}>
           <Paint />

@@ -26,6 +26,7 @@ import Routes from "./routes";
 import TrelloBoard from "./components/TrelloBoard.js";
 import TrelloHome from "./components/Home";
 import './app.scss';
+import  Sidebar  from './components/code-together/sidebar/sidebar.js';
 function App() {
   return (
     <>
@@ -62,6 +63,8 @@ function App() {
               </Auth>
               <Route path="/todo" exact component={TrelloHome} />
               <Route path="/todo/:boardID" component={TrelloBoard} />
+              <Route path="/side" component={Sidebar} />
+
             </main>
             {/* <Footer/> */}
           </SignInProvider>

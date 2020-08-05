@@ -1,116 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900');
 
-.header{
-
-    // .activetab{
-    //     color: white;
-    //     border-bottom: 3px solid white;
-    // }
-
+.navheader{
     color: white;
-    background-image: url('/assets/headerbg3.png');
     height: 110vh;
-    background-repeat: no-repeat;
-    background-size: 114.5%;
-    background-position: top;
-
     z-index: 999;
     opacity: 1;
-    .hdr-dimond{
-        height: 430px;
-        width: 121px;
-    }
-    #hdr-dimond1{
-        position: absolute;
-        top: 40%;
-        left: 1%;
-    }
-    #hdr-dimond2{
-        position: absolute;
-        top: 50%;
-        left: 4%;
-    } 
-    #hdr-dimond3{
-        position: absolute;
-        top: 60%;
-        left: 7%;
-    }
+    
     h1{
         margin: 0;
     }
-    div{
-        font-family: 'Heebo', sans-serif;
-        position: absolute;
-        top: 37%;
-        left: 19.8%;
 
-        h1{
-            font-size: 70px;
-            text-transform: none;
-            font-weight: 500;
-            color: #fff;
-            margin: 0;
-            line-height: 1.1;
-        }
-        h2{
-            font-size: 70px;
-            font-weight: 500;
-            margin: 0 0 14px;
-            display: block;
-            color: #fff;
-            text-transform: none;
-            padding: 0;
-            line-height: 1.1;
-        }
-        p{
-            width: 62%;
-            text-align: left;
-            color: #fff;
-            margin: 24px 0 0;
-            font-size: 22px;
-            margin-bottom: 30px;
-            line-height: 36px;
-        }
-    }
-    .scrolled{
-        ::-webkit-scrollbar-thumb {
-             background: #FE8264; 
-        }
+    transition: all ease-in-out 1s;
+    position: fixed;
+    background-color: #263238;
+    color: green;
+    box-shadow: 0px 5px 5px #263238;
+    width: 100%;
+    z-index: 10;
+    height: 100px;
 
-        transition: all ease-in-out 1s;
-        position: fixed;
-        background-color: #426264;
-        color: green;
-        box-shadow: 0px 10px 20px #426264;
-        width: 100%;
-        z-index: 10;
-        height: 100px;
-        .link{
-        color: #26e79e;
-        }
-        .active{
-            border-bottom: 3px solid #FE8264;
-        }
-        .sign-btn{
-            background: linear-gradient(114deg, #4cddbd, #06f286);
-            // text-shadow: 0px 0px 3px black;
-            color: #426264;
-         
-
-        }
-        .sign-btn:hover{
-            letter-spacing: 4px;
-            box-shadow: none;
-            background: linear-gradient(114deg, #4cddbd, #06f286);
-            text-shadow: none;
-            color: #426264;
-
-        }
-   
-        
+    // .active{
+    //     border-bottom: 3px solid #FE8264;
+    // }
+    .sign-btn{
+        background: linear-gradient(114deg, #4cddbd, #06f286);
+        // text-shadow: 0px 0px 3px black;
+        color: #426264;
+     
 
     }
-    
+    .sign-btn:hover{
+        letter-spacing: 4px;
+        box-shadow: none;
+        background: linear-gradient(114deg, #4cddbd, #06f286);
+        text-shadow: none;
+        color: #426264;
+
+    }
     nav{
         transition: all ease-in-out 1s;
         // position: fixed;
@@ -176,7 +102,7 @@
                 }     
                 h2{
                     font-size: 3rem;
-                    color: #364838;
+                    // color: #364838;
                     text-transform: uppercase;
                     margin-top: 10%;
                     border-bottom: chocolate 3px solid;
@@ -245,6 +171,7 @@
         text-decoration: none;
         color: rgba(0, 0, 0, 0.342);
         color: rgba(66, 98, 100,  0.81);
+        color: white;
         font-size: 20px;
         
     }

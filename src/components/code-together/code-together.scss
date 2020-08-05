@@ -16,6 +16,7 @@ html {
 		padding: 0;
 	}
 }
+
 .playground {
 	position: fixed;
 	top: 0;
@@ -24,11 +25,13 @@ html {
 	width: 600px;
 	background-color: #1E1E2C;
 }
+
 .code-editor {
 	height: 33.33%;
 	overflow: hidden;
 	position: relative;
 }
+
 .editor-header {
 	height: 30px;
 	content: attr(title);
@@ -93,4 +96,10 @@ html {
 	height: 40px;
 	z-index: 9999;
 	max-height: 200px;
+}
+
+#sidebar{
+	position: absolute;
+    left: 50%;
+    z-index: 55555;
 }
