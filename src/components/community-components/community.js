@@ -22,6 +22,7 @@ import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import SearchIcon from '@material-ui/icons/Search';
+import Header from '../header/header.js';
 import './community.scss';
 
 function Community(props) {
@@ -226,12 +227,12 @@ function Community(props) {
                     </Card>
                 ))} 
             </div> */}
-            <div>
-            <Auth capability='read' >
-                    <Link to='/community/addquestion'>
-                        <button className="show-more">Add Question</button>
-                    </Link>
-                </Auth>
+            {/* <div className='header'>
+            <NavBar/>
+
+            </div> */}
+            <Header />
+            <div id='control'>
                 <FormControl className={classes.formControl}>
                     <NativeSelect
                         className={classes.selectEmpty}
@@ -261,6 +262,11 @@ function Community(props) {
                         </IconButton>
                     </Link>
                 </Paper>
+            <Auth capability='read' >
+                    <Link to='/community/addquestion'>
+                        <button className="show-more">Add Question</button>
+                    </Link>
+                </Auth>
             </div>
             <div id='cards'>
                 {props.questions.questions.map(oneQuestion => (

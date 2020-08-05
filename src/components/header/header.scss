@@ -2,6 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900');
 
 .header{
+
+    // .activetab{
+    //     color: white;
+    //     border-bottom: 3px solid white;
+    // }
+
     color: white;
     background-image: url('/assets/headerbg3.png');
     height: 110vh;
@@ -67,13 +73,54 @@
             line-height: 36px;
         }
     }
-    nav{
+    .scrolled{
+        ::-webkit-scrollbar-thumb {
+             background: #FE8264; 
+        }
+
+        transition: all ease-in-out 1s;
         position: fixed;
+        background-color: #426264;
+        color: green;
+        width: 100%;
+        z-index: 10;
+        height: 100px;
+        .link{
+        color: #26e79e;
+        }
+        .active{
+            border-bottom: 3px solid #FE8264;
+        }
+        .sign-btn{
+            background: linear-gradient(114deg, #4cddbd, #06f286);
+            // text-shadow: 0px 0px 3px black;
+            color: #426264;
+         
+
+        }
+        .sign-btn:hover{
+            letter-spacing: 4px;
+            box-shadow: none;
+            background: linear-gradient(114deg, #4cddbd, #06f286);
+            text-shadow: none;
+            color: #426264;
+
+        }
+   
+        
+
+    }
+    
+    nav{
+        transition: all ease-in-out 1s;
+        // position: fixed;
         display: grid;
-        width: 92.5%;
+        width: 100%;
         grid-template-columns: 50% 50%;
         grid-template-rows: 100%;
         grid-template-areas: "a b";
+        z-index: 10;
+        height: 100px;
         .bgBlack{
             z-index: 1000000;
             position: fixed;
@@ -85,6 +132,7 @@
             width: 100%;
             height: 100%;
             .sign-popup{
+                z-index: 10;
                 height: 75%;
                 width: 35%;
                 display: flex;
@@ -100,6 +148,7 @@
                 // justify-content: space-evenly;
                 align-items: center; 
                 form{
+                z-index: 10;
                     height: 60%;
                     width: 70%;
                     display: flex;
@@ -145,7 +194,7 @@
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        height: 15vh;
+        // height: 15vh;
         // font-size: 18px;
         font-family: 'Heebo', sans-serif;
         font-weight: 500;
@@ -184,7 +233,6 @@
         border-radius: 5px;
         letter-spacing: 5px;
         box-shadow: 1px 1px 10px black;
-
     }
     .sign-btn:focus{
         border: none;
@@ -196,8 +244,17 @@
         margin: 0;
         text-decoration: none;
         color: rgba(0, 0, 0, 0.342);
+        color: rgba(66, 98, 100,  0.81);
         font-size: 20px;
+        
     }
+    .active{
+        color: white;
+        // color: orange;
+        border-bottom: 3px solid white;
+
+    }
+  
     .link:hover{
         color: #fff;
         letter-spacing: 3px;
