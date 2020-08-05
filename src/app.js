@@ -41,26 +41,34 @@ function App() {
                 <GitHub />
                 <LinkedIn />
               </Route>
-              
-              <Route exact path='/profile' component={Profile} />
+
+              <Route path='/profile' >
+                <Profile />
+                <Route exact path='/profile/:id' component={ShowMore} />
+
+              </Route>
+
               <Route exact path='/oauth' component={Hello} />
               <Route component={Routes} />
-              <Route exact path='/coding' component={(props) => <RoomsForm {...props} key={window.location.pathname} />} />
+              {/* <Route exact path='/coding' component={(props) => <RoomsForm {...props} key={window.location.pathname} />} /> */}
               <Route exact path='/coding/:room'>
                 <CodeTogether />
               </Route>
-              <Route exact path='/community'>
-                <Community/>
-              </Route>
-              <Route exact path='/community/search'>
+              {/* <Route path='/community'>
+                <Community /> */}
+              <Route  path='/community'>
                 <Community />
+                <Route exact path='/community/:id' component={ShowMore} />
               </Route>
-              <Route exact path='/community/search/:key' component={Search} />
-              <Route exact path='/community/tags/:tag' component={TagsSearch} />
-              <Route exact path='/community/details/:id' component={ShowMore} />
-              <Auth capabilities='read'>
+              {/* <Route exact path='/community/search'>
+                <Community />
+              </Route> */}
+              <Route exact path='/search/:key' component={Search} />
+              <Route exact path='/tags/:tag' component={TagsSearch} />
+              {/* <Auth capabilities='read'>
                 <Route exact path='/community/addquestion' component={AddQuestion} />
-              </Auth>
+              </Auth> */}
+              {/* </Auth> */}
               <Route path="/todo" exact component={TrelloHome} />
               <Route path="/todo/:boardID" component={TrelloBoard} />
               <Route path="/side" component={Sidebar} />

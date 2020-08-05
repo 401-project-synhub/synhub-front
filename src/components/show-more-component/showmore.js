@@ -4,7 +4,7 @@ import superagent from 'superagent';
 import Auth from '../auth/';
 // import Show from '../show/';
 
-import { Link, Redirect,useHistory  } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { ButtonGroup, Button, CardHeader, Avatar } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,8 +14,9 @@ import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import { connect } from 'react-redux';
 import Show from '../show/index';
 import { SignInContext } from '../../context/auth';
-import { _addAnswer, _getQuestionDetails, _getAllQuestionsByTag, _bookmark, _getAllBookmarked, _deleteQuestion, _updateQuestion ,_deleteAns} from '../../store/community-reducer';
+import { _addAnswer, _getQuestionDetails, _getAllQuestionsByTag, _bookmark, _getAllBookmarked, _deleteQuestion, _updateQuestion, _deleteAns} from '../../store/community-reducer';
 
+import {useHistory} from 'react-router-dom'
 
 import './sm.scss';
 
@@ -31,8 +32,7 @@ function ShowMore(props) {
     const [details, setDetails] = useState({});
     const context = useContext(SignInContext);
     let [bol, setBol] = useState(false);
-    const history = useHistory();
-
+    const history = useHistory()
     // const [data, setData] = useState({});
     useEffect(() => {
         getQuestionDetails();
@@ -124,16 +124,15 @@ function ShowMore(props) {
                     />
                     <Show condition={context.signedIn&&context.user.capabilities ? context.user.username === details.author || context.user.capabilities.role === 'admin':null}>
                         <Auth capability='delete' >
-                            {context.user.capabilities ? context.user.username === details.author || context.user.capabilities.role === 'admin' ? <button className="show-more" onClick={() => {props.delete(details._id);history.goBack()}}>Delete Question</button> : null : null}
+                            {context.user.capabilities ? context.user.username === details.author || context.user.capabilities.role === 'admin' ? <button className="show-more" onClick={() =>{ props.delete(details._id);setBol(!bol);history.goBack()}}>Delete Question</button> : null : null}
                         </Auth>
-                        {/* <Redirect to='/community'/> */}
 
                     </Show>
 
                     <p>Description: {details.description}</p>
                     <ButtonGroup size="small" aria-label="small outlined button group">
                         {details.tags ? details.tags.map(tag => (
-                            <Link to={`/community/tags/${tag}`} >
+                            <Link to={`/tags/${tag}`} >
                                 <Button onClick={() => props.tagsSearch(tag)} key={tag}>{tag}</Button>
                             </Link>
 
@@ -162,14 +161,10 @@ function ShowMore(props) {
                             Answer Description :
                             {oneAns.description}
                         </p>
-                    <Show condition={context.signedIn&&context.user.capabilities ? context.user.username === oneAns.author || context.user.capabilities.role === 'admin':null}>
-
                         <Auth capability='delete' >
                             {context.user.capabilities ? context.user.username === oneAns.author || context.user.capabilities.role === 'admin' ? <button className="show-more" onClick={() => props.deleteAns(oneAns._id)}>Delete Answer</button> : null : null}
                         </Auth>
-                    </Show>
                     </div>
-
 
 
                 )) : ''}
@@ -199,12 +194,12 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => ({
     add: (answer, qTitle) => dispatch(_addAnswer(answer, qTitle)),
+    deleteAns:(id)=>dispatch(_deleteAns(id)),
     get: (id) => dispatch(_getQuestionDetails(id)),
     delete: (_id) => dispatch(_deleteQuestion(_id)),
     update: (body, _id) => dispatch(_updateQuestion(body, _id)),
     tagsSearch: (tag) => { dispatch(_getAllQuestionsByTag(tag)) },
     bookmark: (body) => dispatch(_bookmark(body)),
-    getMarked: () => dispatch(_getAllBookmarked()),
-    deleteAns:(id) => dispatch(_deleteAns(id))
+    getMarked: () => dispatch(_getAllBookmarked())
 })
 export default connect(mapStateToProps, mapDispatchToProps)(ShowMore);

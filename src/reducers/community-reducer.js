@@ -55,10 +55,10 @@ export default (state = initialState, action) => {
             return { ...state, answers: state.answers.filter(val => val._id !== payload) }
         //===
         case 'detailQuestion':
-            console.log(payload)
+            // console.log(payload)
             return { qDetails: payload }
         case 'tagsSearch':
-            console.log('state', state)
+            // console.log('state', state)
             let filteredQuestions = payload.questions.filter(val => val.tags.includes(payload.tag.toLowerCase()))
             console.log('filtered quedtions', filteredQuestions)
             return { ...state, questions: filteredQuestions }
@@ -272,6 +272,21 @@ export const _addAnswer = (body, qTitle) => {
             .then(data => {
                 console.log('data.body', data.body);
                 dispatch(addAnswerAction(data.body.record))
+            }).catch(console.error);
+    }
+}
+export const _deleteAns = (_id) => {
+    const cookieToken = cookie.load('auth');
+    let token = cookieToken || null;
+    const userPro = cookie.load('user');
+    let theUser = userPro || null;
+    return (dispatch) => {
+
+        return superagent.delete(`${API}/api/v1/answers/${_id}`)
+            .accept('application/json')
+            .set('Authorization', `Bearer ${token}`)
+            .then(data => {
+                dispatch(deleteAnswerAction(_id))
             }).catch(console.error);
     }
 }
