@@ -4,7 +4,8 @@ import SignUp from '../../signup/';
 import Show from '../../show/';
 import { SignInContext } from '../../../context/auth.js';
 import { Link, NavLink } from 'react-router-dom';
-import '../header.scss';
+// import '../header.scss';
+import './navbar.scss';
 
 
 
@@ -13,18 +14,18 @@ function Navbar(props) {
     const [signUP, setSignUP] = useState(false);
     const [scrolled, setScrolled] = useState('');
 
-    const handleScroll=() => {
-        const offset=window.scrollY;
-        if(offset > 100 ){
-          setScrolled('scrolled');
+    const handleScroll = () => {
+        const offset = window.scrollY;
+        if (offset > 100) {
+            setScrolled('scrolled');
         }
-        else{
-          setScrolled('');
+        else {
+            setScrolled('');
         }
-      }
-      useEffect(() => {
-        window.addEventListener('scroll',handleScroll)
-      })
+    }
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
+    })
     const context = useContext(SignInContext);
     const signInToggle = (e) => {
         setSignIN(!signIN);
@@ -40,13 +41,13 @@ function Navbar(props) {
         signIN ? signInToggle() : doNothing();
     }
     const doNothing = () => { }
-    return(
-        <nav className={scrolled}>
+
+    return (
+        <div className='navheader'>
+            <nav className={scrolled}>
                 <ul>
-                    {/* <li>Home</li> */}
                     <NavLink className='link' to='/'>Home</NavLink>
 
-                    {/* <li>Community</li> */}
                     <NavLink className='link' to='/community'>Community</NavLink>
                     {/* <li>Code Along</li> */}
                     <Show condition={context.signedIn}>
@@ -55,32 +56,10 @@ function Navbar(props) {
 
                     </Show>
 
-                    {<NavLink className='link' to='/todo'>Task Manager</NavLink>}
-
-                    <Show condition={!context.signedIn}>
-                        <button onClick={signInToggle} className='sign-btn'>
-                            SIGNIN
-                        </button>
-                    </Show>
-   
-                    <Show condition={!context.signedIn}>
-                        <button onClick={signUpToggle} className='sign-btn'>
-                            SIGNUP
-                        </button>
-                    </Show>
-                 
-                    <Show condition={context.signedIn}>
-                        <button className='sign-btn' onClick={saveTheDay}>SIGNOUT</button>
-                    </Show>
+                    <NavLink className='link' to='/todo'>Task Manager</NavLink>
                 </ul>
-
-            <Show condition={signIN}>
-                        <SignIn />
-                    </Show>
-            <Show condition={signUP}>
-                        <SignUp />
-                    </Show>
             </nav>
+        </div>
     )
 }
 

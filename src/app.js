@@ -26,6 +26,7 @@ import Routes from "./routes";
 import TrelloBoard from "./components/TrelloBoard.js";
 import TrelloHome from "./components/Home";
 import './app.scss';
+import  Sidebar  from './components/code-together/sidebar/sidebar.js';
 function App() {
   return (
     <>
@@ -48,7 +49,7 @@ function App() {
               </Route>
 
               <Route exact path='/oauth' component={Hello} />
-              <Route component={Routes} />
+              {/* <Route component={Routes} /> */}
               {/* <Route exact path='/coding' component={(props) => <RoomsForm {...props} key={window.location.pathname} />} /> */}
               <Route exact path='/coding/:room'>
                 <CodeTogether />
@@ -70,6 +71,8 @@ function App() {
               {/* </Auth> */}
               <Route path="/todo" exact component={TrelloHome} />
               <Route path="/todo/:boardID" component={TrelloBoard} />
+              <Route path="/side" component={Sidebar} />
+
             </main>
             {/* <Footer/> */}
           </SignInProvider>
