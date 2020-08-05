@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Auth from '../auth/';
 import { SignInContext } from '../../context/auth';
 import { _getAllQuestions, _deleteQuestion, _updateQuestion, _searchQuestions, _getAllQuestionsByTag, _bookmark, _getAllBookmarked, _getProfile } from '../../store/community-reducer';
-
+import NavBar from '../header/navbar/navbar'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -13,6 +13,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import './profile.scss'
+// import '../header/header.scss'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,6 +47,9 @@ function Profile(props) {
     }, [])
     return (
         <>
+            <div className='header'>
+                <NavBar />
+            </div>
             <div className='user-info'>
                 <div className='img-container'>
                     <img className='profile-img' alt={props.questions.profile.username} src={props.profile.imgUrl ? props.profile.imgUrl : props.profile.gender === 'male' ? 'https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236__340.png' : 'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407__340.png'} />
@@ -98,17 +102,17 @@ function Profile(props) {
                         My Questions {props.profile.questions.length}
                     </span> */}
                     {/* <div className='img-ins'> */}
-                        {/* <img alt='lk' src='/assets/header-illus2.png' /> */}
-                        {props.profile.questions.map(oneQ =>
-                            <div key={oneQ.id}>
-                                <Link to={`/profile/${oneQ.id}`}>
-                                    <AccordionDetails>
-                                        <Typography>Question Title : {oneQ.title}</Typography>
-                                    </AccordionDetails>
-                                </Link>
+                    {/* <img alt='lk' src='/assets/header-illus2.png' /> */}
+                    {props.profile.questions.map(oneQ =>
+                        <div key={oneQ.id}>
+                            <Link to={`/profile/${oneQ.id}`}>
+                                <AccordionDetails>
+                                    <Typography>Question Title : {oneQ.title}</Typography>
+                                </AccordionDetails>
+                            </Link>
 
-                            </div>
-                        )}
+                        </div>
+                    )}
                     {/* </div> */}
 
                 </Accordion>
@@ -126,7 +130,7 @@ function Profile(props) {
 
                     {props.profile.answers.map(oneA =>
                         <div key={oneA.id}>
-                            <Link to={`/profile/${props.questions.questions.filter(val => val.title === oneA.questionTitle)[0]?props.questions.questions.filter(val => val.title === oneA.questionTitle)[0]._id:null}`}>
+                            <Link to={`/profile/${props.questions.questions.filter(val => val.title === oneA.questionTitle)[0] ? props.questions.questions.filter(val => val.title === oneA.questionTitle)[0]._id : null}`}>
                                 <AccordionDetails>
                                     <Typography>Question Title : {oneA.questionTitle}</Typography>
                                 </AccordionDetails>
