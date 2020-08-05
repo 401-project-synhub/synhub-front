@@ -48,28 +48,46 @@ class RoomForm extends Component {
 
         return (
             <>
-                <div>
+            <div className='bgBlack'>
+                <div className='sign-popup'>
+                <span id='close'>X</span>
+                <div className='stuffContainer'>
+                <div className='join'>
                     {
                         Object.keys(this.state.rooms).map((room, index) => {
                             return (
-                                <>
+                                <> 
+                                <div className='join-div'>
                                     <p key={index}>{room}</p>
                                     <Link key={index + '1'} to={`/coding/${room}`}>
-                                        <button key={index + '11'}>Join</button>
+                                        <button id='join-btn' key={index + '11'}>Join</button>
                                     </Link>
+                                    </div>
                                 </>
                             )
                         })
                     }
                 </div>
-                <div>
+                {/* <div > */}
                     <form onSubmit={this.createRoom}>
                         <input onChange={this.changeRoomHandler} name='createRoom' placeholder='room name'></input>
                         <Link to={`/coding/${this.state.room}`}>
                             <button>create</button>
                         </Link>
                     </form>
+                {/* </div> */}
                 </div>
+                <div className='stuffImg'>
+                    <h2>
+                        Create<span>/</span>join
+                    </h2>
+                    <h3>
+                        Room
+                    </h3>
+                </div>
+                </div>
+            </div>
+
             </>
         )
     }
