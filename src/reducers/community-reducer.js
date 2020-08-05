@@ -55,10 +55,10 @@ export default (state = initialState, action) => {
             return { ...state, answers: state.answers.filter(val => val._id !== payload) }
         //===
         case 'detailQuestion':
-            console.log(payload)
+            // console.log(payload)
             return { qDetails: payload }
         case 'tagsSearch':
-            console.log('state', state)
+            // console.log('state', state)
             let filteredQuestions = payload.questions.filter(val => val.tags.includes(payload.tag.toLowerCase()))
             console.log('filtered quedtions', filteredQuestions)
             return { ...state, questions: filteredQuestions }

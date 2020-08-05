@@ -73,7 +73,7 @@ function Profile(props) {
                     {/* <img alt='lk' src='/assets/header-illus2.png' /> */}
                     {props.profile.bookmarks.map(book =>
                         // <div>
-                        <Link to={`/community/details/${book.bookmarked.id}`} key={book.id}>
+                        <Link to={`/profile/${book.bookmarked.id}`} key={book.id}>
                             <AccordionDetails>
 
                                 <Typography>Question Title : {book.bookmarked.title}</Typography>
@@ -101,7 +101,7 @@ function Profile(props) {
                         {/* <img alt='lk' src='/assets/header-illus2.png' /> */}
                         {props.profile.questions.map(oneQ =>
                             <div key={oneQ.id}>
-                                <Link to={`/community/details/${oneQ.id}`}>
+                                <Link to={`/profile/${oneQ.id}`}>
                                     <AccordionDetails>
                                         <Typography>Question Title : {oneQ.title}</Typography>
                                     </AccordionDetails>
@@ -126,7 +126,7 @@ function Profile(props) {
 
                     {props.profile.answers.map(oneA =>
                         <div key={oneA.id}>
-                            <Link to={`/community/details/${props.questions.questions.filter(val => val.title === oneA.questionTitle)[0]?props.questions.questions.filter(val => val.title === oneA.questionTitle)[0]._id:null}`}>
+                            <Link to={`/profile/${props.questions.questions.filter(val => val.title === oneA.questionTitle)[0]?props.questions.questions.filter(val => val.title === oneA.questionTitle)[0]._id:null}`}>
                                 <AccordionDetails>
                                     <Typography>Question Title : {oneA.questionTitle}</Typography>
                                 </AccordionDetails>

@@ -36,7 +36,7 @@ function Header(props) {
                     {/* <li>Community</li> */}
                     <NavLink className='link' to='/community'>Community</NavLink>
                     {/* <li>Code Along</li> */}
-                    <NavLink className='link' to='./coding'>Code Together</NavLink>
+                    <NavLink className='link' to='/coding'>Code Together</NavLink>
                     <Show condition={!context.signedIn}>
                         <button onClick={signInToggle} className='sign-btn'>
                             SIGNIN

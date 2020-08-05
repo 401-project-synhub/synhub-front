@@ -163,7 +163,7 @@ function Search(props) {
                         inputProps={{ 'aria-label': 'search google maps' }}
                     />
                     <Divider className={classes.divider} orientation="vertical" />
-                    <Link to={`/community/search/${searchInp}`}>
+                    <Link to={`/search/${searchInp}`}>
                         <IconButton type="submit" className={classes.iconButton} aria-label="search">
                             <SearchIcon />
                         </IconButton>
@@ -178,7 +178,7 @@ function Search(props) {
                                 {/* {console.log(props.questions.bookmarked.filter(val => val.bookmarked._id === oneQuestion._id).length)} */}
                                 <BookmarkBorderIcon className={`bookmark_${!!(props.questions.bookmarked.filter(val => val.bookmarked._id === oneQuestion._id).length)}`} />
                             </IconButton>
-                            <Link to={`/community/details/${oneQuestion._id}`}>
+                            <Link to={`/community/${oneQuestion._id}`}>
                                 <CardHeader
                                     avatar={
                                         <Avatar alt={oneQuestion.author} src={oneQuestion.imgUrl ? oneQuestion.imgUrl : '/static/images/avatar/3.jpg'} title={oneQuestion.author} />
@@ -208,7 +208,7 @@ function Search(props) {
                                     {/* <button className="show-more">Show More</button> */}
                                     <ButtonGroup size="small" aria-label="small outlined button group">
                                         {oneQuestion.tags.map(tag => (
-                                            <Link to={`/community/tags/${tag}`} >
+                                            <Link to={`/tags/${tag}`} >
                                                 <Button onClick={() => props.tagsSearch(tag)} key={tag}>{tag}</Button>
                                             </Link>
 
