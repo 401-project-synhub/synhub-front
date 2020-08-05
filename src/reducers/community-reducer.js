@@ -275,6 +275,21 @@ export const _addAnswer = (body, qTitle) => {
             }).catch(console.error);
     }
 }
+export const _deleteAns = (_id) => {
+    const cookieToken = cookie.load('auth');
+    let token = cookieToken || null;
+    const userPro = cookie.load('user');
+    let theUser = userPro || null;
+    return (dispatch) => {
+
+        return superagent.delete(`${API}/api/v1/answers/${_id}`)
+            .accept('application/json')
+            .set('Authorization', `Bearer ${token}`)
+            .then(data => {
+                dispatch(deleteAnswerAction(_id))
+            }).catch(console.error);
+    }
+}
 export const getQuestionsAction = (payload) => {
     return {
         type: 'showQuestions',

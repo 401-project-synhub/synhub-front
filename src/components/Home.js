@@ -4,6 +4,13 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addBoard } from "../actions";
 import BoardThumbnail from "./BoardThumbnail";
+// import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
+import HomeIcon from '@material-ui/icons/Home';
+import PersonIcon from '@material-ui/icons/Person';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
+import ListIcon from '@material-ui/icons/List';
+import './style.scss'
 
 const Thumbnails = styled.div`
   flex: 1;
@@ -13,6 +20,7 @@ const Thumbnails = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  outline: none;
 `;
 
 const HomeContainer = styled.div`
@@ -20,26 +28,35 @@ const HomeContainer = styled.div`
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  height:100%
 `;
 
 const CreateTitle = styled.h3`
   font-size: 48px;
-  color: white;
+  color: #172b4d;
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
 `;
 
 const CreateInput = styled.input`
-  width: 400px;
-  height: 80px;
-  font-size: 22px;
+  
   padding: 10px;
   box-sizing: border-box;
-  border-radius: 3px;
-  border: none;
-  outline-color: blue;
+  height: 230px;
+  width: 230px;
+  background: rgba(9,30,66,.04);
+  padding: 10px;
+  cursor: pointer;
   box-shadow: 0 2px 4px grey;
+  color: #172b4d;
+  border: none;
   align-self: center;
+  outline: none;
+  font-size: large;
+  text-align: center;
+  padding: 0px;
+  opacity: 60%;
+
 `;
 
 const Home = ({ boards, boardOrder, dispatch }) => {
@@ -49,7 +66,7 @@ const Home = ({ boards, boardOrder, dispatch }) => {
 
   const handleChange = e => {
     setNewBoardTitle(e.target.value);
-    console.log('onchange',newBoardTitle)
+    console.log('onchange', newBoardTitle)
 
   };
 
@@ -58,9 +75,9 @@ const Home = ({ boards, boardOrder, dispatch }) => {
     dispatch(addBoard(newBoardTitle));
     console.log(newBoardTitle)
   };
-console.log('boardOrder',boardOrder)
+  console.log('boardOrder', boardOrder)
   const renderBoards = () => {
-    return boardOrder?boardOrder.map(boardID => {
+    return boardOrder ? boardOrder.map(boardID => {
       const board = boards[boardID];
 
       return (
@@ -72,17 +89,17 @@ console.log('boardOrder',boardOrder)
           <BoardThumbnail {...board} />
         </Link>
       );
-    }):null;
+    }) : null;
   };
 
   const renderCreateBoard = () => {
     return (
       <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
-        <CreateTitle>Create a new Board</CreateTitle>
-        <CreateInput
+        {/* <CreateTitle>Create a new Board</CreateTitle> */}
+        <CreateInput id='createInput'
           onChange={handleChange}
           value={newBoardTitle}
-          placeholder="Your boards title..."
+          placeholder="Your new board's title..."
           type="text"
         />
       </form>
@@ -90,10 +107,22 @@ console.log('boardOrder',boardOrder)
   };
 
   return (
-    <HomeContainer>
-      <Thumbnails>{renderBoards()}</Thumbnails>
-      {renderCreateBoard()}
-    </HomeContainer>
+    <div id='trello-home'>
+      <div id='trello-header'>
+      <PersonIcon fontSize="large"/>      
+        <h1 id='trello-title'>Your Boards</h1>
+      </div>
+      <aside id='trello-aside'>
+      <a href='#'><ArrowBackIcon/></a>
+        <a href='#'><HomeIcon/></a>
+        <a href='#'><NotificationImportantIcon/></a>
+        <a href='#'><ListIcon/></a>
+      </aside>
+      <HomeContainer>
+        <Thumbnails>{renderBoards()}</Thumbnails>
+        {renderCreateBoard()}
+      </HomeContainer>
+    </div>
   );
 };
 

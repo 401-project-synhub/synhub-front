@@ -55,7 +55,7 @@ const TrelloForm = React.memo(
         </StyledCard>
         <ButtonContainer>
           {children}
-          <CloseIcon onMouseDown={closeForm}>close</CloseIcon>
+          <CloseIcon className='delete' onMouseDown={closeForm}>close</CloseIcon>
         </ButtonContainer>
       </Container>
     );

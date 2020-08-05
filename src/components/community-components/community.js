@@ -27,8 +27,9 @@ import AddQuestion from '../add-question/add-question';
 
 import ShowMore from '../show-more-component/showmore'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import Header from '../header/header.js';
 import './community.scss';
 
 function Community(props) {
@@ -245,24 +246,30 @@ function Community(props) {
                     </Card>
                 ))} 
             </div> */}
-            <div>
-                <Auth capability='read' >
-                    {/* <Link to='/community/addquestion'> */}
-                    <button onClick={onButtonClick} className="show-more">Add Question</button>
-                    <Show condition={addShow}>
-                        <AddQuestion />
-                    </Show>
-                    {/* </Link> */}
-                </Auth>
+            {/* <div> */}
+            {/* <Auth capability='read' > */}
+                {/* <Link to='/community/addquestion'> */}
+                {/* <button onClick={onButtonClick} className="show-more">Add Question</button>
+                <Show condition={addShow}>
+                    <AddQuestion />
+                </Show> */}
+                {/* </Link> */}
+            {/* </Auth> */}
+            {/* <div className='header'>
+            <NavBar/>
+
+            </div> */}
+            <Header />
+            <div id='control'>
                 <FormControl className={classes.formControl}>
                     <NativeSelect
-                        className={classes.selectEmpty}
+                        className='selectEmpty'
                         value={choice}
                         name="date"
                         onChange={handleChoiceChange}
                         inputProps={{ 'aria-label': 'age' }}
                     >
-                        <option value="" disabled>
+                        <option value="" >
                             Sort By
                         </option>
                         <option value={'date'}>Date</option>
@@ -283,6 +290,14 @@ function Community(props) {
                         </IconButton>
                     </Link>
                 </Paper>
+                <Auth capability='read' >
+                    {/* <Link to='/community/addquestion'> */}
+                        <button className="show-more" onClick={onButtonClick}><img src='/assets/community/add.png'></img>Add Question</button>
+                        <Show condition={addShow}>
+                            <AddQuestion />
+                        </Show>
+                    {/* </Link> */}
+                </Auth>
             </div>
             <div id='cards'>
                 {props.questions.questions.map(oneQuestion => (

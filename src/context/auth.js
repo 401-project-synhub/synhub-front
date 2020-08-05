@@ -1,4 +1,4 @@
-import React ,{useState} from 'react';
+import React, { useState } from 'react';
 import cookie from 'react-cookies';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -7,8 +7,8 @@ import superagent from 'superagent'
 dotenv.config();
 
 // const API = process.env.API_SERVER  || 'https://synhub.herokuapp.com' 
-const API = process.env.API_SERVER  || 'https://synhub-project.herokuapp.com';
- 
+const API = process.env.API_SERVER || 'https://synhub-project.herokuapp.com';
+
 
 const SECRET = process.env.JWT_SECRET || 'batool123'
 
@@ -20,57 +20,62 @@ class SignInProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      open: false,
+      changeOpen: this.changeOpen,
       signedIn: false,
       signin: this.signin,
       signout: this.signout,
       signup: this.signup,
       user: {},
     };
+    // this.changeOpen = this.changeOpen.bind(this);
   }
-
-  signup = async (username, password,ranking, imgUrl, gender, role) => {//email
-      // console.log(password)
+  changeOpen = () => {
+    this.setState({...this.state,open:!this.state.open})
+  }
+  signup = async (username, password, ranking, imgUrl, gender, role) => {//email
+    // console.log(password)
     try {
-    
+
       superagent.post(`${API}/signup`)
-      .send({ username, password, ranking, imgUrl:imgUrl?imgUrl:gender==='male' ? 'https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236__340.png' : 'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407__340.png', gender, role })
-      // .set('Access-Control-Allow-Origin')
-      .accept('application/json')
-      // .set('Authorization', `Bearer ${token}`)
-      .then(data => {
-          console.log('token in up',data.body.token.token)
-          if(data.body.token.token.result){
+        .send({ username, password, ranking, imgUrl: imgUrl ? imgUrl : gender === 'male' ? 'https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236__340.png' : 'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407__340.png', gender, role })
+        // .set('Access-Control-Allow-Origin')
+        .accept('application/json')
+        // .set('Authorization', `Bearer ${token}`)
+        .then(data => {
+          console.log('token in up', data.body.token.token)
+          if (data.body.token.token.result) {
             // console.log(true)
-            this.signin(username,password)
-          }else{
+            this.signin(username, password)
+          } else {
 
             this.validateToken(data.body.token.token);
           }
         }).catch(console.error);
-      
+
     } catch (ex) {
       console.log('ERROR SIGNUP');
-          
+
     }
   }
 
 
   signin = async (username, password) => {
 
-     try {
-    
+    try {
+
       superagent.get(`${API}/signin`)
-      .send({ username, password })
-      .accept('application/json')
-      .set('Authorization', `Basic ${btoa(`${username}:${password}`)}`)
-      .then(data => {
+        .send({ username, password })
+        .accept('application/json')
+        .set('Authorization', `Basic ${btoa(`${username}:${password}`)}`)
+        .then(data => {
           // console.log('token',this.validateToken(data.body.token))
           this.validateToken(data.body.token);
         }).catch(console.error);
-      
+
     } catch (ex) {
       console.log('ERROR SIGNIN');
-          
+
     }
   }
 
@@ -97,9 +102,9 @@ class SignInProvider extends React.Component {
     // let cookieUser = cookie.load('user');
     // if(!cookieToken){
 
-      cookie.save('auth', token, { path: '/' });
-      cookie.save('user',JSON.stringify(user),{ path: '/' });
-      this.setState({ signedIn, user, token });
+    cookie.save('auth', token, { path: '/' });
+    cookie.save('user', JSON.stringify(user), { path: '/' });
+    this.setState({ signedIn, user, token });
     // }
   }
 
