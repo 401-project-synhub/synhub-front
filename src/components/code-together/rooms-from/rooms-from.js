@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import socketIOClient from "socket.io-client";
 import { Link } from 'react-router-dom';
 import { withRouter } from "react-router"
+import { SignInContext } from '../../../context/auth.js';
+
 const ENDPOINT = "https://synhub.herokuapp.com";
 let socket;
 // const socket = socketIOClient(ENDPOINT);
@@ -21,6 +23,7 @@ let socket;
 
 // socket.emit('get-rooms');
 class RoomForm extends Component {
+    static contextType = SignInContext;
 
     constructor() {
         super();
@@ -48,9 +51,9 @@ class RoomForm extends Component {
 
         return (
             <>
-            <div className='bgBlack'>
+            <div className='bgBlack' onClick={this.context.changeOpen}>
                 <div className='sign-popup'>
-                <span id='close'>X</span>
+                <span id='close' onClick={this.context.changeOpen}>X</span>
                 <div className='stuffContainer'>
                 <div className='join'>
                     {
