@@ -331,7 +331,7 @@ class App extends Component {
               display: 'flex',
               background: "white",
               flexDirection: 'column',
-              background: 'linear-gradient(90deg, rgba(58,86,88,1) 0%, rgba(37,51,52,1) 34%, rgba(27,36,37,1) 100%)',
+              background: '#1b2327',
               zIndex: '10000',
               // zIndex: 1,
               // position: 'fixed',

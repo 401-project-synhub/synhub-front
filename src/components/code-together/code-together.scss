@@ -76,6 +76,13 @@ html {
 			padding: 0 25px;
 			outline: none;
 		}
+		button{
+			font-weight: 600;
+			font-size: 15px;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			outline: none;
+		}
 	}
 }
 .iframe {
@@ -129,16 +136,19 @@ html {
 	// padding: 0 25px;
 	box-sizing: border-box;
 	button{
+		text-transform: uppercase;
+		font-family: 'Heebo', sans-serif;
 	    padding: 15px 60px;
 		width: 100%;
 		border: none;
 		margin-top: 7px;
 		outline: none;
 		background: #3f5c5f00;
-		color: #efefef;
+		color: #72eb86;
 		font-size: 17px;
 		font-weight: 700;
 		a{
+			text-transform: uppercase;
 			color: #efefef;
 		}
 		&:hover{
@@ -196,6 +206,7 @@ background-color: white;
 		width: 100%;
 	   }
 	   p {
+		font-family: 'Heebo', sans-serif;
 		margin: 0 0 0em;
 		margin-left: 14px;
 		line-height: 1.4285em;
@@ -204,12 +215,13 @@ background-color: white;
 	}
 }
 .chat {
+	font-family: 'Heebo', sans-serif;
 	height: 34%;
     overflow: auto;
     background-color: #1e1e2c;
 }
 .send{
-
+	font-family: 'Heebo', sans-serif;
     position: absolute;
     right: 34%;
     border: none;
