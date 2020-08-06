@@ -18,13 +18,19 @@ import Paint from '../paint/paint'
 // import NavBar from '../header/navbar/navbar.js'
 import Sidebar from "react-sidebar";
 // import NavBar from '../header/navbar/navbar.js'
+import cookie from 'react-cookies';
+import { NavLink } from 'react-router-dom';
+import Show from '../show/'
 
 const ENDPOINT = "https://synhub.herokuapp.com";
 const socket = socketIOClient(ENDPOINT);
 let roomName;
 const socketId = pushid();
 // const messagesArray = [{name:'Batool', message:'shit'}];
+let token;
+//
 
+let theUser;
 class App extends Component {
   constructor() {
     super();
@@ -44,9 +50,10 @@ class App extends Component {
       html2: '',
       js2: '',
       css2: '',
-      messagesArray: [{ name: 'Batool', message: 'shit' }],
+      messagesArray: [],
       paintComp: false,
-      sidebarOpen: false
+      sidebarOpen: false,
+      isActive: '',
     };
   }
 
@@ -74,8 +81,10 @@ class App extends Component {
   //   return data;
   // })
   // }
-  onSetSidebarOpen = (open) => {
-    this.setState({ sidebarOpen: open });
+
+  onSetSidebarOpen = () => {
+    this.setState({ sidebarOpen: !this.state.sidebarOpen });
+    this.setState({ isActive: this.state.isActive === 'is-active' ? '' : 'is-active' })
   }
 
   componentWillMount() {
@@ -84,6 +93,11 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const cookieToken = cookie.load('auth');
+    token = cookieToken || null;
+    //
+    const userPro = cookie.load('user');
+    theUser = userPro || null;
     this.runCode();
 
     // this.setState({
@@ -143,7 +157,7 @@ class App extends Component {
     // })
     console.log('react socket id', socket);
     // socket.emit('new-user', roomName, `${Math.floor(Math.random() * 10)}`, socketId);
-    socket.emit('new-user', roomName, `${Math.floor(Math.random() * 10)}`, socketId);
+    socket.emit('new-user', roomName, `${theUser.username}`, socketId);
 
 
   }
@@ -273,37 +287,71 @@ class App extends Component {
 
     return (
       <>
-        <button id='sidebar' onClick={() => this.onSetSidebarOpen(true)}>
-            Open sidebar
+        <button id='sidebar' class={`hamburger hamburger--collapse ${this.state.isActive}`} type="button" onClick={() => this.onSetSidebarOpen()}>
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
         </button>
+        {/* <button id='sidebar' onClick={() => this.onSetSidebarOpen(true)}>
+          Open sidebar
+        </button> */}
 
         <Sidebar
-          sidebar={<b>Sidebar content
-          </b>,
-            <button>hasdassadasdsadsad</button>
+          sidebar={<div id='side-bar-container'>
+            <button className='run' onClick={this.clickHandler}>Run</button>
+            <button className='draw' onClick={this.toggle}>Draw</button>
+
+
+            <button>
+              <NavLink className='link' to='/'>Home</NavLink>
+            </button>
+
+            <button>
+              <NavLink className='link' to='/community'>Community</NavLink>
+            </button>
+            {/* <li>Code Along</li> */}
+            {/* <Show condition={context.signedIn}> */}
+            {/* <NavLink className='link' to='/coding' onClick={context.changeOpen}>Code Together</NavLink> */}
+            {/* <a className='link' onClick={context.changeOpen}style={{cursor:'pointer'}} href>Code Together</a> */}
+
+            {/* </Show> */}
+            <button>
+              <NavLink className='link' to='/todo'>Task Manager</NavLink>
+            </button>
+
+
+          </div>
+
           }
           open={this.state.sidebarOpen}
+          pullRight={true}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { 
-            background: "white",
-            // zIndex: 1,
-            // position: 'fixed',
-            // top: 0 + 'px',
-            // left: 0 + 'px',
-            // right: 0 + 'px',
-            // bottom: 0 + 'px',
-            // opacity: 0,
-            // // visibility: 'hidden',
-            // // transition: opacity 0.3s ease-out 0s, 
-            // // visibility 0.3s ease-out 0s,
-            // backgroundColor: 'white',
-         } }}
+          styles={{
+            sidebar: {
+              display: 'flex',
+              background: "white",
+              flexDirection: 'column',
+              background: '#1b2327',
+              zIndex: '10000',
+              // zIndex: 1,
+              // position: 'fixed',
+              // top: 0 + 'px',
+              // left: 0 + 'px',
+              // right: 0 + 'px',
+              // bottom: 0 + 'px',
+              // opacity: 0,
+              // // visibility: 'hidden',
+              // // transition: opacity 0.3s ease-out 0s, 
+              // // visibility 0.3s ease-out 0s,
+              // backgroundColor: 'white',
+            }
+          }}
         >
         </Sidebar>
 
 
-        
-        <button id='runButton' onClick={this.clickHandler}>Run</button>
+
+        {/* <button id='runButton' onClick={this.clickHandler}>Run</button> */}
         <div className={this.state.paintComp.toString()}>
           <Paint />
         </div>
@@ -372,8 +420,8 @@ class App extends Component {
 
           <section className="result">
             <iframe title="result" className="iframe" ref="iframe" />
-            <div>
-              <div>
+            <div className='chat'>
+              <div id='messages'>
                 {
                   this.state.messagesArray.map((messageData, index) => {
                     return (
@@ -383,10 +431,10 @@ class App extends Component {
                 }
               </div>
               <form onSubmit={this.submitHandler}>
-                <input name="comment" type="text" required></input>
-                <button>send</button>
+                <input name="comment" type="text" required placeholder='Type a comment'></input>
+                <button className='send'>Send</button>
               </form>
-              <button onClick={this.toggle}>Draw</button>
+              {/* <button onClick={this.toggle}>Draw</button> */}
 
             </div>
           </section>

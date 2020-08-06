@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { addBoard } from "../actions";
 import BoardThumbnail from "./BoardThumbnail";
@@ -10,6 +10,9 @@ import PersonIcon from '@material-ui/icons/Person';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
 import ListIcon from '@material-ui/icons/List';
+import Show from './show/'
+import { SignInContext } from '../context/auth';
+
 import './style.scss'
 
 const Thumbnails = styled.div`
@@ -61,7 +64,7 @@ const CreateInput = styled.input`
 
 const Home = ({ boards, boardOrder, dispatch }) => {
   // this is the home site that shows you your boards and you can also create a Board here.
-
+  const context = useContext(SignInContext)
   const [newBoardTitle, setNewBoardTitle] = useState("");
 
   const handleChange = e => {
@@ -107,22 +110,41 @@ const Home = ({ boards, boardOrder, dispatch }) => {
   };
 
   return (
-    <div id='trello-home'>
-      <div id='trello-header'>
-      <PersonIcon fontSize="large"/>      
-        <h1 id='trello-title'>Your Boards</h1>
+    <>
+      <div className='navheader'>
+        <nav >
+          <ul>
+            <NavLink className='link' to='/'>Home</NavLink>
+
+            <NavLink className='link' to='/community'>Community</NavLink>
+            {/* <li>Code Along</li> */}
+            <Show condition={context.signedIn}>
+              {/* <NavLink className='link' to='/coding' onClick={context.changeOpen}>Code Together</NavLink> */}
+              <a className='link' onClick={context.changeOpen} style={{ cursor: 'pointer' }} href>Code Together</a>
+
+            </Show>
+
+            <NavLink className='link' to='/todo'>Task Manager</NavLink>
+          </ul>
+        </nav>
       </div>
-      <aside id='trello-aside'>
+      <div id='trello-home'>
+        <div id='trello-header'>
+          <PersonIcon fontSize="large" />
+          <h1 id='trello-title'>Your Boards</h1>
+        </div>
+        {/* <aside id='trello-aside'>
       <a href='#'><ArrowBackIcon/></a>
         <a href='#'><HomeIcon/></a>
         <a href='#'><NotificationImportantIcon/></a>
         <a href='#'><ListIcon/></a>
-      </aside>
-      <HomeContainer>
-        <Thumbnails>{renderBoards()}</Thumbnails>
-        {renderCreateBoard()}
-      </HomeContainer>
-    </div>
+      </aside> */}
+        <HomeContainer>
+          <Thumbnails>{renderBoards()}</Thumbnails>
+          {renderCreateBoard()}
+        </HomeContainer>
+      </div>
+    </>
   );
 };
 

@@ -25,6 +25,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import SearchIcon from '@material-ui/icons/Search';
 import AddQuestion from '../add-question/add-question';
 
+import RoomsForm from '../code-together/rooms-from/rooms-from';
+
 import ShowMore from '../show-more-component/showmore'
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -260,6 +262,9 @@ function Community(props) {
 
             </div> */}
             <Header />
+            <Show condition={context.open}>
+                <RoomsForm />
+            </Show>
             <div id='control'>
                 <FormControl className={classes.formControl}>
                     <NativeSelect
