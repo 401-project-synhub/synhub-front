@@ -307,12 +307,6 @@ function Community(props) {
             <div id='cards'>
                 {props.questions.questions.map(oneQuestion => (
                     <>
-                        {/* <Button onClick={onButtonClick}>Button</Button>
-                        {showCom ?
-                            <ShowMore idQ={oneQuestion._id}/> :
-                            null
-                        } */}
-                        {/* <ShowMore idQ={oneQuestion._id} /> */}
                         <div id='card'>
                             <div id='cloud'>
                                 <Auth capability='delete' >
