@@ -140,6 +140,7 @@ function Search(props) {
         const name = e.target.value;
         setChoice(name);
     };
+    console.log('hi')
     return (
         <>
         <Header />
