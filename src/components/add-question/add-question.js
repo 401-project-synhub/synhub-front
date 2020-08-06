@@ -24,7 +24,7 @@ function AddQuestion(props) {
     };
 
     return (
-        <form onSubmit={AddQuestionEvent}>
+        <form onSubmit={AddQuestionEvent} >
             <label>
                 Title
             <input type='text' name='title' onChange={handleInputChange} />

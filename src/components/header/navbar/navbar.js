@@ -49,6 +49,12 @@ function Navbar(props) {
                     <NavLink className='link' to='/'>Home</NavLink>
 
                     <NavLink className='link' to='/community'>Community</NavLink>
+                    {/* <li>Code Along</li> */}
+                    <Show condition={context.signedIn}>
+                    {/* <NavLink className='link' to='/coding' onClick={context.changeOpen}>Code Together</NavLink> */}
+                    <a className='link' onClick={context.changeOpen}style={{cursor:'pointer'}} href>Code Together</a>
+
+                    </Show>
 
                     <NavLink className='link' to='/todo'>Task Manager</NavLink>
                 </ul>

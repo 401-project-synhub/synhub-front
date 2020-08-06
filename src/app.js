@@ -49,7 +49,7 @@ function App() {
               </Route>
 
               <Route exact path='/oauth' component={Hello} />
-              <Route component={Routes} />
+              {/* <Route component={Routes} /> */}
               {/* <Route exact path='/coding' component={(props) => <RoomsForm {...props} key={window.location.pathname} />} /> */}
               <Route exact path='/coding/:room'>
                 <CodeTogether />
