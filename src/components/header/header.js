@@ -98,7 +98,7 @@ function Header(props) {
             <div>
                 <h2>Learn and Teach</h2>
                 <h1>At SynHub </h1>
-                <p>Adipisicing elit, sed do eiusmod tempor incididunt with labore et dolore magna aliqua enim ad minimum.</p>
+                <p>This is what software developers call Home. Ideas get born, raised and matured here.</p>
             </div>
             <img id='hdr-illus' src='assets/header-illus2.png' alt='asset'></img>
             <img id='hdr-dimond1' className='hdr-dimond' src='assets/dimond-shape.png' alt='asset'></img>
