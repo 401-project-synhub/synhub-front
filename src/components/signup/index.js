@@ -121,6 +121,7 @@ class SignUP extends React.Component {
                     onChange={this.handleChange}
                   />
                   
+                  
                 <Button size="sm" className="btn btn-primary btn-large centerButton" type="submit">SignUP</Button>
               </Form>
             </Show>
