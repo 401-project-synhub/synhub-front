@@ -1,43 +1,44 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect} from 'react';
 import SignIn from '../signin/';
 import SignUp from '../signup/';
 import Show from '../show/';
 import { SignInContext } from '../../context/auth.js';
 
 import './header.scss';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory} from 'react-router-dom';
 
 function Header(props) {
-    const [signIN, setSignIN] = useState(false);
-    const [signUP, setSignUP] = useState(false);
+    // const [signIN, setSignIN] = useState(false);
+    // const [signUP, setSignUP] = useState(false);
     const [scrolled, setScrolled] = useState('');
-    const [activeClass, setActiveClass] = useState('');
+    // const [activeClass, setActiveClass] = useState('');
+    const history = useHistory();
 
-    const handleScroll=() => {
-        const offset=window.scrollY;
-        if(offset > 100 ){
-          setScrolled('scrolled');
+    const handleScroll = () => {
+        const offset = window.scrollY;
+        if (offset > 100) {
+            setScrolled('scrolled');
         }
-        else{
-          setScrolled('');
+        else {
+            setScrolled('');
         }
-      }
-      useEffect(() => {
-        window.addEventListener('scroll',handleScroll)
-      })
+    }
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
+    })
     const context = useContext(SignInContext);
-    const signInToggle = (e) => {
-        setSignIN(!signIN);
-        // console.log('toggled',signIN)
-    }
-    const signUpToggle = (e) => {
-        setSignUP(!signUP);
-        // console.log('toggled',signUP)
-    }
+    // const signInToggle = (e) => {
+    //     setSignIN(!signIN);
+    //     // console.log('toggled',signIN)
+    // }
+    // const signUpToggle = (e) => {
+    //     setSignUP(!signUP);
+    //     // console.log('toggled',signUP)
+    // }
     const saveTheDay = (e) => {
         context.signout();
-        signUP ? signUpToggle() : doNothing();
-        signIN ? signInToggle() : doNothing();
+        context.signUP ? context.signUpToggle() : doNothing();
+        context.signIN ? context.signInToggle() : doNothing();
     }
     const doNothing = () => { }
 
@@ -63,36 +64,36 @@ function Header(props) {
                     <NavLink className='link' to='/community'>Community</NavLink>
                     {/* <li>Code Along</li> */}
                     <Show condition={context.signedIn}>
-                    {/* <NavLink className='link' to='/coding' onClick={context.changeOpen}>Code Together</NavLink> */}
-                    <a className='link' onClick={context.changeOpen}style={{cursor:'pointer'}} href>Code Together</a>
+                        {/* <NavLink className='link' to='/coding' onClick={context.changeOpen}>Code Together</NavLink> */}
+                        <a className='link' onClick={()=>{context.changeOpen();history.push('/')}} style={{ cursor: 'pointer' }} href>Code Together</a>
 
                     </Show>
 
                     {<NavLink className='link' to='/todo'>Task Manager</NavLink>}
 
                     <Show condition={!context.signedIn}>
-                        <button onClick={signInToggle} className='sign-btn'>
+                        <button onClick={context.signInToggle} className='sign-btn'>
                             SIGNIN
                         </button>
                     </Show>
-   
+
                     <Show condition={!context.signedIn}>
-                        <button onClick={signUpToggle} className='sign-btn'>
+                        <button onClick={context.signUpToggle} className='sign-btn'>
                             SIGNUP
                         </button>
                     </Show>
-                 
+
                     <Show condition={context.signedIn}>
                         <button className='sign-btn' onClick={saveTheDay}>SIGNOUT</button>
                     </Show>
                 </ul>
 
-            <Show condition={signIN}>
-                        <SignIn />
-                    </Show>
-            <Show condition={signUP}>
-                        <SignUp />
-                    </Show>
+                <Show condition={context.signINTogVal}>
+                    <SignIn />
+                </Show>
+                <Show condition={context.signUPTogVal}>
+                    <SignUp />
+                </Show>
             </nav>
             {/* </div> */}
             <div>

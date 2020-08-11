@@ -29,7 +29,7 @@ const Title = styled.h4`
 `;
 
 const BoardThumbnail = ({ title }) => {
-  console.log(title);
+  // console.log(title);
   return (
     <Thumbnail id='Thumbnail'>
       <Title>{title}</Title>

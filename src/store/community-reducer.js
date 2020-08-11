@@ -9,79 +9,79 @@ const API = 'https://synhub-project.herokuapp.com';
 
 
 
-export default (state = initialState, action) => {
-    const { type, payload } = action;
+// export default (state = initialState, action) => {
+//     const { type, payload } = action;
 
-    switch (type) {
-        case 'showQuestions':
-            return { ...state, questions: payload.questions };
-        case 'addQuestion':
-            return { ...state, questions: [payload, ...state.questions] }
-        case 'deleteQuestion':
-            return { ...state, questions: state.questions.filter(val => val._id !== payload) }
-        case 'updateQuestion':
-            return { ...state, questions: [...state.questions.map(val => val.id === payload._id ? payload.record : val)] }
-        case 'searchQuestions':
-            if (payload.input) {
-                console.log('payload in if', payload.input)
+//     switch (type) {
+//         case 'showQuestions':
+//             return { ...state, questions: payload.questions };
+//         case 'addQuestion':
+//             return { ...state, questions: [payload, ...state.questions] }
+//         case 'deleteQuestion':
+//             return { ...state, questions: state.questions.filter(val => val._id !== payload) }
+//         case 'updateQuestion':
+//             return { ...state, questions: [...state.questions.map(val => val.id === payload._id ? payload.record : val)] }
+//         case 'searchQuestions':
+//             if (payload.input) {
+//                 console.log('payload in if', payload.input)
 
-                let searchResult = [];
+//                 let searchResult = [];
 
-                let inputArr = payload.input.replace(/\W\s|\W/g, ' ').split(' ');
+//                 let inputArr = payload.input.replace(/\W\s|\W/g, ' ').split(' ');
 
-                payload.questions.forEach(val => {
-                    let descriptionArr = val.description.replace(/\W\s|\W/g, ' ').split(' ');
-                    // console.log('descriptionArr',descriptionArr)
-                    for (let i = 0; i < inputArr.length; i++) {
-                        if (descriptionArr.includes(inputArr[i])) {
-                            searchResult.push(val);
-                            break;
-                        }
-                    }
-                })
-                console.log('inpu', state.questions)
-                console.log('searchResults', searchResult)
+//                 payload.questions.forEach(val => {
+//                     let descriptionArr = val.description.replace(/\W\s|\W/g, ' ').split(' ');
+//                     // console.log('descriptionArr',descriptionArr)
+//                     for (let i = 0; i < inputArr.length; i++) {
+//                         if (descriptionArr.includes(inputArr[i])) {
+//                             searchResult.push(val);
+//                             break;
+//                         }
+//                     }
+//                 })
+//                 console.log('inpu', state.questions)
+//                 console.log('searchResults', searchResult)
 
-                return { ...state, questions: searchResult }
+//                 return { ...state, questions: searchResult }
 
-            } else {
-                console.log('payload in else', payload.input)
-                return { ...state, questions: payload.questions }
-            }
-        //==========answers
-        case 'addAnswer':
-            return { ...state, answers: [...state.answers, payload] }
-        case 'deleteAnswer':
-            return { ...state, answers: state.answers.filter(val => val._id !== payload) }
-        //===
-        case 'detailQuestion':
-            console.log(payload)
-            return { qDetails: payload }
-        case 'tagsSearch':
-            console.log('state', state)
-            let filteredQuestions = payload.questions.filter(val => val.tags.includes(payload.tag.toLowerCase()))
-            console.log('filtered quedtions', filteredQuestions)
-            return { ...state, questions: filteredQuestions }
+//             } else {
+//                 console.log('payload in else', payload.input)
+//                 return { ...state, questions: payload.questions }
+//             }
+//         //==========answers
+//         case 'addAnswer':
+//             return { ...state, answers: [...state.answers, payload] }
+//         case 'deleteAnswer':
+//             return { ...state, answers: state.answers.filter(val => val._id !== payload) }
+//         //===
+//         case 'detailQuestion':
+//             console.log(payload)
+//             return { qDetails: payload }
+//         case 'tagsSearch':
+//             console.log('state', state)
+//             let filteredQuestions = payload.questions.filter(val => val.tags.includes(payload.tag.toLowerCase()))
+//             console.log('filtered quedtions', filteredQuestions)
+//             return { ...state, questions: filteredQuestions }
 
-        //==================bookmark
-        case 'postBookmark':
-            console.log('payload in add bookmark', payload)
-            return { ...state, bookmarked: [...state.bookmarked, payload] }
-        case 'deleteBookmark':
-            console.log('payload in delete bookmark', payload)
-            return { ...state, bookmarked: state.bookmarked.filter(val => val._id !== payload) }
-        case 'allBookmarked':
-            // console.log(payload)
-            let filteredArr = payload.arr.filter(val => val.user === payload.username)
+//         //==================bookmark
+//         case 'postBookmark':
+//             console.log('payload in add bookmark', payload)
+//             return { ...state, bookmarked: [...state.bookmarked, payload] }
+//         case 'deleteBookmark':
+//             console.log('payload in delete bookmark', payload)
+//             return { ...state, bookmarked: state.bookmarked.filter(val => val._id !== payload) }
+//         case 'allBookmarked':
+//             // console.log(payload)
+//             let filteredArr = payload.arr.filter(val => val.user === payload.username)
 
-            return { ...state, bookmarked: filteredArr }
-        //================profile
-        case 'getProfile':
-            return { ...state, profile: payload }
-        default:
-            return state;
-    }
-}
+//             return { ...state, bookmarked: filteredArr }
+//         //================profile
+//         case 'getProfile':
+//             return { ...state, profile: payload }
+//         default:
+//             return state;
+//     }
+// }
 export const _getAllQuestions = (choice) => {
 
     return (dispatch) => {
