@@ -45,6 +45,7 @@ class SignIn extends React.Component {
                   <Form.Control
                     placeholder="password"
                     name="password"
+                    type="password"
                     onChange={this.handleChange}
                   />
                 <Button size="sm" className="btn btn-primary btn-large centerButton" type="submit">Login</Button>

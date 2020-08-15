@@ -115,7 +115,7 @@ function Home(props) {
                                     </h5>
                             </div>
                             <div id='slider-img'>
-                                <img src="https://ca.slack-edge.com/TNGRRLUMA-UT1D48WBC-155a19161944-512" alt='img' />
+                                <img src="/assets/toma.jpg" alt='img' />
                             </div>
                         </div>
                     </Carousel.Item><Carousel.Item>
@@ -135,7 +135,7 @@ function Home(props) {
                                     </h5>
                             </div>
                             <div id='slider-img'>
-                                <img src="https://ca.slack-edge.com/TNGRRLUMA-UT1D48WBC-155a19161944-512" alt='img' />
+                                <img src="/assets/sb.jpg" alt='img' />
                             </div>
                         </div>
                     </Carousel.Item><Carousel.Item>
@@ -155,7 +155,7 @@ function Home(props) {
                                     </h5>
                             </div>
                             <div id='slider-img'>
-                                <img src="https://ca.slack-edge.com/TNGRRLUMA-UT1D48WBC-155a19161944-512" alt='img' />
+                                <img src="/assets/yousef.jpg" alt='img' />
                             </div>
                         </div>
                     </Carousel.Item>
