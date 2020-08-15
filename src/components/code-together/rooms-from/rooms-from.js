@@ -51,7 +51,7 @@ class RoomForm extends Component {
 
         return (
             <>
-            <div className='bgBlack' onClick={this.context.changeOpen}>
+            <div className='bgBlack'>
                 <div className='sign-popup'>
                 <span id='close' onClick={this.context.changeOpen}>X</span>
                 <div className='stuffContainer'>

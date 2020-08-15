@@ -3,7 +3,7 @@ import SignIn from '../../signin/';
 import SignUp from '../../signup/';
 import Show from '../../show/';
 import { SignInContext } from '../../../context/auth.js';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory} from 'react-router-dom';
 // import '../header.scss';
 import './navbar.scss';
 
@@ -13,6 +13,8 @@ function Navbar(props) {
     const [signIN, setSignIN] = useState(false);
     const [signUP, setSignUP] = useState(false);
     const [scrolled, setScrolled] = useState('');
+    const history = useHistory();
+
 
     const handleScroll = () => {
         const offset = window.scrollY;
@@ -52,12 +54,33 @@ function Navbar(props) {
                     {/* <li>Code Along</li> */}
                     <Show condition={context.signedIn}>
                     {/* <NavLink className='link' to='/coding' onClick={context.changeOpen}>Code Together</NavLink> */}
-                    <a className='link' onClick={context.changeOpen}style={{cursor:'pointer'}} href>Code Together</a>
+                    <a className='link' onClick={()=>{context.changeOpen(); history.push('/')}}style={{cursor:'pointer'}} href>Code Together</a>
 
                     </Show>
 
                     <NavLink className='link' to='/todo'>Task Manager</NavLink>
+                    <Show condition={!context.signedIn}>
+                        <button onClick={context.signInToggle} className='sign-btn'>
+                            SIGNIN
+                        </button>
+                    </Show>
+
+                    <Show condition={!context.signedIn}>
+                        <button onClick={context.signUpToggle} className='sign-btn'>
+                            SIGNUP
+                        </button>
+                    </Show>
+
+                    <Show condition={context.signedIn}>
+                        <button className='sign-btn' onClick={saveTheDay}>SIGNOUT</button>
+                    </Show>
                 </ul>
+                    <Show condition={context.signINTogVal}>
+                    <SignIn />
+                </Show>
+                <Show condition={context.signUPTogVal}>
+                    <SignUp />
+                </Show>
             </nav>
         </div>
     )

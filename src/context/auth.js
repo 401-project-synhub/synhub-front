@@ -20,9 +20,13 @@ class SignInProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      signUPTogVal:false,
+      signINTogVal:false,
       open: false,
       changeOpen: this.changeOpen,
       signedIn: false,
+      signUpToggle:this.signUpToggle,
+      signInToggle:this.signInToggle,
       signin: this.signin,
       signout: this.signout,
       signup: this.signup,
@@ -33,17 +37,25 @@ class SignInProvider extends React.Component {
   changeOpen = () => {
     this.setState({...this.state,open:!this.state.open})
   }
+  signInToggle = () => {
+    this.setState({...this.state,signINTogVal:!this.state.signINTogVal});
+    // console.log('toggled',signIN)
+}
+ signUpToggle = () => {
+  this.setState({...this.state,signUPTogVal:!this.state.signUPTogVal});
+    // console.log('toggled',signUP)
+}
   signup = async (username, password, ranking, imgUrl, gender, role) => {//email
     // console.log(password)
     try {
 
       superagent.post(`${API}/signup`)
-        .send({ username, password, ranking, imgUrl: imgUrl ? imgUrl : gender === 'male' ? 'https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236__340.png' : 'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407__340.png', gender, role })
+        .send({ username, password, ranking:ranking?ranking:'Not Pro', imgUrl: imgUrl ? imgUrl : gender.toUpperCase() === 'MALE' ? 'https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236__340.png' : 'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407__340.png', gender, role:'user' })
         // .set('Access-Control-Allow-Origin')
         .accept('application/json')
         // .set('Authorization', `Bearer ${token}`)
         .then(data => {
-          console.log('token in up', data.body.token.token)
+          console.log('token in up', data.body.token)
           if (data.body.token.token.result) {
             // console.log(true)
             this.signin(username, password)

@@ -14,7 +14,7 @@ export default function GitHub(props) {
             // state: 'asldfjdfs',
         };
     
-        console.log('hello from the gh oauth');
+        // console.log('hello from the gh oauth');
     
         let QueryString = Object.keys(options1).map((key) => {
             return `${key}=` + encodeURIComponent(options1[key]);

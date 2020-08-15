@@ -4,16 +4,19 @@ import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { addBoard } from "../actions";
 import BoardThumbnail from "./BoardThumbnail";
-// import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
 import ListIcon from '@material-ui/icons/List';
-import Show from './show/'
+import Show from './show/';
+import NavHeader  from './header/navbar/navbar'
 import { SignInContext } from '../context/auth';
 
-import './style.scss'
+// import './style.scss';
+// import './header/navbar/navbar.scss';
+import './home/home.scss';
+
 
 const Thumbnails = styled.div`
   flex: 1;
@@ -69,16 +72,16 @@ const Home = ({ boards, boardOrder, dispatch }) => {
 
   const handleChange = e => {
     setNewBoardTitle(e.target.value);
-    console.log('onchange', newBoardTitle)
+    // console.log('onchange', newBoardTitle)
 
   };
 
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(addBoard(newBoardTitle));
-    console.log(newBoardTitle)
+    // console.log(newBoardTitle)
   };
-  console.log('boardOrder', boardOrder)
+  // console.log('boardOrder', boardOrder)
   const renderBoards = () => {
     return boardOrder ? boardOrder.map(boardID => {
       const board = boards[boardID];
@@ -111,34 +114,12 @@ const Home = ({ boards, boardOrder, dispatch }) => {
 
   return (
     <>
-      <div className='navheader'>
-        <nav >
-          <ul>
-            <NavLink className='link' to='/'>Home</NavLink>
-
-            <NavLink className='link' to='/community'>Community</NavLink>
-            {/* <li>Code Along</li> */}
-            <Show condition={context.signedIn}>
-              {/* <NavLink className='link' to='/coding' onClick={context.changeOpen}>Code Together</NavLink> */}
-              <a className='link' onClick={context.changeOpen} style={{ cursor: 'pointer' }} href>Code Together</a>
-
-            </Show>
-
-            <NavLink className='link' to='/todo'>Task Manager</NavLink>
-          </ul>
-        </nav>
-      </div>
+      <NavHeader />
       <div id='trello-home'>
         <div id='trello-header'>
           <PersonIcon fontSize="large" />
           <h1 id='trello-title'>Your Boards</h1>
         </div>
-        {/* <aside id='trello-aside'>
-      <a href='#'><ArrowBackIcon/></a>
-        <a href='#'><HomeIcon/></a>
-        <a href='#'><NotificationImportantIcon/></a>
-        <a href='#'><ListIcon/></a>
-      </aside> */}
         <HomeContainer>
           <Thumbnails>{renderBoards()}</Thumbnails>
           {renderCreateBoard()}
