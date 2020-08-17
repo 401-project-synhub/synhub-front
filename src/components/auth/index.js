@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { SignInContext } from '../../context/auth';
 import Show from '../show/';
 // helper component for ACL
@@ -8,7 +8,6 @@ class Auth extends React.Component {
 
   render() {
     let okToRender = false;
-    // console.log('this.props.capability',this.context.user)
     try {
       okToRender = this.context.signedIn && (
         this.props.capability ?

@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addBoard } from "../actions";
 import BoardThumbnail from "./BoardThumbnail";
+import PersonIcon from '@material-ui/icons/Person';
+import NavHeader  from './header/navbar/navbar'
+import { SignInContext } from '../context/auth';
+
+import './home/home.scss';
 
 const Thumbnails = styled.div`
   flex: 1;
@@ -13,6 +18,7 @@ const Thumbnails = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  outline: none;
 `;
 
 const HomeContainer = styled.div`
@@ -20,47 +26,53 @@ const HomeContainer = styled.div`
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  height:100%
 `;
 
 const CreateTitle = styled.h3`
   font-size: 48px;
-  color: white;
+  color: #172b4d;
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
 `;
 
 const CreateInput = styled.input`
-  width: 400px;
-  height: 80px;
-  font-size: 22px;
+  
   padding: 10px;
   box-sizing: border-box;
-  border-radius: 3px;
-  border: none;
-  outline-color: blue;
+  height: 230px;
+  width: 230px;
+  background: rgba(9,30,66,.04);
+  padding: 10px;
+  cursor: pointer;
   box-shadow: 0 2px 4px grey;
+  color: #172b4d;
+  border: none;
   align-self: center;
+  outline: none;
+  font-size: large;
+  text-align: center;
+  padding: 0px;
+  opacity: 60%;
+
 `;
 
 const Home = ({ boards, boardOrder, dispatch }) => {
-  // this is the home site that shows you your boards and you can also create a Board here.
-
+  const context = useContext(SignInContext)
   const [newBoardTitle, setNewBoardTitle] = useState("");
 
   const handleChange = e => {
     setNewBoardTitle(e.target.value);
-    console.log('onchange',newBoardTitle)
 
   };
 
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(addBoard(newBoardTitle));
-    console.log(newBoardTitle)
   };
-console.log('boardOrder',boardOrder)
+
   const renderBoards = () => {
-    return boardOrder?boardOrder.map(boardID => {
+    return boardOrder ? boardOrder.map(boardID => {
       const board = boards[boardID];
 
       return (
@@ -72,17 +84,16 @@ console.log('boardOrder',boardOrder)
           <BoardThumbnail {...board} />
         </Link>
       );
-    }):null;
+    }) : null;
   };
 
   const renderCreateBoard = () => {
     return (
       <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
-        <CreateTitle>Create a new Board</CreateTitle>
-        <CreateInput
+        <CreateInput id='createInput'
           onChange={handleChange}
           value={newBoardTitle}
-          placeholder="Your boards title..."
+          placeholder="Your new board's title..."
           type="text"
         />
       </form>
@@ -90,10 +101,19 @@ console.log('boardOrder',boardOrder)
   };
 
   return (
-    <HomeContainer>
-      <Thumbnails>{renderBoards()}</Thumbnails>
-      {renderCreateBoard()}
-    </HomeContainer>
+    <>
+      <NavHeader />
+      <div id='trello-home'>
+        <div id='trello-header'>
+          <PersonIcon fontSize="large" />
+          <h1 id='trello-title'>Your Boards</h1>
+        </div>
+        <HomeContainer>
+          <Thumbnails>{renderBoards()}</Thumbnails>
+          {renderCreateBoard()}
+        </HomeContainer>
+      </div>
+    </>
   );
 };
 

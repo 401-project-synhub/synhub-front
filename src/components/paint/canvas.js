@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { v4 } from 'uuid';
 import Pusher from 'pusher-js';
-
+import './paint.scss'
 class Canvas extends Component {
   constructor(props) {
     super(props);
@@ -82,12 +82,13 @@ class Canvas extends Component {
 
   componentDidMount() {
     // Here we set up the properties of the canvas element. 
-    this.canvas.width = 500;
-    this.canvas.height = 200;
+    this.canvas.width = 1322;
+    this.canvas.height = 668;
+
     this.ctx = this.canvas.getContext('2d');
     this.ctx.lineJoin = 'round';
     this.ctx.lineCap = 'round';
-    this.ctx.lineWidth = 5;
+    this.ctx.lineWidth = 3;
     const channel = this.pusher.subscribe('painting');
     channel.bind('draw', (data) => {
       const { userId, line } = data;
@@ -102,7 +103,7 @@ class Canvas extends Component {
 
   render() {
     return (
-      <canvas
+      <canvas id='canvas'
       // We use the ref attribute to get direct access to the canvas element. 
         ref={(ref) => (this.canvas = ref)}
         style={{ background: 'black' }}

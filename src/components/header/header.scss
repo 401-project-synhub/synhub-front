@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900');
 
 .header{
@@ -67,13 +66,54 @@
             line-height: 36px;
         }
     }
-    nav{
+    .scrolled{
+        ::-webkit-scrollbar-thumb {
+             background: #FE8264; 
+        }
+
+        transition: all ease-in-out 1s;
         position: fixed;
+        background-color: #426264;
+        color: green;
+        box-shadow: 0px 10px 20px #1e2c2d;
+        width: 100%;
+        z-index: 10;
+        height: 100px;
+        background-color: #1e2c2d;
+        .link{
+        color: #26e79e;
+        }
+        .active{
+            border-bottom: 3px solid #FE8264;
+        }
+        .sign-btn{
+            background: linear-gradient(114deg, #4cddbd, #06f286);
+            color: #426264;
+         
+
+        }
+        .sign-btn:hover{
+            letter-spacing: 4px;
+            box-shadow: none;
+            background: linear-gradient(114deg, #4cddbd, #06f286);
+            text-shadow: none;
+            color: #426264;
+
+        }
+   
+        
+
+    }
+    
+    nav{
+        transition: all ease-in-out 1s;
         display: grid;
-        width: 92.5%;
+        width: 100%;
         grid-template-columns: 50% 50%;
         grid-template-rows: 100%;
         grid-template-areas: "a b";
+        z-index: 10;
+        height: 100px;
         .bgBlack{
             z-index: 1000000;
             position: fixed;
@@ -85,21 +125,36 @@
             width: 100%;
             height: 100%;
             .sign-popup{
+                z-index: 10;
                 height: 75%;
                 width: 35%;
                 display: flex;
                 top: 15%;
-                left: 30%;
+                left: 32.5%;
                 bottom: 0;
                 right: 0;
                 position: absolute;
-                background-color: #d1ffdd;
+                background-color: #1e2c2d;
                 border-radius: 8px;
-                box-shadow: 0px 2px 8px #172f19;      
+                box-shadow: 0px 2px 8px #172f19;
                 flex-direction: column;
-                // justify-content: space-evenly;
-                align-items: center; 
+                align-items: center;
+                h2{
+                    text-transform: uppercase;
+                    margin-top: 10%;
+                    border-bottom: #fe8264 3px solid;
+                    width: 90%;
+                    text-align: center;
+                    margin-bottom: 0;
+                    color: white;
+                    font-family: 'Heebo', sans-serif;
+                    letter-spacing: 5px;
+                    font-weight: 700;
+                    padding-bottom: 8%;
+                    font-size: 60px;
+                }
                 form{
+                z-index: 10;
                     height: 60%;
                     width: 70%;
                     display: flex;
@@ -110,6 +165,14 @@
                         height: 22%;
                         margin-top: 10%;
                         border-radius: 0.55rem;
+                        background-color: #284042;
+                        border: none;
+                        border-bottom: 3px solid white;
+                        font-family: 'Heebo',sans-serif;
+                        font-size: 25px;
+                        font-weight: 500;
+                        text-transform: capitalize;
+                        color: white;
                     }
                     button{
                         cursor: pointer;
@@ -123,40 +186,27 @@
                         font-size: large;
                         font-weight: 500;
                         color: #dcffe5;
+                        background: linear-gradient(114deg, #4cddbd, #06f286);
+                        color: #1e2c2d;
+                        font-family: 'Heebo', sans-serif;
+                        font-size: 35px;
+                        letter-spacing: 10px;
                     }
                 }     
-                h2{
-                    font-size: 3rem;
-                    color: #364838;
-                    text-transform: uppercase;
-                    margin-top: 10%;
-                    border-bottom: chocolate 3px solid;
-                    width: 90%;
-                    text-align: center;
-                    margin-bottom: 0;
-                }
             }
         }
     }
     ul{
-        // width: 60%;
         grid-area: b;
         margin: 0;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        height: 15vh;
-        // font-size: 18px;
         font-family: 'Heebo', sans-serif;
         font-weight: 500;
         color: #fff;
         text-transform: capitalize;
     }
-    // li{
-    //     margin: 0;
-    //     list-style: none;
-
-    // }
 
     .sign-btn{
         transition: all ease-in 0.3s;
@@ -164,14 +214,11 @@
         display: block;
         font-size: 16px;
         font-size: 90%;
-        // margin-left: 43px;
         font-weight: 500;
         text-transform: capitalize;
-        // background-color: #FE8264;
         border-radius: 50px;
         color: #fff;
         padding: 18px 45px;
-        // padding: 2% 4%;
         background: rgba(255, 255, 255, 0.349);
         letter-spacing: 3px;
         background-color: #426264;         
@@ -180,11 +227,9 @@
         background: #FE8264;
         background: #0ebfaa;
         background: #253b3b;
-        /* background: #0ebfaa; */
         border-radius: 5px;
         letter-spacing: 5px;
         box-shadow: 1px 1px 10px black;
-
     }
     .sign-btn:focus{
         border: none;
@@ -196,8 +241,16 @@
         margin: 0;
         text-decoration: none;
         color: rgba(0, 0, 0, 0.342);
+        color: rgba(66, 98, 100,  0.81);
         font-size: 20px;
+        
     }
+    .active{
+        color: white;
+        border-bottom: 3px solid white;
+
+    }
+  
     .link:hover{
         color: #fff;
         letter-spacing: 3px;
@@ -209,6 +262,5 @@
         left: 59.5%;
         width: 38%;
         opacity: 0.95;
-        // opacity: 1;
     }
 }

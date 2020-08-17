@@ -1,5 +1,4 @@
 import React from 'react';
-// import Typography from '@material-ui/core/Typography';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
@@ -19,7 +18,7 @@ function Footer(props) {
         <div className='footer-middle'>
           <div className='footer-col1 footer-col'>
             <div>
-              <img className='footer-logo' src="https://via.placeholder.com/170x50" />
+              <img className='footer-logo' src="https://via.placeholder.com/170x50" alt='Logo' />
               <p className='mission'>Lorem Ipsum availableThere are many variations passages of Lorem Ipsum available, but these majority have suffered</p>
               <ul id="menu-social-menu" class="menu"  >
                 <li id="menu-item-464" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-464"><a href="#"  > <FacebookIcon color="disabled" /> </a></li>

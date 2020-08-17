@@ -1,0 +1,284 @@
+        .bgBlack{
+            z-index: 1000000;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background-color: #0000008c;
+            width: 100%;
+            height: 100%;
+            .MuiCardHeader-root {
+                display: block;
+                padding: 0px;
+            }
+            .sign-popup{
+                z-index: 10;
+                height: 60%;
+                width: 60%;
+                top: 20%;
+                left: 20%;
+                bottom: 0;
+                right: 0;
+                position: absolute;
+                background-color: #1e2c2d;
+                border-radius: 8px;
+                box-shadow: 3px 3px 8px 5px #232523;
+                #close{
+                    color: #fe8264;
+                    position: absolute;
+                    left: 97%;
+                    top: 2.5%;
+                    font-family: 'Heebo', sans-serif;
+                    font-size: 25px;
+                    font-weight: 700;
+                    cursor: pointer;
+                }
+                #smDiv{
+                    height: 100%;
+                    display: grid;
+                    grid-template-rows: 30% 50% 20%;
+                    grid-template-columns: 100%;
+                    grid-template-areas: 'question'
+                                        'answers'
+                                        'form';
+                    color:white;
+
+                    #question{
+                        grid-area: question;
+                        display: grid;
+                        grid-template-rows: 45% 45% 10%;
+                        grid-template-columns: 100%;
+                        grid-template-areas: 'details'
+                                            'description'
+                                            'clickable';
+                        h3{
+                            grid-area: details;
+                            position: relative;
+                            left: 13%;
+                            top: 29%;
+                            text-transform: capitalize;
+                            font-family: 'Heebo', sans-serif;
+                            font-size: 25px;
+                            letter-spacing: 3px;
+                            background-color: #1e2d2e;
+                            width: 50%;
+                            border-radius: 20px;
+                            font-weight: 500;
+                        }
+                        h4{
+                            grid-area: details;
+                            position: relative;
+                            top: 39%;
+                            left: 13%;
+                            text-transform: capitalize;
+                            font-family: 'Heebo', sans-serif;
+                            letter-spacing: 1px;
+                            font-weight: 200;
+                        }
+                        .avatarImg{
+                            grid-area: details;
+                            width: 7%;
+                            position: relative;
+                            left: 5%;
+                            top: 17%;
+                        }
+                        p{
+                            grid-area: description;
+                            position: relative;
+                            left: 5%;
+                            top: 9%;
+                            text-transform: capitalize;
+                            font-family: 'Heebo', sans-serif;
+                            font-size: 18px;
+                            width: 79%;
+                            background-color: #233637;
+                            border-radius: 4px;
+                            border-left: 3px solid #fe8264;
+                            border-bottom: 4px solid #fe8264;
+                            padding-left: 1%;
+                            padding-top: 1%;
+
+                            font-weight: 300;
+
+                        }
+                        button{
+                            grid-area: clickable;
+                            color: #1e2c2d;
+                            border: none;
+                            width: 10%;
+                            border-radius: 4px;
+                            padding: 10px 1px;
+                            position: absolute;
+                            top: 21%;
+                            left: 87%;
+                            background: linear-gradient(114deg, #4cddbd, #06f286);
+                            font-family: 'Heebo', sans-serif;
+                            font-size: 18px;
+                            font-weight: 800;
+                        }
+                        .dlt-btn{
+
+                        }
+                    }
+                    .answers{
+                        overflow-y: scroll;
+                        grid-area: answers;
+                   
+                                            .one{
+                                                display: grid;
+                                                height: 100%;
+                                                grid-template-rows: 45% 45% 10%;
+                                                grid-template-columns: 100%;
+                                                grid-template-areas: 'details'
+                                                                    'description'
+                                                                    'clickable';
+                                                h3{
+                                                    grid-area: details;
+                                                    position: relative;
+                                                    left: 13%;
+                                                    top: 29%;
+                                                    text-transform: capitalize;
+                                                    font-family: 'Heebo', sans-serif;
+                                                    font-size: 25px;
+                                                    letter-spacing: 3px;
+                                                    background-color: #1e2d2e;
+                                                    width: 50%;
+                                                    border-radius: 20px;
+                                                    font-weight: 500;
+                                                }
+                                                h4{
+                                                    grid-area: details;
+                                                    position: relative;
+                                                    top: 39%;
+                                                    left: 13%;
+                                                    text-transform: capitalize;
+                                                    font-family: 'Heebo', sans-serif;
+                                                    letter-spacing: 1px;
+                                                    font-weight: 200;
+                                                }
+                                                .avatarImg{
+                                                    grid-area: details;
+                                                    width: 7%;
+                                                    height: 75px;
+                                                    position: relative;
+                                                    left: 5%;
+                                                    top: 17%;
+                                                }
+                                                p{
+                                                    grid-area: description;
+                                                    position: relative;
+                                                    left: 5%;
+                                                    top: 9%;
+                                                    text-transform: capitalize;
+                                                    font-family: 'Heebo', sans-serif;
+                                                    font-size: 18px;
+                                                    width: 79%;
+                                                    background-color: #233637;
+                                                    border-radius: 4px;
+                                                    border-left: 3px solid #3fe1b3;
+                                                    border-bottom: 4px solid #3fe1b3;
+                                                    padding-left: 1%;
+                                                    padding-top: 1%;
+                        
+                                                    font-weight: 300;
+                        
+                                                }
+                                                button{
+                                                    grid-area: clickable;
+                                                    color: #1e2c2d;
+                                                    border: none;
+                                                    width: 10%;
+                                                    border-radius: 4px;
+                                                    height: 46px;
+                                                    position: relative;
+                                                    top: -50px;
+                                                    left: 87%;
+                                                    background: linear-gradient(114deg, #4cddbd, #06f286);
+                                                    font-family: 'Heebo', sans-serif;
+                                                    font-size: 18px;
+                                                    font-weight: 800;
+                                                }
+                                            }
+                    }
+                    #form{
+                        grid-area: form;
+                        display: grid;
+                        position: relative;
+                        grid-template-rows: 45% 55%;
+                                                grid-template-columns: 100%;
+                                                grid-template-areas: 'formheader'
+                                                                    'formFooter';
+                        #formHeader{
+                            grid-area: formheader;
+                            margin: 0;
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        #formFooter{
+                            grid-area: formFooter;
+                            display: flex;
+                            justify-content: space-evenly;
+                            align-items: center;
+
+                        }
+                        input{
+                            background-color: #233536;
+                            color: white;
+                            border-radius: 4px 4px 4px 4px;
+                            border: none;
+                            border-bottom: 5px solid #737373;
+                            height: 45px;
+                            font-size: 18px;
+                            border-left: 3px solid #737373;
+                            text-transform: capitalize;
+                            font-family: 'Heebo', sans-serif;
+                            font-weight: 400;
+                            letter-spacing: 1.5px;
+                            padding: 0 25px;
+                        }
+                        textarea{
+                            background-color: #233536;
+                            color: white;
+                            border-radius: 4px 4px 4px 4px;
+                            border-bottom: 5px solid #737373;
+                            height: 45px;
+                            font-size: 18px;
+                            border-left: 3px solid #737373;
+                            text-transform: capitalize;
+                            font-family: 'Heebo', sans-serif;
+                            font-weight: 400;
+                            letter-spacing: 1.5px;
+                            width: 75%; 
+                            padding: 0;
+                            position: relative; 
+                            left: -2.5%;    
+                        }
+                        #post-ans{
+                            background: linear-gradient(114deg, #4cddbd, #06f286);
+                            font-family: 'Heebo', sans-serif;
+                            font-size: 18px;
+                            font-weight: 800;
+                            border: none;
+                            border-radius: 50%;
+                            width: 50px;
+                            height: 50px;
+                            font-size: 40px;
+                            font-family: 'Heebo',sans-serif;
+                            font-weight: 900;
+                            color: #1e2c2d;
+                            cursor: pointer;
+                        }
+                        label{
+                            position: relative;
+                            left: 4%;
+                            top: 15%;
+                        }
+                    }
+                    span{
+                        color:white
+                    }
+                }
+    }
+}

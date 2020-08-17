@@ -1,7 +1,4 @@
 import { CONSTANTS } from "../actions";
-import {v4} from "uuid";
-
-console.log(v4());
 
 const initialState = ["board-0"];
 

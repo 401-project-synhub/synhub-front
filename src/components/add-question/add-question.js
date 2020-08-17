@@ -1,69 +1,59 @@
-import React, { useState } from 'react';
-import {connect} from 'react-redux';
-import {_addQuestion} from '../../store/community-reducer';
+import React, { useState, useContext } from 'react';
+import { connect } from 'react-redux';
+import { _addQuestion } from '../../store/community-reducer';
+import { SignInContext } from '../../context/auth.js';
 
+import './add-question.scss';
 
 function AddQuestion(props) {
     const [input, setInput] = useState({})
-
+    const context = useContext(SignInContext)
     const AddQuestionEvent = (e) => {
         e.preventDefault();
         props.add(input);
         e.target.reset();
     }
     const handleInputChange = (e) => {
-        if(e.target.name === 'tags'){
-           let theTags = e.target.value.toLowerCase().split(' ');
-           
+        if (e.target.name === 'tags') {
+            let theTags = e.target.value.toLowerCase().split(' ');
+
             setInput({ ...input, [e.target.name]: theTags });
 
-        }else{
+        } else {
 
             setInput({ ...input, [e.target.name]: e.target.value });
         }
     };
 
     return (
-        <form onSubmit={AddQuestionEvent}>
-            <label>
-                Title
+        <div className='bgBlack'>
+            <div className='sign-popup2'>
+                <span id='close' onClick={context.changeOpen2}>X</span>
+                <form id='qform' onSubmit={AddQuestionEvent} >
+                    <label>
+                        Title
             <input type='text' name='title' onChange={handleInputChange} />
 
-            </label><br />
-            <label>
-                Tags
+                    </label><br />
+                    <label>
+                        Tags
             <input type='text' name='tags' multiple onChange={handleInputChange} />
-            </label><br />
-            <label>
-                Question Description
+                    </label><br />
             <textarea placeholder='Add description' name='description' onChange={handleInputChange}></textarea>
-            </label><br />
-            {/* <label>
-                Image
-            {userInfo.userInfo ?
-                    <input type='hidden' name='userimage' onChange={handleInputChange} defaultValue={userInfo.userInfo.imgUrl} /> 
-                    : null}
-            </label> */}
-            {/* <label>
-                Name
-                {userInfo.userInfo ?
-                    < input type='hidden' name='author' defaultValue={userInfo.userInfo.username} onChange={handleInputChange} />
-                    : null}
-            </label> */}
+                    <br />
+                    <button>Add</button>
+                </form>
+            </div>
+        </div>
 
-
-
-            <button>Submit</button>
-        </form>
     )
 }
-const mapStateToProps = (state) =>{
-    // console.log('communityReducer',state.communityReducer)
+const mapStateToProps = (state) => {
     return {
         question: state.communityReducer,
     }
 }
-const mapDispatchToProps = (dispatch) =>({
-    add: (body)=> dispatch(_addQuestion(body)),
+const mapDispatchToProps = (dispatch) => ({
+    add: (body) => dispatch(_addQuestion(body)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AddQuestion);

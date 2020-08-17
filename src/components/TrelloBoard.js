@@ -5,16 +5,22 @@ import TrelloCreate from "./TrelloCreate";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { sort, setActiveBoard } from "../actions";
-import { Link } from "react-router-dom";
+import { Link, NavLink} from "react-router-dom";
+import DashboardIcon from '@material-ui/icons/Dashboard';
 
+
+import Show from './show/'
+import { SignInContext } from '../context/auth';
+
+import './style.scss'
 const ListsContainer = styled.div`
   display: flex;
   flex-direction: row;
 `;
 
-// TODO: Fix performance issue
 
 class TrelloBoard extends PureComponent {
+  static contextType = SignInContext;
   componentDidMount() {
     // set active trello board here
     const { boardID } = this.props.match.params;
@@ -51,37 +57,60 @@ class TrelloBoard extends PureComponent {
     const listOrder = board.lists;
 
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <Link to="/todo">Go Back</Link>
-        <h2>{board.title}</h2>
-        <Droppable droppableId="all-lists" direction="horizontal" type="list">
-          {provided => (
-            <ListsContainer
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {listOrder.map((listID, index) => {
-                const list = lists[listID];
-                if (list) {
-                  const listCards = list.cards.map(cardID => cards[cardID]);
+      <>
+        <div className='navheader'>
+          <nav >
+            <ul>
+              <NavLink className='link' to='/'>Home</NavLink>
 
-                  return (
-                    <TrelloList
-                      listID={list.id}
-                      key={list.id}
-                      title={list.title}
-                      cards={listCards}
-                      index={index}
-                    />
-                  );
-                }
-              })}
-              {provided.placeholder}
-              <TrelloCreate list />
-            </ListsContainer>
-          )}
-        </Droppable>
-      </DragDropContext>
+              <NavLink className='link' to='/community'>Community</NavLink>
+              <Show condition={this.context.signedIn}>
+                <a className='link' onClick={this.context.changeOpen} style={{ cursor: 'pointer' }} href>Code Together</a>
+              </Show>
+
+              <NavLink className='link' to='/todo'>Task Manager</NavLink>
+            </ul>
+          </nav>
+        </div>
+        <div id='board'>
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            <Link to="/todo" id='yourBoards-link'></Link>
+            <div id='list-title'>
+              <DashboardIcon fontSize="large" />
+              <h2 id='title'>{board.title}</h2>
+            </div>
+
+
+            <Droppable droppableId="all-lists" direction="horizontal" type="list">
+              {provided => (
+                <ListsContainer
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {listOrder.map((listID, index) => {
+                    const list = lists[listID];
+                    if (list) {
+                      const listCards = list.cards.map(cardID => cards[cardID]);
+
+                      return (
+                        <TrelloList id='list'
+                          listID={list.id}
+                          key={list.id}
+                          title={list.title}
+                          cards={listCards}
+                          index={index}
+                        />
+                      );
+                    }
+                  })}
+                  {provided.placeholder}
+                  <TrelloCreate list />
+                </ListsContainer>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </div>
+      </>
     );
   }
 }

@@ -30,7 +30,6 @@ const boardsReducer = (state = initialState, action) => {
         type
       } = action.payload;
 
-      // draggin lists around
       if (type === "list") {
         const pulledOutList = lists.splice(droppableIndexStart, 1);
         lists.splice(droppableIndexEnd, 0, ...pulledOutList);

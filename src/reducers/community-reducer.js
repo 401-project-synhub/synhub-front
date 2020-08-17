@@ -3,8 +3,7 @@ import superagent from 'superagent';
 
 
 
-const initialState = { questions: [], answers: [], qDetails: {}, bookmarked:[], profile:{} };
-// const API = 'https://synhub.herokuapp.com';
+const initialState = { questions: [], answers: [], qDetails: {}, bookmarked: [], profile: {} };
 const API = 'https://synhub-project.herokuapp.com';
 
 
@@ -14,11 +13,11 @@ export default (state = initialState, action) => {
 
     switch (type) {
         case 'showQuestions':
-            return { ...state,questions: payload.questions };
+            return { ...state, questions: payload.questions };
         case 'addQuestion':
-            return { ...state,questions: [payload, ...state.questions] }
+            return { ...state, questions: [payload, ...state.questions] }
         case 'deleteQuestion':
-            return { ...state,questions: state.questions.filter(val => val._id !== payload) }
+            return { ...state, questions: state.questions.filter(val => val._id !== payload) }
         case 'updateQuestion':
             return { ...state, questions: [...state.questions.map(val => val.id === payload._id ? payload.record : val)] }
         case 'searchQuestions':
@@ -31,7 +30,6 @@ export default (state = initialState, action) => {
 
                 payload.questions.forEach(val => {
                     let descriptionArr = val.description.replace(/\W\s|\W/g, ' ').split(' ');
-                    // console.log('descriptionArr',descriptionArr)
                     for (let i = 0; i < inputArr.length; i++) {
                         if (descriptionArr.includes(inputArr[i])) {
                             searchResult.push(val);
@@ -42,38 +40,39 @@ export default (state = initialState, action) => {
                 console.log('inpu', state.questions)
                 console.log('searchResults', searchResult)
 
-                return {...state, questions: searchResult }
+                return { ...state, questions: searchResult }
 
             } else {
                 console.log('payload in else', payload.input)
                 return { ...state, questions: payload.questions }
             }
+        //==========answers
         case 'addAnswer':
-            return { ...state,answers: [...state.answers, payload] }
+            return { ...state, answers: [...state.answers, payload] }
+        case 'deleteAnswer':
+            return { ...state, answers: state.answers.filter(val => val._id !== payload) }
+        //===
         case 'detailQuestion':
-            console.log(payload)
             return { qDetails: payload }
         case 'tagsSearch':
-            console.log('state', state)
             let filteredQuestions = payload.questions.filter(val => val.tags.includes(payload.tag.toLowerCase()))
             console.log('filtered quedtions', filteredQuestions)
             return { ...state, questions: filteredQuestions }
 
         //==================bookmark
         case 'postBookmark':
-            console.log('payload in add bookmark',payload)
-            return {...state, bookmarked:[...state.bookmarked, payload]}
+            console.log('payload in add bookmark', payload)
+            return { ...state, bookmarked: [...state.bookmarked, payload] }
         case 'deleteBookmark':
-            console.log('payload in delete bookmark',payload)
-            return {...state, bookmarked:state.bookmarked.filter(val => val._id !== payload)}
+            console.log('payload in delete bookmark', payload)
+            return { ...state, bookmarked: state.bookmarked.filter(val => val._id !== payload) }
         case 'allBookmarked':
-            // console.log(payload)
             let filteredArr = payload.arr.filter(val => val.user === payload.username)
 
-            return {...state, bookmarked:filteredArr}
-            //================profile
-            case 'getProfile':
-                return {...state,profile:payload}
+            return { ...state, bookmarked: filteredArr }
+        //================profile
+        case 'getProfile':
+            return { ...state, profile: payload }
         default:
             return state;
     }
@@ -182,18 +181,13 @@ export const _searchQuestions = (input) => {
 
 //=====================Bookmarks===================
 export const _getAllBookmarked = () => {
-    const cookieToken = cookie.load('auth');
-    let token = cookieToken || null;
     const userPro = cookie.load('user');
     let theUser = userPro || null;
     return (dispatch) => {
         return superagent.get(`${API}/api/v1/bookmarks`)
             .accept('application/json')
             .then(data => {
-                // console.log('data.body.records', data.body.records)
-                let filteredArr = data.body.records.filter(val => val.user === theUser.username)
-                // console.log('filteredArr', filteredArr)
-                dispatch(getAllBookmarkedAction({arr:data.body.records, username:theUser.username}))
+                dispatch(getAllBookmarkedAction({ arr: data.body.records, username: theUser.username }))
             }).catch(console.error);
     }
 }
@@ -202,33 +196,28 @@ export const _bookmark = (body) => {
     let token = cookieToken || null;
     const userPro = cookie.load('user');
     let theUser = userPro || null;
-    // console.log('theUser', theUser);
-    // console.log('body', body);
 
     return (dispatch) => {
         superagent.get(`${API}/api/v1/bookmarks`).accept('application/json').then(record => {
-            let marked = record.body.records.filter(oneBook => oneBook.bookmarked._id === body._id && oneBook.user===theUser.username)
+            let marked = record.body.records.filter(oneBook => oneBook.bookmarked._id === body._id && oneBook.user === theUser.username)
 
-            if (marked.length ===0 ) {
+            if (marked.length === 0) {
                 superagent.post(`${API}/api/v1/bookmarks`)
                     .send({ bookmarked: body, user: theUser.username })
                     .accept('application/json')
                     .set('Authorization', `Bearer ${token}`)
                     .then(data => {
-                        // console.log('data in post')
-                        // console.log('data in post',data.body.record)
                         dispatch(addBookmarkAction(data.body.record))
                     }).catch(console.error);
 
             } else {
-                    // console.log('marked', marked)
-                    superagent.delete(`${API}/api/v1/bookmarks/${marked[0]._id}`)
-                        .accept('application/json')
-                        .set('Authorization', `Bearer ${token}`)
-                        .then(data => {
-                            console.log('data in delete')
-                            dispatch(deleteBookmarkAction(marked[0]._id))
-                        }).catch(console.error);
+                superagent.delete(`${API}/api/v1/bookmarks/${marked[0]._id}`)
+                    .accept('application/json')
+                    .set('Authorization', `Bearer ${token}`)
+                    .then(data => {
+                        console.log('data in delete')
+                        dispatch(deleteBookmarkAction(marked[0]._id))
+                    }).catch(console.error);
 
             }
 
@@ -236,22 +225,20 @@ export const _bookmark = (body) => {
     }
 }
 //====================Profile======================
-export const _getProfile = (id)=>{
-    const cookieToken = cookie.load('auth');
-    let token = cookieToken || null;
+export const _getProfile = (id) => {
     const userPro = cookie.load('user');
     let theUser = userPro || null;
 
-    console.log(theUser,'id')
+    console.log(theUser, 'id')
 
     return (dispatch) => {
-    superagent.get(`${API}/api/v1/users/${theUser.id||id}`)
-    .accept('application/json')
-    .then(record => {
-        console.log('data profile', record.body.records[0])
-        dispatch(getProfileAction(record.body.records[0]))
-    }).catch(console.error);
-}
+        superagent.get(`${API}/api/v1/users/${theUser.id || id}`)
+            .accept('application/json')
+            .then(record => {
+                console.log('data profile', record.body.records[0])
+                dispatch(getProfileAction(record.body.records[0]))
+            }).catch(console.error);
+    }
 
 }
 // ===================ANSWERS=======================
@@ -268,6 +255,19 @@ export const _addAnswer = (body, qTitle) => {
             .then(data => {
                 console.log('data.body', data.body);
                 dispatch(addAnswerAction(data.body.record))
+            }).catch(console.error);
+    }
+}
+export const _deleteAns = (_id) => {
+    const cookieToken = cookie.load('auth');
+    let token = cookieToken || null;
+    return (dispatch) => {
+
+        return superagent.delete(`${API}/api/v1/answers/${_id}`)
+            .accept('application/json')
+            .set('Authorization', `Bearer ${token}`)
+            .then(data => {
+                dispatch(deleteAnswerAction(_id))
             }).catch(console.error);
     }
 }
@@ -315,22 +315,22 @@ export const searchByTagsAction = (payload) => {
     }
 }
 //====================Bookmark=======================
-export const getAllBookmarkedAction = (payload) =>{
-    return{
-        type:'allBookmarked',
-        payload:payload
+export const getAllBookmarkedAction = (payload) => {
+    return {
+        type: 'allBookmarked',
+        payload: payload
     }
 }
-export const addBookmarkAction = (payload) =>{
+export const addBookmarkAction = (payload) => {
     return {
-        type:'postBookmark',
-        payload:payload,
+        type: 'postBookmark',
+        payload: payload,
     }
 }
-export const deleteBookmarkAction = (payload) =>{
+export const deleteBookmarkAction = (payload) => {
     return {
-        type:'deleteBookmark',
-        payload:payload,
+        type: 'deleteBookmark',
+        payload: payload,
     }
 }
 //===================Profile=======================
@@ -344,6 +344,12 @@ export const getProfileAction = (payload) => {
 export const addAnswerAction = (payload) => {
     return {
         type: 'addAnswer',
+        payload: payload,
+    }
+}
+export const deleteAnswerAction = (payload) => {
+    return {
+        type: 'deleteAnswer',
         payload: payload,
     }
 }

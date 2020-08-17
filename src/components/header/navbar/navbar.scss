@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900');
+
+.navheader{
+    color: white;
+    height: 110vh;
+    z-index: 999;
+    opacity: 1;
+    
+    h1{
+        margin: 0;
+    }
+
+    transition: all ease-in-out 1s;
+    position: fixed;
+    background-color: #263238;
+    color: green;
+    box-shadow: 0px 5px 5px #263238;
+    width: 100%;
+    z-index: 10;
+    height: 100px;
+
+  .scrolled{
+        ::-webkit-scrollbar-thumb {
+             background: #FE8264; 
+        }
+
+        transition: all ease-in-out 1s;
+        position: fixed;
+        background-color: #426264;
+        color: green;
+        box-shadow: 0px 10px 20px #1e2c2d;
+        width: 100%;
+        z-index: 10;
+        height: 100px;
+        background-color: #1e2c2d;
+        .link{
+        color: #26e79e;
+        }
+        .active{
+            border-bottom: 3px solid #FE8264;
+        }
+        .sign-btn{
+            background: linear-gradient(114deg, #4cddbd, #06f286);
+            color: #426264;
+         
+
+        }
+        .sign-btn:hover{
+            letter-spacing: 4px;
+            box-shadow: none;
+            background: linear-gradient(114deg, #4cddbd, #06f286);
+            text-shadow: none;
+            color: #426264;
+
+        }
+   
+        
+
+    }
+    
+    nav{
+        transition: all ease-in-out 1s;
+        display: grid;
+        width: 100%;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 100%;
+        grid-template-areas: "a b";
+        z-index: 10;
+        height: 100px;
+        .bgBlack{
+            z-index: 1000000;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background-color: #0000008c;
+            width: 100%;
+            height: 100%;
+            .sign-popup{
+                z-index: 10;
+                height: 75%;
+                width: 35%;
+                display: flex;
+                top: 15%;
+                left: 32.5%;
+                bottom: 0;
+                right: 0;
+                position: absolute;
+                background-color: #1e2c2d;
+                border-radius: 8px;
+                box-shadow: 0px 2px 8px #172f19;
+                flex-direction: column;
+                align-items: center;
+                h2{
+                    text-transform: uppercase;
+                    margin-top: 10%;
+                    border-bottom: #fe8264 3px solid;
+                    width: 90%;
+                    text-align: center;
+                    margin-bottom: 0;
+                    color: white;
+                    font-family: 'Heebo', sans-serif;
+                    letter-spacing: 5px;
+                    font-weight: 700;
+                    padding-bottom: 8%;
+                    font-size: 60px;
+                }
+                form{
+                z-index: 10;
+                    height: 60%;
+                    width: 70%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    margin-top: 5%;
+                    input{
+                        height: 22%;
+                        margin-top: 10%;
+                        border-radius: 0.55rem;
+                        background-color: #284042;
+                        border: none;
+                        border-bottom: 3px solid white;
+                        font-family: 'Heebo',sans-serif;
+                        font-size: 25px;
+                        font-weight: 500;
+                        text-transform: capitalize;
+                        color: white;
+                    }
+                    button{
+                        cursor: pointer;
+                        border-radius: 0.55rem;
+                        height: 18%;
+                        margin-top: 5%;
+                        background-color: chocolate;
+                        border: 0;
+                        border-bottom: 4px solid #364838;
+                        text-transform: uppercase;
+                        font-size: large;
+                        font-weight: 500;
+                        color: #dcffe5;
+                        background: linear-gradient(114deg, #4cddbd, #06f286);
+                        color: #1e2c2d;
+                        font-family: 'Heebo', sans-serif;
+                        font-size: 35px;
+                        letter-spacing: 10px;
+                    }
+                }     
+            }
+        }
+    }
+    ul{
+        grid-area: b;
+        margin: 0;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        font-family: 'Heebo', sans-serif;
+        font-weight: 500;
+        color: #fff;
+        text-transform: capitalize;
+    }
+
+    .sign-btn{
+        transition: all ease-in 0.3s;
+        border: none;
+        display: block;
+        font-size: 16px;
+        font-size: 90%;
+        font-weight: 500;
+        text-transform: capitalize;
+        border-radius: 50px;
+        color: #fff;
+        padding: 18px 45px;
+        background: rgba(255, 255, 255, 0.349);
+        letter-spacing: 3px;
+        background-color: #426264;         
+    }
+    .sign-btn:hover{
+        background: #FE8264;
+        background: #0ebfaa;
+        background: #253b3b;
+        border-radius: 5px;
+        letter-spacing: 5px;
+        box-shadow: 1px 1px 10px black;
+    }
+    .sign-btn:focus{
+        border: none;
+        outline: none;
+    }
+
+    .link{
+        transition: all ease-in-out 0.3s;
+        margin: 0;
+        text-decoration: none;
+        color: rgba(0, 0, 0, 0.342);
+        color: rgba(66, 98, 100,  0.81);
+        color: white;
+        font-size: 20px;
+        
+    }
+    .active{
+        color: white;
+        border-bottom: 3px solid white;
+
+    }
+  
+    .link:hover{
+        color: #fff;
+        letter-spacing: 3px;
+        
+    }
+    img{
+        position: absolute;
+        top: 25%;
+        left: 59.5%;
+        width: 38%;
+        opacity: 0.95;
+    }
+}

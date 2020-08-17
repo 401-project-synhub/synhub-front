@@ -6,6 +6,204 @@
     width: 90%;
     margin: 7% auto;
     text-align: center;
+
+    .bgBlack{
+        z-index: 1000000;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background-color: #0000008c;
+        width: 100%;
+        height: 100%;
+        .sign-popup{
+            z-index: 10;
+            height: 60%;
+            width: 60%;
+            top: 20%;
+            left: 20%;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            background-color: #1e2c2d;
+            border-radius: 8px;
+            box-shadow: 3px 3px 8px 5px #232523;
+            display: grid;
+            grid-template-rows: 100%;
+            grid-template-columns: 60% 40%;
+            grid-template-areas: 'stuff pic';
+            #close{
+                color: #fe8264;
+                position: absolute;
+                left: 97%;
+                top: 2.5%;
+                font-family: 'Heebo', sans-serif;
+                font-size: 25px;
+                font-weight: 700;
+                cursor: pointer;
+            }
+            .stuffContainer{
+                .join{
+                    overflow: scroll;
+                    color: wheat;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    height: 480px;
+                    position: relative;
+                    top: 24px;
+                    .join-div{
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-around;
+                        align-items: center;
+                    }
+                    button{
+                        background: linear-gradient(114deg, #4cddbd, #06f286);
+                        color: #426264;
+                        transition: all ease-in 0.3s;
+                        border: none;
+                        display: block;
+                        font-size: 16px;
+                        font-size: 90%;
+                        font-weight: 700;
+                        text-transform: capitalize;
+                        border-radius: 4px;
+                        padding: 15px 27px;
+                        letter-spacing: 3px;
+                        text-transform: uppercase;
+                        font-family: 'Heebo', sans-serif;
+                    }
+                    #join-btn{
+                        position: relative;
+                        top: -11px;
+                    }
+                    #join-btn:hover{
+                        letter-spacing: 4px;
+                    }
+                    p{
+                        width: 65%;
+                        height: 45px;
+                        text-transform: capitalize;
+                        font-size: 25px;
+                        font-family: 'Heebo', sans-serif;
+                        font-weight: 500;
+                        color: #e0e0e0;
+                        background-color: #233536;
+                        border-top: 5px solid #fe8264;
+                        border-right: 5px solid #fe8264;
+                        border-radius: 4px;
+                    }
+                }
+                grid-area: stuff;
+                form{
+                    z-index: 10;
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: center;
+                    position: relative;
+                    bottom: 60px;
+                    input{
+                        align-items: center;
+                        width: 65%;
+                        background-color: #233536;
+                        color: white;
+                        border-bottom: 3px solid #fe8264;
+                        border-radius: 4px 4px 4px 4px;
+                        border: none;
+                        border-bottom: 5px solid #fe8264;
+                        height: 45px;
+                        font-size: 18px;
+                        border-left: 3px solid #fe8264;
+                        text-transform: capitalize;
+                        font-family: 'Heebo', sans-serif;
+                        font-weight: 500;
+                        letter-spacing: 1.5px;
+                        padding: 0 25px;
+                    }
+                    input:focus{
+                        outline: none;
+                    }
+                    button{
+                        background: linear-gradient(114deg, #4cddbd, #06f286);
+                        color: #426264;
+                        transition: all ease-in 0.3s;
+                        border: none;
+                        display: block;
+                        font-size: 16px;
+                        font-size: 90%;
+                        font-weight: 700;
+                        text-transform: capitalize;
+                        border-radius: 4px;
+                        padding: 15px 17px;
+                        letter-spacing: 3px;
+                        text-transform: uppercase;
+                        font-family: 'Heebo', sans-serif;
+                    }
+                    button:hover{
+                        letter-spacing: 4px;
+                    }
+                    button:focus{
+                        outline: none;
+                    }
+                    p{
+                        margin: 0;
+                        line-height: 0;
+                    }
+                }
+                p{
+                    z-index: 10;
+    
+                }
+                button{
+                    z-index: 10;
+    
+                }
+            }
+            .stuffImg{
+                grid-area: pic;
+                background-image: url('/assets/room/meeting.png');
+                background-position: center;
+                background-size: 90%;
+                background-repeat: no-repeat;
+                background-position-y: bottom;
+                h2{
+                    position: relative;
+                    top: 44px;
+                    font-size: 41px;
+                    letter-spacing: 7px;
+                    font-family: 'Heebo', sans-serif;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: 500;
+                    opacity: .8;
+                    span{
+                        color: #ff6641;
+                        font-size: 125%;
+                        padding: 0 6px;
+                        opacity: 1;
+                        font-weight: 900;
+                        opacity: 1;
+                    }
+                }
+                h3{
+                    position: relative;
+                    top: 29px;
+                    left: 3%;
+                    font-size: 86px;
+                    letter-spacing: 22px;
+                    font-family: 'Heebo', sans-serif;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: 500;
+                }
+            }
+  
+
+    }
+
+}
     h2{
         font-family: 'Heebo', sans-serif;
         font-weight: 400;
@@ -76,7 +274,6 @@
             position: absolute;
             right: 0;
             background-repeat: no-repeat;
-            // background-position-x: 100%;
             margin: 0;
             overflow-x: hidden;
             opacity: .5;
@@ -145,9 +342,7 @@
                 background-position-y: 0;
                 background-repeat: no-repeat;
                 top: 0px;
-                left: 5%;
-                // top: 32px;
-                // left: 20.5%;            
+                left: 5%;           
                 margin-left: -80px;
                 width: 100px;
                 height: 100px;
@@ -156,9 +351,6 @@
                 border-radius: 10px;
             }
             a:hover:before{
-                // background: #64fe7a;
-                // border: 1px solid #64fe7a;
-                // box-shadow: 0px 8px 16px 0px #64fe7a33;
                 left: 73%;
                 top: 0px;
                 border-radius: 5px;
@@ -265,9 +457,7 @@
                 background-position-y: 0;
                 background-repeat: no-repeat;
                 top: 0px;
-                left: 5%;
-                // top: 32px;
-                // left: 20.5%;            
+                left: 5%;           
                 margin-left: -80px;
                 width: 100px;
                 height: 100px;
@@ -276,9 +466,6 @@
                 border-radius: 10px;
             }
             a:hover:before{
-                // background: #64fe7a;
-                // border: 1px solid #64fe7a;
-                // box-shadow: 0px 8px 16px 0px #64fe7a33;
                 left: 73%;
                 top: 0px;
                 border-radius: 5px;

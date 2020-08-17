@@ -7,6 +7,8 @@ import styled from "styled-components";
 import TrelloForm from "./TrelloForm";
 import TrelloOpenForm from "./TrelloOpenForm";
 
+
+
 class TrelloCreate extends React.PureComponent {
   state = {
     formOpen: false,
@@ -63,13 +65,12 @@ class TrelloCreate extends React.PureComponent {
     const buttonText = list ? "Add another list" : "Add another card";
     const buttonTextOpacity = list ? 1 : 0.5;
     const buttonTextColor = list ? "white" : "inherit";
-    const buttonTextBackground = list ? "rgba(0,0,0,.15)" : "inherit";
+    const buttonTextBackground = list ? "white" : "inherit";
 
     const OpenFormButton = styled.div`
       display: flex;
       align-items: center;
       cursor: pointer;
-      border-radius: 3px;
       height: 36px;
       margin-left: 8px;
       width: 300px;
@@ -78,13 +79,21 @@ class TrelloCreate extends React.PureComponent {
       opacity: ${buttonTextOpacity};
       color: ${buttonTextColor};
       background-color: ${buttonTextBackground};
+      background-color: white;
+      padding: 50px;
+      box-shadow: 0px 5px 0px #71e995;
+      border: 2px solid #71e995;
+      border-radius: 20px 20px 20px 20px;
     `;
-
+   
     return (
-      <OpenFormButton onClick={this.openForm}>
-        <Icon>add</Icon>
-        <p style={{ flexShrink: 0 }}>{buttonText}</p>
-      </OpenFormButton>
+      <div id='shit'>
+        <OpenFormButton onClick={this.openForm}>
+          <Icon>add</Icon>
+          <p style={{ flexShrink: 0 }}>{buttonText}</p>
+        </OpenFormButton>
+      </div>
+
     );
   };
 
@@ -97,15 +106,15 @@ class TrelloCreate extends React.PureComponent {
         onChange={this.handleInputChange}
         closeForm={this.closeForm}
       >
-        <TrelloButton onClick={list ? this.handleAddList : this.handleAddCard}>
+        <TrelloButton id='add-card-button' onClick={list ? this.handleAddList : this.handleAddCard}>
           {list ? "Add List" : "Add Card"}
         </TrelloButton>
       </TrelloForm>
     ) : (
-      <TrelloOpenForm list={list} onClick={this.openForm}>
-        {list ? "Add another list" : "Add another card"}
-      </TrelloOpenForm>
-    );
+        <TrelloOpenForm list={list} onClick={this.openForm}>
+          {list ? "Add another list" : "Add another card"}
+        </TrelloOpenForm>
+      );
   }
 }
 
