@@ -41,7 +41,6 @@ const listsReducer = (state = initialState, action) => {
         type
       } = action.payload;
 
-      // draggin lists around - the listOrderReducer should handle this
       if (type === "list") {
         return state;
       }

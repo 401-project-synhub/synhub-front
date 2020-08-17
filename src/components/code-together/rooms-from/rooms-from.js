@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { useState, useEffect } from 'react';
 import socketIOClient from "socket.io-client";
 import { Link } from 'react-router-dom';
 import { withRouter } from "react-router"
@@ -7,21 +6,7 @@ import { SignInContext } from '../../../context/auth.js';
 
 const ENDPOINT = "https://synhub.herokuapp.com";
 let socket;
-// const socket = socketIOClient(ENDPOINT);
 
-// if(window.location.hash !== "#2") {
-//     window.location.href += "#2";
-//     window.location.reload(false);
-//   }
-
-// if (this.match.params.id !== prevProps.match.params.id) {
-//     // call the fetch function again
-//   }
-
-// window.location.reload();
-
-
-// socket.emit('get-rooms');
 class RoomForm extends Component {
     static contextType = SignInContext;
 
@@ -38,12 +23,10 @@ class RoomForm extends Component {
         socket = socketIOClient(ENDPOINT);    
         socket.on('send-rooms', data => {
             this.setState({ rooms: data });
-            // socket.disconnect();
         });
     }
 
     changeRoomHandler = (e) => {
-        // console.log(e.target.value);
         this.setState({ room: e.target.value });
     }
 
@@ -71,14 +54,12 @@ class RoomForm extends Component {
                         })
                     }
                 </div>
-                {/* <div > */}
                     <form onSubmit={this.createRoom}>
                         <input onChange={this.changeRoomHandler} name='createRoom' placeholder='room name'></input>
                         <Link to={`/coding/${this.state.room}`}>
                             <button>create</button>
                         </Link>
                     </form>
-                {/* </div> */}
                 </div>
                 <div className='stuffImg'>
                     <h2>

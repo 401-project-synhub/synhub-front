@@ -1,0 +1,97 @@
+.bgBlack{
+    .sign-popup2{
+        // z-index: 10;
+        height: 60%;
+        width: 60%;
+        width:40%;
+        top: 20%;
+        left: 30%;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        background-color: #1e2c2d;
+        border-radius: 8px;
+        box-shadow: 3px 3px 8px 5px #232523;
+        span{
+            position: relative;
+            left: 96%;
+            top:17px;
+            color: #ff6641;
+            font-size: 135%;
+            padding: 0 6px;
+            opacity: 1;
+            font-weight: 900;
+            opacity: 1;
+            cursor: pointer;
+        }
+        #qform{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-height: none;
+            height: 500px;
+            width: 100%;
+            position: relative;
+            top: 6%;
+            border-top: 3px solid #fe8264;
+            label{
+                color: white;
+                font-family: 'Heebo', sans-serif;
+                font-weight: 400;
+                font-size: 18px;
+                margin-right: 2%;
+            }
+            input{
+                background-color: #233536;
+                color: white;
+                border-radius: 4px 4px 4px 4px;
+                border: none;
+                border-bottom: 5px solid #737373;
+                height: 45px;
+                font-size: 18px;
+                border-left: 3px solid #737373;
+                text-transform: capitalize;
+                font-family: 'Heebo', sans-serif;
+                font-weight: 400;
+                letter-spacing: 1.5px;
+                padding: 0 25px;
+            }
+            textarea{
+                background-color: #233536;
+                color: white;
+                border-radius: 4px 4px 4px 4px;
+                border-bottom: 5px solid #737373;
+                height: 45px;
+                font-size: 18px;
+                border-left: 3px solid #737373;
+                text-transform: capitalize;
+                font-family: 'Heebo', sans-serif;
+                font-weight: 400;
+                letter-spacing: 1.5px;
+                padding: 10px;
+                width: 80%;
+                height: 50%;
+            }
+            button{
+                transition: all ease-in-out 0.3s;
+                color: #ffffff;
+                background: #B8F1A3;
+                font-family: 'Heebo', sans-serif;
+                font-size: 15px;
+                font-weight: 600;
+                text-transform: uppercase;
+                border: none;
+                border-radius: 5px 25px 25px 25px;
+                padding: 10px 25px 10px 25px;
+                text-decoration: none;
+                cursor: pointer;
+                letter-spacing: 1.3px;
+                background: linear-gradient(114deg, #4cddbd, #06f286);
+                z-index: 5;
+                background: linear-gradient(114deg, #4cddbd, #06f286);
+                color: #426264;
+            }
+        }
+    }
+}

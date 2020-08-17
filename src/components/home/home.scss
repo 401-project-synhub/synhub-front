@@ -29,8 +29,6 @@
             background-color: #1e2c2d;
             border-radius: 8px;
             box-shadow: 3px 3px 8px 5px #232523;
-            // flex-direction: column;
-            // align-items: center;
             display: grid;
             grid-template-rows: 100%;
             grid-template-columns: 60% 40%;
@@ -52,7 +50,6 @@
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    /* height: 70%; */
                     height: 480px;
                     position: relative;
                     top: 24px;
@@ -73,9 +70,7 @@
                         font-weight: 700;
                         text-transform: capitalize;
                         border-radius: 4px;
-                        /* color: #fff; */
                         padding: 15px 27px;
-                        /* background: rgba(255, 255, 255, 0.349); */
                         letter-spacing: 3px;
                         text-transform: uppercase;
                         font-family: 'Heebo', sans-serif;
@@ -85,7 +80,6 @@
                         top: -11px;
                     }
                     #join-btn:hover{
-                        // padding: 17px 19px;
                         letter-spacing: 4px;
                     }
                     p{
@@ -142,15 +136,12 @@
                         font-weight: 700;
                         text-transform: capitalize;
                         border-radius: 4px;
-                        /* color: #fff; */
                         padding: 15px 17px;
-                        /* background: rgba(255, 255, 255, 0.349); */
                         letter-spacing: 3px;
                         text-transform: uppercase;
                         font-family: 'Heebo', sans-serif;
                     }
                     button:hover{
-                        // padding: 17px 19px;
                         letter-spacing: 4px;
                     }
                     button:focus{
@@ -173,7 +164,6 @@
             .stuffImg{
                 grid-area: pic;
                 background-image: url('/assets/room/meeting.png');
-                // border-left: 1px solid white;
                 background-position: center;
                 background-size: 90%;
                 background-repeat: no-repeat;
@@ -284,7 +274,6 @@
             position: absolute;
             right: 0;
             background-repeat: no-repeat;
-            // background-position-x: 100%;
             margin: 0;
             overflow-x: hidden;
             opacity: .5;
@@ -353,9 +342,7 @@
                 background-position-y: 0;
                 background-repeat: no-repeat;
                 top: 0px;
-                left: 5%;
-                // top: 32px;
-                // left: 20.5%;            
+                left: 5%;           
                 margin-left: -80px;
                 width: 100px;
                 height: 100px;
@@ -364,9 +351,6 @@
                 border-radius: 10px;
             }
             a:hover:before{
-                // background: #64fe7a;
-                // border: 1px solid #64fe7a;
-                // box-shadow: 0px 8px 16px 0px #64fe7a33;
                 left: 73%;
                 top: 0px;
                 border-radius: 5px;
@@ -473,9 +457,7 @@
                 background-position-y: 0;
                 background-repeat: no-repeat;
                 top: 0px;
-                left: 5%;
-                // top: 32px;
-                // left: 20.5%;            
+                left: 5%;           
                 margin-left: -80px;
                 width: 100px;
                 height: 100px;
@@ -484,9 +466,6 @@
                 border-radius: 10px;
             }
             a:hover:before{
-                // background: #64fe7a;
-                // border: 1px solid #64fe7a;
-                // box-shadow: 0px 8px 16px 0px #64fe7a33;
                 left: 73%;
                 top: 0px;
                 border-radius: 5px;

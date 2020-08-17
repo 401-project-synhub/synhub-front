@@ -1,8 +1,6 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Auth from '../auth/';
-import { SignInContext } from '../../context/auth';
 import { _getAllQuestions, _deleteQuestion, _updateQuestion, _searchQuestions, _getAllQuestionsByTag, _bookmark, _getAllBookmarked, _getProfile } from '../../store/community-reducer';
 import NavBar from '../header/navbar/navbar'
 
@@ -13,7 +11,6 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import './profile.scss'
-// import '../header/header.scss'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -71,21 +68,15 @@ function Profile(props) {
                         <Typography className={classes.heading}>Bookmarked Questions</Typography>
                         <Typography className={classes.secondaryHeading}> Number Of marked Questions :{props.profile.bookmarks.length}</Typography>
                     </AccordionSummary>
-                    {/* <img alt='lk' src='/assets/header-illus2.png' /> */}
-
-                    {/* <div className='img-ins'> */}
-                    {/* <img alt='lk' src='/assets/header-illus2.png' /> */}
                     {props.profile.bookmarks.map(book =>
-                        // <div>
+
                         <Link to={`/profile/${book.bookmarked.id}`} key={book.id}>
                             <AccordionDetails>
 
                                 <Typography>Question Title : {book.bookmarked.title}</Typography>
                             </AccordionDetails>
                         </Link>
-                        // </div>
                     )}
-                    {/* </div> */}
                 </Accordion>
 
                 <Accordion expanded={expanded === 'myQuestions'} onChange={handleChange('myQuestions')} >
@@ -97,12 +88,6 @@ function Profile(props) {
                         <Typography className={classes.heading}>My Questions</Typography>
                         <Typography className={classes.secondaryHeading}> Number Of My Questions :{props.profile.questions.length}</Typography>
                     </AccordionSummary>
-
-                    {/* <span>
-                        My Questions {props.profile.questions.length}
-                    </span> */}
-                    {/* <div className='img-ins'> */}
-                    {/* <img alt='lk' src='/assets/header-illus2.png' /> */}
                     {props.profile.questions.map(oneQ =>
                         <div key={oneQ.id}>
                             <Link to={`/profile/${oneQ.id}`}>
@@ -113,7 +98,6 @@ function Profile(props) {
 
                         </div>
                     )}
-                    {/* </div> */}
 
                 </Accordion>
 

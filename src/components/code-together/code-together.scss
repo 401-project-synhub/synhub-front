@@ -133,7 +133,6 @@ html {
 #side-bar-container{
 	display: flex;
 	flex-direction: column;
-	// padding: 0 25px;
 	box-sizing: border-box;
 	button{
 		text-transform: uppercase;
@@ -165,8 +164,7 @@ svg.MuiSvgIcon-root.MuiSvgIcon-colorSecondary {
     position: absolute;
     top: 5px;
     right: 12px;
-    /* float: right; */
-    /* clear: both; */
+
 }
 .hamburger--collapse.is-active .hamburger-inner::before {
 	background-color: white;

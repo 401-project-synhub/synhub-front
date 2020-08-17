@@ -1,4 +1,3 @@
-// @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@300&display=swap');
 
 #control{
@@ -82,8 +81,6 @@
         padding: 10px 19px;
         border-radius: 4px;
         color: white;
-        /* font-family: 'Heebo',sans-serif; */
-        /* font-size: 18px; */
         font-size: 22px;
         font-family: 'Heebo', sans-serif;
         font-weight: 500;
@@ -122,6 +119,7 @@
         z-index: 1;
         transform: rotate(2deg);
         filter: brightness(1.25);
+        filter: hue-rotate(354deg);
         button{
             transform: rotate(-2deg);
         }
@@ -164,7 +162,6 @@
         width: 23%;
         margin: 2%;
         display: grid;
-        // grid-template-rows: 30% 70%;
         grid-template-rows: 35% 65%;
         grid-template-columns: 100%;
         grid-template-areas:
@@ -180,7 +177,6 @@
         background-size: 199%;
         color: #344c4d;
         text-shadow: 1px 1px 2px #f5f5dc;
-        // margin-bottom: 10%;
         #card-header{
             grid-area: cardheader;
             display: grid;
@@ -283,8 +279,6 @@
                 grid-template-rows: 100%;
                 grid-template-columns: 58% 42%;
                 grid-template-areas: 'clickablestags clickablesbutton';
-                // grid-template-areas: 'clickablestags'
-                //                     'clickablesbutton' ;
                 z-index: 5;     
                 #card-body-clickables-tags{
                     grid-area: clickablestags;
@@ -313,7 +307,6 @@
                         background: #FE8264;
                         background: #0ebfaa;
                         background: #253b3b;
-                        /* background: #0ebfaa; */
                         box-shadow: 1px 1px 5px black;
                 
                     }
@@ -386,24 +379,13 @@
             }
         }
     }
-    // #card:nth-child(even){
-    //     // background-color: black;
-    //     margin-top: 0%;
-    //     // margin-bottom: 5%;
-    // }  
-    // #card:nth-child(odd){
-    //     // background-color: black;
-    //     margin-top: 10%;
-    // } 
+
     #card:nth-child(3n+3){
-        // background-color: black;
         margin-top: 10%;
 
     }
     #card:nth-child(3n+1){
-        // background-color: black;
         margin-top: 10%;
-
     }
 }
 
@@ -437,78 +419,3 @@
         }
     }
 }
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-// .show-more{
-//     float: right;
-//     color: whitesmoke;
-//     width: 35%;
-//     padding: 3%;
-//     border-radius: 5px;
-//     box-shadow: 3px 3px 4px #577D38;
-//     border: none;
-//     background-color: #88E766;
-//     font-family: sans-serif;
-//     cursor: pointer;
-    
-//     &:hover {
-//         background-color: #B8F1A3;
-//         box-shadow: 1px 1px 3px #577D38;
-//     }
-// }
-
-// #root{
-//     .container {
-//         display: flex;
-//         justify-content: space-around;
-//         align-content: center;
-//         flex-wrap: wrap;
-//         .MuiPaper-root {
-//             box-shadow: 5px 6px 10px #88af88;
-//             margin-top: 35px;
-//             .MuiCardContent-root{
-//                 .MuiTypography-body2 {
-//                     font-size: 1rem;
-//                     font-family: 'Zilla slab',serif;
-//                     font-weight: 600;
-//                     letter-spacing: .6px;
-//                 }
-    
-//             }
-//         }
-//     }
-// }

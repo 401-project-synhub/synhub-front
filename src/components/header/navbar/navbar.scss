@@ -19,9 +19,6 @@
     z-index: 10;
     height: 100px;
 
-    // .active{
-    //     border-bottom: 3px solid #FE8264;
-    // }
   .scrolled{
         ::-webkit-scrollbar-thumb {
              background: #FE8264; 
@@ -44,7 +41,6 @@
         }
         .sign-btn{
             background: linear-gradient(114deg, #4cddbd, #06f286);
-            // text-shadow: 0px 0px 3px black;
             color: #426264;
          
 
@@ -64,7 +60,6 @@
     
     nav{
         transition: all ease-in-out 1s;
-        // position: fixed;
         display: grid;
         width: 100%;
         grid-template-columns: 50% 50%;
@@ -151,38 +146,20 @@
                         letter-spacing: 10px;
                     }
                 }     
-                // h2{
-                //     font-size: 3rem;
-                //     color: #364838;
-                //     text-transform: uppercase;
-                //     margin-top: 10%;
-                //     border-bottom: chocolate 3px solid;
-                //     width: 90%;
-                //     text-align: center;
-                //     margin-bottom: 0;
-                // }
             }
         }
     }
     ul{
-        // width: 60%;
         grid-area: b;
         margin: 0;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        // height: 15vh;
-        // font-size: 18px;
         font-family: 'Heebo', sans-serif;
         font-weight: 500;
         color: #fff;
         text-transform: capitalize;
     }
-    // li{
-    //     margin: 0;
-    //     list-style: none;
-
-    // }
 
     .sign-btn{
         transition: all ease-in 0.3s;
@@ -190,14 +167,11 @@
         display: block;
         font-size: 16px;
         font-size: 90%;
-        // margin-left: 43px;
         font-weight: 500;
         text-transform: capitalize;
-        // background-color: #FE8264;
         border-radius: 50px;
         color: #fff;
         padding: 18px 45px;
-        // padding: 2% 4%;
         background: rgba(255, 255, 255, 0.349);
         letter-spacing: 3px;
         background-color: #426264;         
@@ -206,7 +180,6 @@
         background: #FE8264;
         background: #0ebfaa;
         background: #253b3b;
-        /* background: #0ebfaa; */
         border-radius: 5px;
         letter-spacing: 5px;
         box-shadow: 1px 1px 10px black;
@@ -228,7 +201,6 @@
     }
     .active{
         color: white;
-        // color: orange;
         border-bottom: 3px solid white;
 
     }
@@ -244,6 +216,5 @@
         left: 59.5%;
         width: 38%;
         opacity: 0.95;
-        // opacity: 1;
     }
 }

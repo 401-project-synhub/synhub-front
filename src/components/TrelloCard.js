@@ -4,14 +4,12 @@ import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
-import Icon from "@material-ui/core/Icon";
 import TrelloForm from "./TrelloForm";
 import { editCard, deleteCard } from "../actions";
 import { connect } from "react-redux";
 import TrelloButton from "./TrelloButton";
 
 import EditIcon from '@material-ui/icons/Edit';
-// import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 

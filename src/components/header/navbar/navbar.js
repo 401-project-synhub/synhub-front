@@ -3,8 +3,7 @@ import SignIn from '../../signin/';
 import SignUp from '../../signup/';
 import Show from '../../show/';
 import { SignInContext } from '../../../context/auth.js';
-import { Link, NavLink, useHistory} from 'react-router-dom';
-// import '../header.scss';
+import { NavLink, useHistory} from 'react-router-dom';
 import './navbar.scss';
 
 
@@ -31,11 +30,9 @@ function Navbar(props) {
     const context = useContext(SignInContext);
     const signInToggle = (e) => {
         setSignIN(!signIN);
-        // console.log('toggled',signIN)
     }
     const signUpToggle = (e) => {
         setSignUP(!signUP);
-        // console.log('toggled',signUP)
     }
     const saveTheDay = (e) => {
         context.signout();
@@ -51,9 +48,7 @@ function Navbar(props) {
                     <NavLink className='link' to='/'>Home</NavLink>
 
                     <NavLink className='link' to='/community'>Community</NavLink>
-                    {/* <li>Code Along</li> */}
                     <Show condition={context.signedIn}>
-                    {/* <NavLink className='link' to='/coding' onClick={context.changeOpen}>Code Together</NavLink> */}
                     <a className='link' onClick={()=>{context.changeOpen(); history.push('/')}}style={{cursor:'pointer'}} href>Code Together</a>
 
                     </Show>

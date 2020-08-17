@@ -5,13 +5,6 @@ import Auth from '../auth/';
 import { SignInContext } from '../../context/auth';
 import { _getAllQuestions, _deleteQuestion, _updateQuestion, _searchQuestions, _getAllQuestionsByTag, _bookmark, _getAllBookmarked } from '../../store/community-reducer';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Paper from '@material-ui/core/Paper';
@@ -27,8 +20,6 @@ import AddQuestion from '../add-question/add-question';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 
-// import '../community-component/community.scss';
-
 function Search(props) {
     // console.log('hey from tag')
     const [input, setInput] = useState({})
@@ -36,11 +27,9 @@ function Search(props) {
     let [questionID, setQuestionID] = useState('');
     let [choice, setChoice] = useState('date');
     let [searchInp, setSearchInp] = useState('');
-    let [url, setUrl] = useState(props.match.params.key)
     let [bol, setBol] = useState(false);
 
     let [addShow, setAddShow] = useState(false);
-    // let [idQ, setIdQ] = useState(false)
 
     const onButtonClick = () => {
 
@@ -64,7 +53,6 @@ function Search(props) {
     };
 
     const handleSearchChange = (e) => {
-        // console.log(e.target.value)
         setSearchInp(e.target.value);
     }
     const handleSearchSubmit = (e) => {
@@ -72,21 +60,16 @@ function Search(props) {
         console.log('searchINp', searchInp)
 
         props.search(searchInp);
-        // setSearchInp('');
         e.target.reset();
-        // console.log('searchInp', searchInp);
     }
     const context = useContext(SignInContext);
-    // console.log('(props.match',props.match)
     const fetchData = () => {
         props.search(props.match.params.key);
     };
     useEffect(() => {
-        // props.get(choice);
-        // setSearchInp('');
+
         props.search(props.match.params.key);
 
-        // console.log('say hi')
     }, [props.match.params.key])
 
     useEffect(() => {
@@ -178,23 +161,15 @@ function Search(props) {
                     </Link>
                 </Paper>
                 <Auth capability='read' >
-                    {/* <Link to='/community/addquestion'> */}
                         <button className="show-more" onClick={onButtonClick}><img src='./assets/community/add.png'></img>Add Question</button>
                         <Show condition={addShow}>
                             <AddQuestion />
                         </Show>
-                    {/* </Link> */}
                 </Auth>
             </div>
             <div id='cards'>
                 {props.questions.questions.map(oneQuestion => (
                     <>
-                        {/* <Button onClick={onButtonClick}>Button</Button>
-                        {showCom ?
-                            <ShowMore idQ={oneQuestion._id}/> :
-                            null
-                        } */}
-                        {/* <ShowMore idQ={oneQuestion._id} /> */}
                         <div id='card'>
                             <div id='cloud'>
                                 <Auth capability='delete' >
@@ -204,7 +179,6 @@ function Search(props) {
                                 </Auth>
                                 <Auth capability='delete' >
                                     {context.user.capabilities ? context.user.username === oneQuestion.author || context.user.capabilities.role === 'admin' ?
-                                        // <button className="show-more" onClick={() => props.delete(oneQuestion._id)}>Delete Question</button> 
                                         <IconButton id='delete' onClick={() => { props.delete(oneQuestion._id) }}>
                                             <DeleteForeverIcon />
                                         </IconButton>
@@ -212,11 +186,6 @@ function Search(props) {
                                 </Auth>
                                 <Auth capability='update' >
                                     {context.user.capabilities ? context.user.username === oneQuestion.author ?
-                                        // <button className="show-more" onClick={toggle} id={oneQuestion._id}>Edit</button>
-                                        // <button onClick={toggle} id={oneQuestion._id}>
-
-                                        //     <FontAwesomeIcon  icon={faCoffee} />
-                                        // </button>
                                         <IconButton id={'edit'} onClick={toggle} >
                                             <EditIcon />
                                         </IconButton>

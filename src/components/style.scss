@@ -114,9 +114,7 @@ main{height: 100vh;}
 
 #trello-header{
   height: 50px;
-    /* margin-top: 10px; */
     box-sizing: border-box;
-    /* margin-left: 6%; */
     background-color: #f0f0f0;
     padding-left: 3%;
     padding-top: 6px;
@@ -156,7 +154,6 @@ main{height: 100vh;}
     background-size: 23%;
     background-repeat: no-repeat;
     background-position-y: 77%;
-    /* background-image: url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2397x1600/d52b5d0…/photo-1577186606264-8bc8d1fdf9e5.jpg); */
 }
 
 .ckjgcB {
@@ -217,16 +214,6 @@ main{height: 100vh;}
 }
 
 #board{
-  // // background: url('./todo2.png');
-  //  // background-position-x: center;
-  // background: url('./todo4.png');
-  // height: 100vh;
-  // // background: url(/static/media/todo4.eecf40da.png);
-  // background-position-x: 90%;
-  // min-height: 500px;
-  // background-size: 30%;
-  // background-repeat: no-repeat;
-  // background-position-y: 59%;
   top: 104px;
   background: url('./todo4.png');
   height: 100vh;
@@ -241,9 +228,7 @@ main{height: 100vh;}
 
 #list-title{
   height: 50px;
-    /* margin-top: 10px; */
     box-sizing: border-box;
-    /* margin-left: 6%; */
     color: #467168;
     background-color: #f5f5f5;
     padding-top: 6px;
@@ -293,7 +278,6 @@ main{height: 100vh;}
   padding-left: 3.2%;
   padding-top: 10px;
   background-color: #e0e0e0;
-  // position: fixed;
   a{
   .MuiSvgIcon-root{
 

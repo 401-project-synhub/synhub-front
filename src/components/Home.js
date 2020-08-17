@@ -1,22 +1,14 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addBoard } from "../actions";
 import BoardThumbnail from "./BoardThumbnail";
-import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
-import ListIcon from '@material-ui/icons/List';
-import Show from './show/';
 import NavHeader  from './header/navbar/navbar'
 import { SignInContext } from '../context/auth';
 
-// import './style.scss';
-// import './header/navbar/navbar.scss';
 import './home/home.scss';
-
 
 const Thumbnails = styled.div`
   flex: 1;
@@ -66,22 +58,19 @@ const CreateInput = styled.input`
 `;
 
 const Home = ({ boards, boardOrder, dispatch }) => {
-  // this is the home site that shows you your boards and you can also create a Board here.
   const context = useContext(SignInContext)
   const [newBoardTitle, setNewBoardTitle] = useState("");
 
   const handleChange = e => {
     setNewBoardTitle(e.target.value);
-    // console.log('onchange', newBoardTitle)
 
   };
 
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(addBoard(newBoardTitle));
-    // console.log(newBoardTitle)
   };
-  // console.log('boardOrder', boardOrder)
+
   const renderBoards = () => {
     return boardOrder ? boardOrder.map(boardID => {
       const board = boards[boardID];
@@ -101,7 +90,6 @@ const Home = ({ boards, boardOrder, dispatch }) => {
   const renderCreateBoard = () => {
     return (
       <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
-        {/* <CreateTitle>Create a new Board</CreateTitle> */}
         <CreateInput id='createInput'
           onChange={handleChange}
           value={newBoardTitle}

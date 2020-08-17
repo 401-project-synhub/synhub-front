@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Controlled as CodeMirror } from 'react-codemirror2';
 import pushid from 'pushid';
-// import RoomForm from './create-room-form/create-room-form.js'
-// import'http://https://synhub.herokuapp.com/socket.io/socket.io.js';
 import '../../../node_modules/socket.io-client/dist/socket.io.js';
 import socketIOClient from "socket.io-client";
 import './code-together.scss';
@@ -12,30 +10,23 @@ import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/css/css';
 import 'codemirror/mode/javascript/javascript';
 import { withRouter } from "react-router"
-import { useParams } from "react-router-dom";
 import GetAppIcon from '@material-ui/icons/GetApp';
 import Paint from '../paint/paint'
-// import NavBar from '../header/navbar/navbar.js'
 import Sidebar from "react-sidebar";
-// import NavBar from '../header/navbar/navbar.js'
 import cookie from 'react-cookies';
 import { NavLink } from 'react-router-dom';
-import Show from '../show/'
+
+let token;
 
 const ENDPOINT = "https://synhub.herokuapp.com";
 const socket = socketIOClient(ENDPOINT);
 let roomName;
 const socketId = pushid();
-// const messagesArray = [{name:'Batool', message:'shit'}];
-let token;
-//
-
 let theUser;
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      // id: '',
       html: `<!DOCTYPE html>
 <html>
   <head>
@@ -57,31 +48,6 @@ class App extends Component {
     };
   }
 
-  // componentDidUpdate() {
-  // console.log('heyya');
-  // socket.emit('send-chat-message', roomName, this.state.html);
-  // socket.on('chat-message', data => {
-  //   console.log(data.message);
-  //   // this.setState({html:data.message})
-  //   return data;
-  // })
-  // this.runCode();
-  // }
-  // componentWillUpdate() {
-  // console.log('heyya update');
-  // socket.emit('send-chat-message', roomName, this.state.html);
-  // socket.on('chat-message', data => {
-  //   console.log(data.message);
-  //   // this.setState({html:data.message})
-  //   return data;
-  // })
-  // socket.on('chat-message', data => {
-  //   console.log(data.message);
-  //   this.setState({html:data.message})
-  //   return data;
-  // })
-  // }
-
   onSetSidebarOpen = () => {
     this.setState({ sidebarOpen: !this.state.sidebarOpen });
     this.setState({ isActive: this.state.isActive === 'is-active' ? '' : 'is-active' })
@@ -95,15 +61,10 @@ class App extends Component {
   componentDidMount() {
     const cookieToken = cookie.load('auth');
     token = cookieToken || null;
-    //
     const userPro = cookie.load('user');
     theUser = userPro || null;
     this.runCode();
-
-    // this.setState({
-    //   id: pushid(),
-    // });
-
+  
     const socket = socketIOClient(ENDPOINT);
     socket.on('chat-message', data => {
       console.log(data.message);
@@ -142,33 +103,12 @@ class App extends Component {
     });
 
 
-
-
-
-    // socket.join(roomName)
-    // socket.on("test", data => {
-    //   console.log('helllo');
-    // });
-    // socket.emit('comment', () => {
-    //   console.log('react test 2');
-    // });
-    // socket.on('test2', () => {
-    //   console.log('test 2 received');
-    // })
     console.log('react socket id', socket);
-    // socket.emit('new-user', roomName, `${Math.floor(Math.random() * 10)}`, socketId);
     socket.emit('new-user', roomName, `${theUser.username}`, socketId);
 
 
   }
 
-  // componentWillUnmount(){
-  //   alert('front-disconnected');
-  //   socket.on('front-disconnect', () => {
-  //     console.log('front-disconnected');
-  //     socket.emit('front-disconnected', socketId)
-  //   });
-  // }
 
   runCode = () => {
     const { html2, js2, css2 } = this.state;
@@ -201,27 +141,12 @@ class App extends Component {
     document.write(documentContents);
     document.close();
   };
+
   clickHandler = () => {
     console.log(this.state.html);
-    // socket.emit('comment', () => {
-    //   console.log('react test 2');
-    // });
-    // socket.on('test2', () => {
-    //   console.log('test 2 received');
-    // })
     socket.emit('send-chat-message-result', roomName, { html: this.state.html, css: this.state.css, js: this.state.js });
-    // socket.on('chat-message-css', data => {
-    //   console.log(data.message);
-    //   this.setState({ css: data.message })
-    //   return data;
-    // });
-    // this.setState({ html2: this.state.html, css2: this.state.css, js2: this.state.js });
   }
-  //  clickHandler(){
-  //   console.log(this.state.html)
-  //   console.log('hi')
-  //   // this.setState({ html2: this.state.html, css2:this.state.css, js2: this.state.js });
-  // }
+ 
 
   submitHandler = (e) => {
     e.preventDefault();
@@ -292,9 +217,6 @@ class App extends Component {
             <span class="hamburger-inner"></span>
           </span>
         </button>
-        {/* <button id='sidebar' onClick={() => this.onSetSidebarOpen(true)}>
-          Open sidebar
-        </button> */}
 
         <Sidebar
           sidebar={<div id='side-bar-container'>
@@ -309,12 +231,7 @@ class App extends Component {
             <button>
               <NavLink className='link' to='/community'>Community</NavLink>
             </button>
-            {/* <li>Code Along</li> */}
-            {/* <Show condition={context.signedIn}> */}
-            {/* <NavLink className='link' to='/coding' onClick={context.changeOpen}>Code Together</NavLink> */}
-            {/* <a className='link' onClick={context.changeOpen}style={{cursor:'pointer'}} href>Code Together</a> */}
-
-            {/* </Show> */}
+   
             <button>
               <NavLink className='link' to='/todo'>Task Manager</NavLink>
             </button>
@@ -329,21 +246,9 @@ class App extends Component {
           styles={{
             sidebar: {
               display: 'flex',
-              background: "white",
               flexDirection: 'column',
               background: '#1b2327',
               zIndex: '10000',
-              // zIndex: 1,
-              // position: 'fixed',
-              // top: 0 + 'px',
-              // left: 0 + 'px',
-              // right: 0 + 'px',
-              // bottom: 0 + 'px',
-              // opacity: 0,
-              // // visibility: 'hidden',
-              // // transition: opacity 0.3s ease-out 0s, 
-              // // visibility 0.3s ease-out 0s,
-              // backgroundColor: 'white',
             }
           }}
         >
@@ -351,7 +256,6 @@ class App extends Component {
 
 
 
-        {/* <button id='runButton' onClick={this.clickHandler}>Run</button> */}
         <div className={this.state.paintComp.toString()}>
           <Paint />
         </div>
@@ -367,12 +271,6 @@ class App extends Component {
                   ...codeMirrorOptions,
                 }}
                 onBeforeChange={(editor, data, html) => {
-                  // this.setState({ html });
-                  // socket.on('chat-message', data => {
-                  //   console.log(data);
-                  //   this.setState({ html: data.message })
-                  //   return data;
-                  // });
 
                   socket.emit('send-chat-message-html', roomName, html);
                 }}
@@ -389,11 +287,6 @@ class App extends Component {
                 onBeforeChange={(editor, data, css) => {
                   this.setState({ css });
                   socket.emit('send-chat-message-css', roomName, css);
-                  // socket.on('chat-message-css', data => {
-                  //   console.log(data);
-                  //   // this.setState({css:data.message})
-                  //   return data;
-                  // })
                 }}
               />
             </div>
@@ -406,13 +299,7 @@ class App extends Component {
                   ...codeMirrorOptions,
                 }}
                 onBeforeChange={(editor, data, js) => {
-                  // this.setState({ js });
                   socket.emit('send-chat-message-js', roomName, js);
-                  // socket.on('chat-message', data => {
-                  //   console.log(data);
-                  //   // this.setState({js:data.message})
-                  //   return data;
-                  // })
                 }}
               />
             </div>
@@ -431,16 +318,14 @@ class App extends Component {
                 }
               </div>
               <form onSubmit={this.submitHandler}>
-                <input name="comment" type="text" required placeholder='Type a comment'></input>
+                <input name="comment" type="text" required placeholder='Type a message'></input>
                 <button className='send'>Send</button>
               </form>
-              {/* <button onClick={this.toggle}>Draw</button> */}
 
             </div>
           </section>
 
         </div>
-        {/* <RoomForm /> */}
       </>
     );
   }

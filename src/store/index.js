@@ -1,6 +1,5 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import communityReducer from './community-reducer';
 import thunk from 'redux-thunk';
 import rootReducer from "../reducers/";
 import { persistStore, persistReducer } from "redux-persist";
@@ -13,7 +12,6 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-// const rootReducer = combineReducers({communityReducer});
 
 export default () => {
   let store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));

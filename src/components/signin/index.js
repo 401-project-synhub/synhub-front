@@ -28,7 +28,6 @@ class SignIn extends React.Component {
   }
 
   render() {
-    // console.log('hello sign in')
     return (
       <>
    

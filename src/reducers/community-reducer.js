@@ -4,7 +4,6 @@ import superagent from 'superagent';
 
 
 const initialState = { questions: [], answers: [], qDetails: {}, bookmarked: [], profile: {} };
-// const API = 'https://synhub.herokuapp.com';
 const API = 'https://synhub-project.herokuapp.com';
 
 
@@ -31,7 +30,6 @@ export default (state = initialState, action) => {
 
                 payload.questions.forEach(val => {
                     let descriptionArr = val.description.replace(/\W\s|\W/g, ' ').split(' ');
-                    // console.log('descriptionArr',descriptionArr)
                     for (let i = 0; i < inputArr.length; i++) {
                         if (descriptionArr.includes(inputArr[i])) {
                             searchResult.push(val);
@@ -55,10 +53,8 @@ export default (state = initialState, action) => {
             return { ...state, answers: state.answers.filter(val => val._id !== payload) }
         //===
         case 'detailQuestion':
-            // console.log(payload)
             return { qDetails: payload }
         case 'tagsSearch':
-            // console.log('state', state)
             let filteredQuestions = payload.questions.filter(val => val.tags.includes(payload.tag.toLowerCase()))
             console.log('filtered quedtions', filteredQuestions)
             return { ...state, questions: filteredQuestions }
@@ -71,7 +67,6 @@ export default (state = initialState, action) => {
             console.log('payload in delete bookmark', payload)
             return { ...state, bookmarked: state.bookmarked.filter(val => val._id !== payload) }
         case 'allBookmarked':
-            // console.log(payload)
             let filteredArr = payload.arr.filter(val => val.user === payload.username)
 
             return { ...state, bookmarked: filteredArr }
@@ -186,17 +181,12 @@ export const _searchQuestions = (input) => {
 
 //=====================Bookmarks===================
 export const _getAllBookmarked = () => {
-    const cookieToken = cookie.load('auth');
-    let token = cookieToken || null;
     const userPro = cookie.load('user');
     let theUser = userPro || null;
     return (dispatch) => {
         return superagent.get(`${API}/api/v1/bookmarks`)
             .accept('application/json')
             .then(data => {
-                // console.log('data.body.records', data.body.records)
-                let filteredArr = data.body.records.filter(val => val.user === theUser.username)
-                // console.log('filteredArr', filteredArr)
                 dispatch(getAllBookmarkedAction({ arr: data.body.records, username: theUser.username }))
             }).catch(console.error);
     }
@@ -206,8 +196,6 @@ export const _bookmark = (body) => {
     let token = cookieToken || null;
     const userPro = cookie.load('user');
     let theUser = userPro || null;
-    // console.log('theUser', theUser);
-    // console.log('body', body);
 
     return (dispatch) => {
         superagent.get(`${API}/api/v1/bookmarks`).accept('application/json').then(record => {
@@ -219,13 +207,10 @@ export const _bookmark = (body) => {
                     .accept('application/json')
                     .set('Authorization', `Bearer ${token}`)
                     .then(data => {
-                        // console.log('data in post')
-                        // console.log('data in post',data.body.record)
                         dispatch(addBookmarkAction(data.body.record))
                     }).catch(console.error);
 
             } else {
-                // console.log('marked', marked)
                 superagent.delete(`${API}/api/v1/bookmarks/${marked[0]._id}`)
                     .accept('application/json')
                     .set('Authorization', `Bearer ${token}`)
@@ -241,8 +226,6 @@ export const _bookmark = (body) => {
 }
 //====================Profile======================
 export const _getProfile = (id) => {
-    const cookieToken = cookie.load('auth');
-    let token = cookieToken || null;
     const userPro = cookie.load('user');
     let theUser = userPro || null;
 
@@ -278,8 +261,6 @@ export const _addAnswer = (body, qTitle) => {
 export const _deleteAns = (_id) => {
     const cookieToken = cookie.load('auth');
     let token = cookieToken || null;
-    const userPro = cookie.load('user');
-    let theUser = userPro || null;
     return (dispatch) => {
 
         return superagent.delete(`${API}/api/v1/answers/${_id}`)

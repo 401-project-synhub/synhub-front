@@ -1,4 +1,4 @@
-import React, { PureComponent, useContext} from "react";
+import React, { PureComponent } from "react";
 import TrelloList from "./TrelloList";
 import { connect } from "react-redux";
 import TrelloCreate from "./TrelloCreate";
@@ -6,13 +6,8 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { sort, setActiveBoard } from "../actions";
 import { Link, NavLink} from "react-router-dom";
-import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import HomeIcon from '@material-ui/icons/Home';
-import PersonIcon from '@material-ui/icons/Person';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
-import ListIcon from '@material-ui/icons/List';
+
 
 import Show from './show/'
 import { SignInContext } from '../context/auth';
@@ -23,7 +18,6 @@ const ListsContainer = styled.div`
   flex-direction: row;
 `;
 
-// TODO: Fix performance issue
 
 class TrelloBoard extends PureComponent {
   static contextType = SignInContext;
@@ -70,11 +64,8 @@ class TrelloBoard extends PureComponent {
               <NavLink className='link' to='/'>Home</NavLink>
 
               <NavLink className='link' to='/community'>Community</NavLink>
-              {/* <li>Code Along</li> */}
               <Show condition={this.context.signedIn}>
-                {/* <NavLink className='link' to='/coding' onClick={context.changeOpen}>Code Together</NavLink> */}
                 <a className='link' onClick={this.context.changeOpen} style={{ cursor: 'pointer' }} href>Code Together</a>
-
               </Show>
 
               <NavLink className='link' to='/todo'>Task Manager</NavLink>
@@ -88,12 +79,7 @@ class TrelloBoard extends PureComponent {
               <DashboardIcon fontSize="large" />
               <h2 id='title'>{board.title}</h2>
             </div>
-            {/* <aside id='trello-aside'>
-            <a href='#'><ArrowBackIcon /></a>
-            <a href='#'><HomeIcon /></a>
-            <a href='#'><NotificationImportantIcon /></a>
-            <a href='#'><ListIcon /></a>
-          </aside> */}
+
 
             <Droppable droppableId="all-lists" direction="horizontal" type="list">
               {provided => (

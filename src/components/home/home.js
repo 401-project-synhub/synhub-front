@@ -1,6 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import './home.scss'
-import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel'
 
@@ -10,7 +9,6 @@ import { SignInContext } from '../../context/auth';
 
 function Home(props) {
     const context = useContext(SignInContext)
-    // const [showCoding, setShowCoding] = useState(false)
     return (
         <section className='home'>
 
@@ -155,7 +153,7 @@ function Home(props) {
                                     </h5>
                             </div>
                             <div id='slider-img'>
-                                <img src="/assets/yousef.jpg" alt='img' />
+                                <img src="/assets/home/yousef.jpg" alt='img' />
                             </div>
                         </div>
                     </Carousel.Item>

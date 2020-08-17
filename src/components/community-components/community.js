@@ -6,13 +6,6 @@ import Show from '../show/'
 import { SignInContext } from '../../context/auth';
 import { _getAllQuestions, _deleteQuestion, _updateQuestion, _searchQuestions, _getAllQuestionsByTag, _bookmark, _getAllBookmarked } from '../../store/community-reducer';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Paper from '@material-ui/core/Paper';
@@ -27,10 +20,6 @@ import AddQuestion from '../add-question/add-question';
 
 import RoomsForm from '../code-together/rooms-from/rooms-from';
 
-import ShowMore from '../show-more-component/showmore'
-
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import Header from '../header/header.js';
 import './community.scss';
 
@@ -42,7 +31,6 @@ function Community(props) {
     let [searchInp, setSearchInp] = useState('');
     let [bol, setBol] = useState(false);
     let [addShow, setAddShow] = useState(false);
-    // let [idQ, setIdQ] = useState(false)
 
     const onButtonClick = () => {
 
@@ -51,7 +39,6 @@ function Community(props) {
     }
 
     const updateQuestionEvent = (e) => {
-        // console.log('hi')
         e.preventDefault();
         props.update(input, e.target.id);
         setUnderUpdating(!underUpdating);
@@ -75,7 +62,6 @@ function Community(props) {
         if (searchInp !== '') {
             props.search(searchInp);
         }
-        // setSearchInp('');
         e.target.reset();
         console.log('searchInp', searchInp);
     }
@@ -90,14 +76,8 @@ function Community(props) {
     useEffect(() => {
         fetchData('date');
         props.getMarked();
-        // console.log('jhjhjh')
     }, [])
-    //the marked array changed
-    // useEffect(() => {
-    //     props.getMarked();
-    //     console.log('bookmarked e', props.questions.bookmarked)
 
-    // }, [bol])
 
     const toggle = (e) => {
         console.log('hola');
@@ -149,118 +129,9 @@ function Community(props) {
         const name = e.target.value;
         setChoice(name);
     };
-    // const clicker = (id)=>{
-    //     setIdQ(id);setShowCom(!showCom);console.log('idQ',idQ)
-    // }
-    // console.log('bookmarked', props.questions.bookmarked)
 
     return (
         <>
-            {/* <div className='container'>
-            <Auth capability='read' >
-                    <Link to='/profile'>
-                        <button className="show-more">Go Profile</button>
-                    </Link>
-                </Auth>
-                <Auth capability='read' >
-                    <Link to='/community/addquestion'>
-                        <button className="show-more">Add Question</button>
-                    </Link>
-                </Auth>
-                <FormControl className={classes.formControl}>
-                    <NativeSelect
-                        className={classes.selectEmpty}
-                        value={choice}
-                        name="date"
-                        onChange={handleChoiceChange}
-                        inputProps={{ 'aria-label': 'age' }}
-                    >
-                        <option value="" disabled>
-                            Sort By
-                        </option>
-                        <option value={'date'}>Date</option>
-                        <option value={'title'}>Title</option>
-                    </NativeSelect>
-                </FormControl>
-                <Paper onSubmit={handleSearchSubmit} component="form" className={classes.root2}>
-                    <InputBase
-                        onChange={handleSearchChange}
-                        className={classes.input}
-                        placeholder="Search Questions"
-                        inputProps={{ 'aria-label': 'search google maps' }}
-                    />
-                    <Divider className={classes.divider} orientation="vertical" />
-                    <Link to={`/community/search/${searchInp}`}>
-                        <IconButton type="submit" className={classes.iconButton} aria-label="search">
-                            <SearchIcon />
-                        </IconButton>
-                    </Link>
-                </Paper>
-                {props.questions.questions.map(oneQuestion => (
-                    console.log((props.questions.bookmarked.filter(val=>val.bookmarked._id===oneQuestion._id))),
-                    <Card className={classes.root} key={oneQuestion._id}>
-                        <IconButton onClick={() => { props.bookmark(oneQuestion); setBol(!bol) }}>
-                            <BookmarkBorderIcon  className={`bookmark_${!!(props.questions.bookmarked.filter(val => val.bookmarked._id === oneQuestion._id).length)}`} />
-                        </IconButton>
-                        <Link to={`/community/details/${oneQuestion._id}`}>
-                            <CardHeader
-                                avatar={
-                                    <Avatar alt={oneQuestion.author} src={oneQuestion.imgUrl ? oneQuestion.imgUrl : '/static/images/avatar/3.jpg'} title={oneQuestion.author} />
-                                }
-                                title={oneQuestion.title}
-                                subheader={oneQuestion.date}
-                                className={classes.cardHeader}
-                            />
-                        </Link>
-
-                        {underUpdating && context.user.username === oneQuestion.author && questionID === oneQuestion._id
-                            ?
-                            <form onSubmit={updateQuestionEvent} id={oneQuestion._id}>
-                                <input type='text' defaultValue={oneQuestion.title} name='title' onChange={handleInputChange} />
-                                <input type='text' defaultValue={oneQuestion.description} name='description' onChange={handleInputChange} />
-                                <input type='text' defaultValue={oneQuestion.tags} name='tags' onChange={handleInputChange} />
-                                <button className="show-more"> Save</button>
-                            </form>
-                            :
-                            <>
-                                <CardContent>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        {oneQuestion.description}
-                                    </Typography>
-                                </CardContent>
-
-                                <button className="show-more">Show More</button>
-                                <ButtonGroup size="small" aria-label="small outlined button group">
-                                    {oneQuestion.tags.map(tag => (
-                                        <Link to={`/community/tags/${tag}`} >
-                                            <Button onClick={() => props.tagsSearch(tag)} key={tag}>{tag}</Button>
-                                        </Link>
-                                    ))}
-                                </ButtonGroup>
-                            </>
-                        }
-                        <Auth capability='delete' >
-                            {context.user.capabilities ? context.user.username === oneQuestion.author || context.user.capabilities.role === 'admin' ? <button className="show-more" onClick={() => props.delete(oneQuestion._id)}>Delete Question</button> : null : null}
-                        </Auth>
-                        <Auth capability='update' >
-                            {context.user.capabilities ? context.user.username === oneQuestion.author ? <button className="show-more" onClick={toggle} id={oneQuestion._id}>Edit</button> : null : null}
-                        </Auth>
-                    </Card>
-                ))} 
-            </div> */}
-            {/* <div> */}
-            {/* <Auth capability='read' > */}
-                {/* <Link to='/community/addquestion'> */}
-                {/* <button onClick={onButtonClick} className="show-more">Add Question</button>
-                <Show condition={addShow}>
-                    <AddQuestion />
-                </Show> */}
-                {/* </Link> */}
-            {/* </Auth> */}
-            {/* <div className='header'>
-            <NavBar/>
-
-            </div> */}
             <Header />
             <Show condition={context.open}>
                 <RoomsForm />
@@ -296,12 +167,15 @@ function Community(props) {
                     </Link>
                 </Paper>
                 <Auth capability='read' >
-                    {/* <Link to='/community/addquestion'> */}
-                        <button className="show-more" onClick={onButtonClick}><img src='/assets/community/add.png'></img>Add Question</button>
+                    {/* <button className="show-more" onClick={onButtonClick}><img src='/assets/community/add.png' alt='add question'></img>Add Question</button>
                         <Show condition={addShow}>
                             <AddQuestion />
-                        </Show>
-                    {/* </Link> */}
+                        </Show> */}
+                    <button className="show-more" onClick={context.changeOpen2}><img src='/assets/community/add.png' alt='add question'></img>Add Question</button>
+                    <Show condition={context.open2}>
+                        <AddQuestion />
+                    </Show>
+
                 </Auth>
             </div>
             <div id='cards'>
@@ -316,7 +190,6 @@ function Community(props) {
                                 </Auth>
                                 <Auth capability='delete' >
                                     {context.user.capabilities ? context.user.username === oneQuestion.author || context.user.capabilities.role === 'admin' ?
-                                        // <button className="show-more" onClick={() => props.delete(oneQuestion._id)}>Delete Question</button> 
                                         <IconButton id='delete' onClick={() => { props.delete(oneQuestion._id) }}>
                                             <DeleteForeverIcon />
                                         </IconButton>
@@ -324,11 +197,6 @@ function Community(props) {
                                 </Auth>
                                 <Auth capability='update' >
                                     {context.user.capabilities ? context.user.username === oneQuestion.author ?
-                                        // <button className="show-more" onClick={toggle} id={oneQuestion._id}>Edit</button>
-                                        // <button onClick={toggle} id={oneQuestion._id}>
-
-                                        //     <FontAwesomeIcon  icon={faCoffee} />
-                                        // </button>
                                         <IconButton id={'edit'} onClick={toggle} >
                                             <EditIcon />
                                         </IconButton>
