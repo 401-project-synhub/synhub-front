@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import superagent from 'superagent'
 dotenv.config();
 
-const API = process.env.API_SERVER ;
+const API = 'https://synhub-server.herokuapp.com';
 
 
 const SECRET = process.env.JWT_SECRET || 'batool123'
