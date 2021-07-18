@@ -17,7 +17,7 @@ import { useHistory } from 'react-router-dom'
 
 import './sm.scss';
 
-const API = 'https://synhub-project.herokuapp.com';
+const API = process.env.API_SERVER;
 
 
 function ShowMore(props) {

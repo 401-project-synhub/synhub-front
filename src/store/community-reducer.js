@@ -4,7 +4,7 @@ import superagent from 'superagent';
 
 
 // const API = 'https://synhub.herokuapp.com';
-const API = 'https://synhub-project.herokuapp.com';
+const API = process.env.API_SERVER;
 
 
 export const _getAllQuestions = (choice) => {

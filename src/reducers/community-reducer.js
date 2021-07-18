@@ -4,7 +4,7 @@ import superagent from 'superagent';
 
 
 const initialState = { questions: [], answers: [], qDetails: {}, bookmarked: [], profile: {} };
-const API = 'https://synhub-project.herokuapp.com';
+const API = process.env.API_SERVER;
 
 
 
